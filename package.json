@@ -1,0 +1,35 @@
+{
+  "name": "budgie",
+  "version": "0.0.0",
+  "private": true,
+  "scripts": {
+    "db:generate": "npx prisma generate",
+    "db:gui": "npx prisma studio",
+    "db:push": "npx prisma push",
+    "db:shell": "pscale shell budgie dev",
+    "db:start": "pscale connect budgie dev --port 3309",
+    "start": "sst start",
+    "build": "sst build",
+    "deploy": "nsst deploy --stage=production",
+    "remove": "sst remove",
+    "console": "sst console",
+    "typecheck": "tsc --noEmit",
+    "test": "vitest run"
+  },
+  "devDependencies": {
+    "@serverless-stack/cli": "^1.2.36",
+    "@serverless-stack/resources": "^1.2.36",
+    "@tsconfig/node16": "^1.0.3",
+    "@types/node": "^18.0.0",
+    "aws-cdk-lib": "2.24.0",
+    "typescript": "^4.7.4",
+    "vitest": "^0.16.0"
+  },
+  "workspaces": [
+    "graphql",
+    "services"
+  ],
+  "overrides": {
+    "graphql": "16.5.0"
+  }
+}

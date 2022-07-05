@@ -1,0 +1,25 @@
+{
+  "name": "@budgie/services",
+  "version": "0.0.0",
+  "type": "module",
+  "scripts": {},
+  "dependencies": {
+    "@pothos/core": "^3.12.1",
+    "@pothos/plugin-prisma": "^3.13.1",
+    "@prisma/client": "^4.0.0",
+    "@sentry/integrations": "^7.5.0",
+    "@sentry/serverless": "^7.5.0",
+    "@serverless-stack/node": "^1.2.36",
+    "aws-sdk": "^2.1166.0",
+    "fs-extra": "^10.1.0",
+    "graphql-type-json": "^0.3.2",
+    "ioredis": "^5.1.0",
+    "prisma": "^4.0.0",
+    "ulid": "^2.3.0"
+  },
+  "devDependencies": {
+    "@types/aws-lambda": "^8.10.101",
+    "@types/fs-extra": "^9.0.13",
+    "prisma": "^4.0.0"
+  }
+}
