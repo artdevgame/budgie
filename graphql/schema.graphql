@@ -1,0 +1,84 @@
+type Account {
+  accountId: String!
+
+  """Has this account been closed?"""
+  active: Boolean!
+  name: String!
+}
+
+enum AmountDir {
+  credit
+  debit
+}
+
+type Budget {
+  """Amount as a round number (smallest unit of the currency)"""
+  amount: Int!
+  categoryId: String!
+
+  """Date in ISO-8601 format (YYYY-MM-DD)"""
+  date: String!
+}
+
+scalar DateTime
+
+type Event {
+  data: JSON!
+  id: String!
+  sequence: Int!
+  timestamp: DateTime!
+  version: String!
+}
+
+scalar JSON
+
+type Mutation {
+  addTransaction(accountId: String!, amount: Int!, amountDir: AmountDir!, categoryId: String, currency: String!, txId: String, txInformation: String, txReference: String): Transaction!
+  closeAccount(accountId: String!): Account!
+  createAccount(name: String!): Account!
+  createUser(authId: String!, email: String!, familyName: String!, givenName: String!): User!
+  updateAccount(accountId: String!, name: String!): Account!
+  updateUser(email: String, familyName: String, givenName: String): User!
+  upsertBudget(amount: Int!, categoryId: String!, date: String!): Budget!
+}
+
+type Query {
+  accounts: [Account!]!
+  budget(date: String!): [Budget!]!
+  events: [Event!]!
+  transactions(accountId: String!): [Transaction!]!
+  user: User!
+}
+
+type Transaction {
+  accountId: String!
+
+  """A number of monetary units"""
+  amount: Int!
+
+  """
+  Supply "credit" or "debit"
+  """
+  amountDir: AmountDir!
+  categoryId: String!
+
+  """Currency code (ISO-4217)"""
+  currency: String!
+
+  """Unique identifier for the transaction within an servicing institution."""
+  txId: String!
+
+  """Further details of the transaction"""
+  txInformation: String!
+
+  """
+  Unique reference for the transaction. This reference is optionally populated.
+  """
+  txReference: String!
+}
+
+type User {
+  email: String!
+  familyName: String!
+  givenName: String!
+}

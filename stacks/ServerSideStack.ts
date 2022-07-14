@@ -17,7 +17,7 @@ export function ServerSideStack(context: StackContext) {
   });
 
   api.attachPermissions([bus]);
-  auth.attachPermissionsForAuthUsers([api]);
+  // auth.attachPermissionsForAuthUsers([api]);
 
   stack.addOutputs({
     ApiEndpoint: api.url,

@@ -1,16 +1,9 @@
 import { Event } from '@budgie/core/models/event';
 import { Event as IEvent } from '@prisma/client';
 
-import { builder, TQueryFieldBuilder } from '../builder';
+import { builder } from '../builder';
 
-function getEvents(fieldBuilder: TQueryFieldBuilder) {
-  return fieldBuilder.field({
-    type: [BudgetType],
-    resolve: async (_, {}, { authId }) => Event.getEvents(authId),
-  });
-}
-
-const BudgetType = builder.objectRef<IEvent>('Event').implement({
+const EventType = builder.objectRef<IEvent>('Event').implement({
   fields: (t) => ({
     id: t.exposeString('id'),
     data: t.expose('data', { type: 'JSON' }),
@@ -20,6 +13,9 @@ const BudgetType = builder.objectRef<IEvent>('Event').implement({
   }),
 });
 
-builder.queryFields((fieldBuilder) => ({
-  events: getEvents(fieldBuilder),
+builder.queryFields((t) => ({
+  events: t.field({
+    type: [EventType],
+    resolve: async (_, {}, { authId }) => Event.getEvents(authId),
+  }),
 }));

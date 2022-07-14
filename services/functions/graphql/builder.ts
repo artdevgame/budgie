@@ -1,6 +1,6 @@
 import GraphQLJSON from 'graphql-type-json';
 
-import SchemaBuilder, { MutationFieldBuilder } from '@pothos/core';
+import SchemaBuilder from '@pothos/core';
 
 type TCustomBuilderType = {
   Context: {
@@ -11,11 +11,6 @@ type TCustomBuilderType = {
     JSON: { Input: string; Output: unknown };
   };
 };
-export type TMutationFieldBuilder = MutationFieldBuilder<PothosSchemaTypes.ExtendDefaultTypes<TCustomBuilderType>, {}>;
-export type TQueryFieldBuilder = PothosSchemaTypes.QueryFieldBuilder<
-  PothosSchemaTypes.ExtendDefaultTypes<TCustomBuilderType>,
-  {}
->;
 
 export const builder = new SchemaBuilder<TCustomBuilderType>({});
 
@@ -30,3 +25,6 @@ builder.scalarType('DateTime', {
 });
 
 builder.addScalarType('JSON', GraphQLJSON, {});
+
+builder.queryType({});
+builder.mutationType({});

@@ -3,15 +3,36 @@ import { Category, ICategory } from '@budgie/core/models/category';
 import { createEvent } from '@budgie/core/models/event';
 import { TWithAuth } from '@budgie/core/types/TWithAuth';
 
-import { builder, TMutationFieldBuilder, TQueryFieldBuilder } from '../builder';
+import { builder } from '../builder';
 
-function createCategory(fieldBuilder: TMutationFieldBuilder) {
-  return fieldBuilder.field({
+const BudgetCategoryType = builder.objectRef<ICategory>('BudgetCategory').implement({
+  fields: (t) => ({
+    categoryId: t.exposeString('categoryId'),
+    categoryGroupId: t.exposeString('categoryGroupId'),
+    name: t.exposeString('name'),
+    order: t.exposeInt('order'),
+  }),
+});
+
+builder.queryFields((t) => ({
+  categories: t.field({
+    type: [BudgetCategoryType],
+    resolve: async (_, {}, { authId }) => {
+      const categories = await Category.getCategories(authId);
+      return Object.entries(categories).map(([categoryId, category]) => {
+        return { ...category, categoryId };
+      });
+    },
+  }),
+}));
+
+builder.mutationFields((t) => ({
+  createCategory: t.field({
     type: BudgetCategoryType,
     args: {
-      categoryGroupId: fieldBuilder.arg.string(),
-      name: fieldBuilder.arg.string({ required: true }),
-      order: fieldBuilder.arg.int({ defaultValue: 0 }),
+      categoryGroupId: t.arg.string(),
+      name: t.arg.string({ required: true }),
+      order: t.arg.int({ defaultValue: 0 }),
     },
     resolve: async (_, { categoryGroupId, name, order }, { authId }) => {
       const event = await createEvent({
@@ -26,14 +47,11 @@ function createCategory(fieldBuilder: TMutationFieldBuilder) {
 
       return category;
     },
-  });
-}
-
-function deleteCategory(fieldBuilder: TMutationFieldBuilder) {
-  return fieldBuilder.field({
+  }),
+  deleteCategory: t.field({
     type: BudgetCategoryType,
     args: {
-      categoryId: fieldBuilder.arg.string({ required: true }),
+      categoryId: t.arg.string({ required: true }),
     },
     resolve: async (_, { categoryId }, { authId }) => {
       const event = await createEvent({
@@ -46,17 +64,14 @@ function deleteCategory(fieldBuilder: TMutationFieldBuilder) {
 
       return category;
     },
-  });
-}
-
-function updateCategory(fieldBuilder: TMutationFieldBuilder) {
-  return fieldBuilder.field({
+  }),
+  updateCategory: t.field({
     type: BudgetCategoryType,
     args: {
-      categoryId: fieldBuilder.arg.string({ required: true }),
-      categoryGroupId: fieldBuilder.arg.string(),
-      name: fieldBuilder.arg.string(),
-      order: fieldBuilder.arg.int(),
+      categoryId: t.arg.string({ required: true }),
+      categoryGroupId: t.arg.string(),
+      name: t.arg.string(),
+      order: t.arg.int(),
     },
     resolve: async (_, { categoryId, categoryGroupId, name, order }, { authId }) => {
       const event = await createEvent({
@@ -72,36 +87,5 @@ function updateCategory(fieldBuilder: TMutationFieldBuilder) {
 
       return category;
     },
-  });
-}
-
-function getCategories(fieldBuilder: TQueryFieldBuilder) {
-  return fieldBuilder.field({
-    type: [BudgetCategoryType],
-    resolve: async (_, {}, { authId }) => {
-      const categories = await Category.getCategories(authId);
-      return Object.entries(categories).map(([categoryId, category]) => {
-        return { ...category, categoryId };
-      });
-    },
-  });
-}
-
-const BudgetCategoryType = builder.objectRef<ICategory>('BudgetCategory').implement({
-  fields: (t) => ({
-    categoryId: t.exposeString('categoryId'),
-    categoryGroupId: t.exposeString('categoryGroupId'),
-    name: t.exposeString('name'),
-    order: t.exposeInt('order'),
   }),
-});
-
-builder.queryFields((fieldBuilder) => ({
-  categories: getCategories(fieldBuilder),
-}));
-
-builder.mutationFields((fieldBuilder) => ({
-  createCategory: createCategory(fieldBuilder),
-  deleteCategory: deleteCategory(fieldBuilder),
-  updateCategory: updateCategory(fieldBuilder),
 }));
