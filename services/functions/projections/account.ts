@@ -1,11 +1,9 @@
-async function accountCreated() {
+export async function accountClosed() {}
 
+export async function accountCreated() {}
+
+export async function accountsRetrieved() {
+  // dispatch SSE
 }
 
-async function accountUpdated() {
-
-}
-
-async function accountClosed() {
-
-}
+export async function accountUpdated() {}

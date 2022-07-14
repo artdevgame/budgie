@@ -1,11 +1,5 @@
-async function categoryCreated() {
+export async function categoryCreated() {}
 
-}
+export async function categoryUpdated() {}
 
-async function categoryUpdated() {
-
-}
-
-async function categoryDeleted() {
-
-}
+export async function categoryDeleted() {}

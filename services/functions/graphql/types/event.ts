@@ -1,4 +1,4 @@
-import { builder } from '../builder'
+import { builder } from '../builder';
 
 builder.prismaObject('Event', {
   name: 'Event',
@@ -8,5 +8,5 @@ builder.prismaObject('Event', {
     sequence: t.exposeInt('sequence'),
     timestamp: t.expose('timestamp', { type: 'DateTime' }),
     version: t.exposeString('version'),
-  })
-})
+  }),
+});

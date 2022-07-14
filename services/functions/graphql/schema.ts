@@ -1,9 +1,9 @@
-import { builder } from "./builder";
+import './types/account';
+import './types/budget';
+import './types/event';
+import './types/ledger';
+import './types/user';
 
-import "./types/account";
-import "./types/auth";
-import "./types/budget";
-import "./types/event";
-import "./types/ledger";
+import { builder } from './builder';
 
 export const schema = builder.toSchema({});

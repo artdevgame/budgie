@@ -1,7 +1,7 @@
-async function userCreated() {
+export async function userCreated() {}
 
+export async function userRetrieved() {
+  // dispatch SSE
 }
 
-async function userUpdated() {
-
-}
+export async function userUpdated() {}

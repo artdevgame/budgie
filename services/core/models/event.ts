@@ -1,5 +1,8 @@
-import { ulid } from "ulid";
-import { database } from "../../lib/database";
+import { ulid } from 'ulid';
+
+import { database } from '../lib/database';
+
+export * as Event from './event';
 
 interface IAccountCreate {
   command: 'CREATE_ACCOUNT';
@@ -29,14 +32,14 @@ interface IBudgetRetrieve {
 
 interface IBudgetUpdate {
   command: 'UPDATE_BUDGET';
+  amount: number;
   categoryId: string;
   date: string;
-  value: number;
 }
 
 interface ICategoryCreate {
   command: 'CREATE_CATEGORY';
-  categoryGroupId: string;
+  categoryGroupId?: string;
   name: string;
   order?: number;
 }
@@ -69,15 +72,15 @@ interface ICategoryGroupUpdate extends Partial<Omit<ICategoryGroupCreate, 'comma
 
 interface ITransactionAdd {
   command: 'ADD_TRANSACTION';
-  userId: string;
+  authId: string;
   accountId: string;
   categoryId?: string;
-  txId: string;
+  txId?: string;
   txReference?: string;
   txInformation?: string;
   amount: number;
   currency: string;
-  amountDir: 'credit' | 'debit'
+  amountDir: 'credit' | 'debit';
 }
 
 interface ITransactionRetrieve {
@@ -104,7 +107,6 @@ interface IUserLogout {
 
 interface IUserUpdate extends Partial<Omit<IUserCreate, 'command'>> {
   command: 'UPDATE_USER';
-  userId: string;
 }
 
 type TEventData =
@@ -133,8 +135,8 @@ export async function createEvent(data: TEventData, sequence: number = 0) {
       data: JSON.stringify(data),
       id: ulid(),
       sequence,
-      timestamp: (new Date()).toISOString(),
+      timestamp: new Date().toISOString(),
       version: '1.0.0',
-    }
-  })
+    },
+  });
 }

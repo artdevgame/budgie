@@ -1,9 +1,8 @@
-import { useSentry } from "@budgie/core/lib/sentry";
-import { APIGatewayProxyHandlerV2WithJWTAuthorizer } from "aws-lambda";
+import { APIGatewayProxyHandlerV2WithJWTAuthorizer } from 'aws-lambda';
 
-const main: APIGatewayProxyHandlerV2WithJWTAuthorizer = async (
-  event
-) => {
+import { useSentry } from '@budgie/core/lib/sentry';
+
+const main: APIGatewayProxyHandlerV2WithJWTAuthorizer = async (event) => {
   return {
     statusCode: 200,
     body: `Hello ${event.requestContext.authorizer.jwt.claims.sub}!`,
