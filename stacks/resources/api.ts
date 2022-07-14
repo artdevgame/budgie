@@ -2,17 +2,8 @@ import { Api, StackContext } from '@serverless-stack/resources';
 
 export function getApi({ app, stack }: StackContext, environment: Record<string, string>) {
   return new Api(stack, 'ServerSide', {
-    authorizers: {
-      auth0: {
-        type: 'jwt',
-        jwt: {
-          audience: [process.env.AUTH0_DOMAIN + '/api/v2/'],
-          issuer: process.env.AUTH0_DOMAIN,
-        },
-      },
-    },
     defaults: {
-      authorizer: 'auth0',
+      authorizer: 'iam',
       function: {
         environment: {
           ...environment,

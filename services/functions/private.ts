@@ -1,11 +1,15 @@
-import { APIGatewayProxyHandlerV2WithJWTAuthorizer } from 'aws-lambda';
+import { APIGatewayProxyWithCognitoAuthorizerHandler } from 'aws-lambda';
 
 import { useSentry } from '@budgie/core/lib/sentry';
 
-const main: APIGatewayProxyHandlerV2WithJWTAuthorizer = async (event) => {
+const main: APIGatewayProxyWithCognitoAuthorizerHandler = async (event) => {
+  const { authorizer } = event.requestContext;
+
+  console.log('Private route', authorizer);
+
   return {
     statusCode: 200,
-    body: `Hello ${event.requestContext.authorizer.jwt.claims.sub}!`,
+    body: `Hello Private`,
   };
 };
 
