@@ -140,3 +140,13 @@ export async function createEvent(data: TEventData, sequence: number = 0) {
     },
   });
 }
+
+export async function getEvents(authId: string) {
+  return database.event.findMany({
+    where: {
+      data: {
+        equals: { authId },
+      },
+    },
+  });
+}

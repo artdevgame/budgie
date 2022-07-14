@@ -62,7 +62,7 @@ function getUser(fieldBuilder: TQueryFieldBuilder) {
   });
 }
 
-const UserType = builder.objectRef<IUser>('Account').implement({
+const UserType = builder.objectRef<IUser>('User').implement({
   fields: (t) => ({
     email: t.exposeString('email'),
     familyName: t.exposeString('familyName'),

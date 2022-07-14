@@ -1,16 +1,11 @@
 import GraphQLJSON from 'graphql-type-json';
 
 import SchemaBuilder, { MutationFieldBuilder } from '@pothos/core';
-import PrismaPlugin from '@pothos/plugin-prisma';
-import { PrismaClient } from '@prisma/client';
-
-import type PrismaTypes from '@pothos/plugin-prisma/generated';
 
 type TCustomBuilderType = {
   Context: {
     authId: string;
   };
-  PrismaTypes: PrismaTypes;
   Scalars: {
     DateTime: { Input: Date; Output: Date };
     JSON: { Input: string; Output: unknown };
@@ -22,14 +17,7 @@ export type TQueryFieldBuilder = PothosSchemaTypes.QueryFieldBuilder<
   {}
 >;
 
-const prisma = new PrismaClient({});
-
-export const builder = new SchemaBuilder<TCustomBuilderType>({
-  plugins: [PrismaPlugin],
-  prisma: {
-    client: prisma,
-  },
-});
+export const builder = new SchemaBuilder<TCustomBuilderType>({});
 
 builder.scalarType('DateTime', {
   serialize: (date) => date.toISOString(),

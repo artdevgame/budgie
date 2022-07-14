@@ -1,10 +1,6 @@
 const DUMMY_RESOLVER = { serialize: x => x, parseValue: x => x }; 
 import SchemaBuilder from '@pothos/core';
-import PrismaPlugin from '@pothos/plugin-prisma';
-var builder = new SchemaBuilder({
-    plugins: [PrismaPlugin],
-    prisma: { client: prisma }
-});
+var builder = new SchemaBuilder({});
 builder.scalarType('DateTime', DUMMY_RESOLVER);
 builder.scalarType('JSON', DUMMY_RESOLVER);
 var AccountType = builder.objectRef('Account').implement({
@@ -29,16 +25,16 @@ var BudgetType = builder.objectRef('Budget').implement({
 });
 builder.queryFields(fieldBuilder => ({ budget: getBudget(fieldBuilder) }));
 builder.mutationFields(fieldBuilder => ({ upsertBudget: upsertBudget(fieldBuilder) }));
-builder.prismaObject('Event', {
-    name: 'Event',
+var BudgetType2 = builder.objectRef('Event').implement({
     fields: t => ({
-        id: t.exposeID('id'),
+        id: t.exposeString('id'),
         data: t.expose('data', { type: 'JSON' }),
         sequence: t.exposeInt('sequence'),
         timestamp: t.expose('timestamp', { type: 'DateTime' }),
         version: t.exposeString('version')
     })
 });
+builder.queryFields(fieldBuilder => ({ events: getEvents(fieldBuilder) }));
 var AmountDir = builder.enumType('AmountDir', {
     values: [
         'credit',
@@ -62,7 +58,7 @@ var TransactionType = builder.objectRef('Transaction').implement({
 });
 builder.queryFields(fieldBuilder => ({ transactions: getTransactions(fieldBuilder) }));
 builder.mutationFields(fieldBuilder => ({ addTransaction: addTransaction(fieldBuilder) }));
-var UserType = builder.objectRef('Account').implement({
+var UserType = builder.objectRef('User').implement({
     fields: t => ({
         email: t.exposeString('email'),
         familyName: t.exposeString('familyName'),
