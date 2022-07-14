@@ -23,7 +23,7 @@ Here's a [primer video](https://www.youtube.com/watch?v=rolfJR9ERxo) on the theo
 ## 🧰 Toolbox
 
 - Serverless via [SST](https://sst.dev) (based on `create-sst`)
-- Authentication via [Auth0](https://auth0.com)
+- Authentication via [Amazon Cognito](https://aws.amazon.com/cognito)
 - MySQL database via [PlanetScale](https://planetscale.com) (used for event storage - "writes")
 - ORM via [Prisma](https://prisma.io) (might change this to [Kysely](https://koskimas.github.io/kysely) eventually)
 - Redis caching via [Upstash](https://upstash.com) (used to generate projections - "reads")
@@ -35,10 +35,8 @@ Here's a [primer video](https://www.youtube.com/watch?v=rolfJR9ERxo) on the theo
 
 ## 🔧 Environment variables
 
-| Name            | Description                                   |
-| --------------- | --------------------------------------------- |
-| AUTH0_CLIENT_ID | Auth0 client id                               |
-| AUTH0_DOMAIN    | Auth0 domain                                  |
-| CACHE_URL       | Location of the Redis cache on Upstash        |
-| DATABASE_URL    | Location of the MySQL database on PlanetScale |
-| SENTRY_DSN      | Location of the error/performance logs        |
+| Name         | Description                                   |
+| ------------ | --------------------------------------------- |
+| CACHE_URL    | Location of the Redis cache on Upstash        |
+| DATABASE_URL | Location of the MySQL database on PlanetScale |
+| SENTRY_DSN   | Location of the error/performance logs        |
