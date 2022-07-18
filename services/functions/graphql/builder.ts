@@ -1,4 +1,4 @@
-import GraphQLJSON from 'graphql-type-json';
+import { JSONResolver } from 'graphql-scalars';
 
 import SchemaBuilder from '@pothos/core';
 
@@ -24,7 +24,7 @@ builder.scalarType('DateTime', {
   },
 });
 
-builder.addScalarType('JSON', GraphQLJSON, {});
+builder.addScalarType('JSON', JSONResolver, {});
 
 builder.queryType({});
 builder.mutationType({});

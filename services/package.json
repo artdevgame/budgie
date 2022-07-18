@@ -11,7 +11,7 @@
     "@serverless-stack/node": "^1.2.36",
     "aws-sdk": "^2.1166.0",
     "fs-extra": "^10.1.0",
-    "graphql-type-json": "^0.3.2",
+    "graphql-scalars": "^1.17.0",
     "ioredis": "^5.1.0",
     "prisma": "^4.0.0",
     "ulid": "^2.3.0"

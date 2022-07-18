@@ -26,6 +26,7 @@ export function getApi({ app, stack }: StackContext, environment: Record<string,
 
       'POST /graphql': {
         type: 'pothos',
+        authorizer: 'none',
         function: {
           handler: 'functions/graphql/graphql.handler',
         },
