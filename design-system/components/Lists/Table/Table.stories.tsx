@@ -11,7 +11,7 @@ import { TableBody } from './TableBody';
 import { TableHead } from './TableHead';
 
 export default {
-  title: 'Components/Lists/Table',
+  title: 'Lists/Table',
   args: {
     condensed: false,
     striped: false,
@@ -64,7 +64,9 @@ const Template: ComponentStory<typeof Table> = (args) => (
       {transactions.map((transaction, index) => (
         <Row
           key={`${index}:${transaction.id}`}
-          onPress={({ nativeEvent: target }) => console.log('Transaction row pressed', transaction, target, { index })}
+          onPress={({ nativeEvent: { target } }) =>
+            console.log('Transaction row pressed', transaction, target, { index })
+          }
         >
           <Cell columnId="id" variant="td">
             {transaction.id}
