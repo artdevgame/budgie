@@ -1,0 +1,15 @@
+{
+  "extends": "../tsconfig.json",
+  "include": ["components", "*.d.ts"],
+  "compilerOptions": {
+    "allowSyntheticDefaultImports": true,
+    "baseUrl": ".",
+    "jsx": "react-native",
+    "moduleResolution": "node",
+    "paths": {
+      "@budgie/design-system/*": ["./components/*"],
+      "@budgie/design-system/common/*": ["./common/*"]
+    },
+    "resolveJsonModule": true
+  }
+}

@@ -1,0 +1,54 @@
+{
+  "name": "@budgie/design-system",
+  "version": "0.0.0",
+  "type": "commonjs",
+  "scripts": {
+    "storybook": "NODE_OPTIONS=--openssl-legacy-provider start-storybook -p 6006",
+    "storybook:build": "NODE_OPTIONS=--openssl-legacy-provider build-storybook"
+  },
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
+  },
+  "msw": {
+    "workerDirectory": "static"
+  },
+  "dependencies": {
+    "nativewind": "^2.0.0-next.51",
+    "react": "18.0.0",
+    "react-dom": "18.0.0",
+    "react-native": "^0.69.2",
+    "react-native-web": "^0.18.7"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.18.9",
+    "@storybook/addon-a11y": "^6.5.9",
+    "@storybook/addon-actions": "^6.5.9",
+    "@storybook/addon-essentials": "^6.5.9",
+    "@storybook/addon-interactions": "^6.5.9",
+    "@storybook/addon-links": "^6.5.9",
+    "@storybook/addon-postcss": "^2.0.0",
+    "@storybook/addons": "^6.5.9",
+    "@storybook/builder-webpack4": "^6.5.9",
+    "@storybook/manager-webpack4": "^6.5.9",
+    "@storybook/react": "^6.5.9",
+    "@storybook/testing-library": "^0.0.13",
+    "@storybook/theming": "^6.5.9",
+    "@types/react-native": "^0.69.3",
+    "axe-playwright": "^1.1.11",
+    "babel-loader": "^8.2.5",
+    "msw": "^0.42.1",
+    "msw-storybook-addon": "^1.6.3",
+    "storybook-addon-designs": "^6.3.1",
+    "tailwindcss": "^3.1.6",
+    "tailwind-merge": "^1.5.0"
+  }
+}
