@@ -86,9 +86,9 @@ export const DropdownItem = ({ icon, label, onPress }: IDropdownItem): ReactElem
     );
 
   return (
-    <StyledComponent component={Button} {...pressProps} className={className} accessibilityRole="menuitem">
+    <Button {...pressProps} className={className} accessibilityRole="menuitem">
       {content}
-    </StyledComponent>
+    </Button>
   );
 };
 
