@@ -1,10 +1,9 @@
 import React, { ReactElement, useRef } from 'react';
-import { View } from 'react-native';
+import { Pressable, View } from 'react-native';
 import { twMerge } from 'tailwind-merge';
 
 import { XIcon } from '@heroicons/react/outline';
 
-import { IconButton } from '../Buttons/IconButton';
 import { BasicBadge, IBasicBadge } from './BasicBadge';
 
 export { colors } from './BasicBadge';
@@ -39,12 +38,9 @@ const badgeSizeClassNames = {
 
 const RemoveButton = ({ className, onPress }: IRemoveButton): ReactElement => {
   return (
-    <IconButton
-      className={twMerge('bg-transparent shadow-none', className, 'focus:bg-transparent')}
-      icon={<XIcon className={className} />}
-      onPress={onPress}
-      size="sm"
-    />
+    <Pressable onPress={onPress}>
+      <XIcon className={className} />
+    </Pressable>
   );
 };
 

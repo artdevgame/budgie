@@ -3,21 +3,22 @@ import React, { PropsWithChildren, ReactElement } from 'react';
 import { Pressable, Text } from 'react-native';
 import { twMerge } from 'tailwind-merge';
 
+import { TSize } from '@budgie/design-system/common/size';
 import { PressHookProps, usePress } from '@react-native-aria/interactions';
 
 interface IRoundedButton {
   className?: string;
-  size: ButtonSize;
+  size: IButtonSize;
 }
 
 export interface IButton extends PropsWithChildren<PressHookProps> {
   className?: string;
   rounded?: boolean;
-  size?: ButtonSize;
+  size?: IButtonSize;
   variant?: 'primary' | 'secondary' | 'tertiary';
 }
 
-export type ButtonSize = 'xs' | 'sm' | 'md' | 'lg' | '2xl';
+export type IButtonSize = Exclude<TSize, '2xl' | '3xl' | '4xl'>;
 
 export const sharedClassNames =
   'border focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 font-medium inline-flex items-center shadow-sm';
@@ -32,21 +33,21 @@ const classNames = {
     sm: twMerge(sharedClassNames, sharedPrimaryClassNames, 'px-3 py-2 text-sm leading-4 rounded-md'),
     md: twMerge(sharedClassNames, sharedPrimaryClassNames, 'px-4 py-2 text-sm rounded-md'),
     lg: twMerge(sharedClassNames, sharedPrimaryClassNames, 'px-4 py-2 text-base rounded-md'),
-    '2xl': twMerge(sharedClassNames, sharedPrimaryClassNames, 'px-6 py-3 text-base rounded-md'),
+    xl: twMerge(sharedClassNames, sharedPrimaryClassNames, 'px-6 py-3 text-base rounded-md'),
   },
   secondary: {
     xs: twMerge(sharedClassNames, sharedSecondaryClassNames, 'px-2.5 py-1.5 text-xs rounded'),
     sm: twMerge(sharedClassNames, sharedSecondaryClassNames, 'px-3 py-2 text-sm leading-4 rounded-md'),
     md: twMerge(sharedClassNames, sharedSecondaryClassNames, 'px-4 py-2 text-sm rounded-md'),
     lg: twMerge(sharedClassNames, sharedSecondaryClassNames, 'px-4 py-2 text-base rounded-md'),
-    '2xl': twMerge(sharedClassNames, sharedSecondaryClassNames, 'px-6 py-3 text-base rounded-md'),
+    xl: twMerge(sharedClassNames, sharedSecondaryClassNames, 'px-6 py-3 text-base rounded-md'),
   },
   tertiary: {
     xs: twMerge(sharedClassNames, sharedTertiaryClassNames, 'px-2.5 py-1.5 text-xs rounded'),
     sm: twMerge(sharedClassNames, sharedTertiaryClassNames, 'px-3 py-2 text-sm leading-4 rounded-md'),
     md: twMerge(sharedClassNames, sharedTertiaryClassNames, 'px-4 py-2 text-sm rounded-md'),
     lg: twMerge(sharedClassNames, sharedTertiaryClassNames, 'px-4 py-2 text-base rounded-md'),
-    '2xl': twMerge(sharedClassNames, sharedTertiaryClassNames, 'px-6 py-3 text-base rounded-md'),
+    xl: twMerge(sharedClassNames, sharedTertiaryClassNames, 'px-6 py-3 text-base rounded-md'),
   },
 };
 

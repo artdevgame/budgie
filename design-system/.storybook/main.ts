@@ -1,15 +1,18 @@
 module.exports = {
-  babel: async (options) => ({
-    ...options,
-    // plugins: [...options.plugins, 'nativewind/babel'],
-  }),
   addons: [
     '@storybook/addon-a11y',
     '@storybook/addon-essentials',
     '@storybook/addon-interactions',
     '@storybook/addon-links',
-    '@storybook/addon-postcss',
     'storybook-addon-designs',
+    {
+      name: '@storybook/addon-postcss',
+      options: {
+        postcssLoaderOptions: {
+          implementation: require('postcss'),
+        },
+      },
+    },
   ],
   features: {
     interactionsDebugger: true,

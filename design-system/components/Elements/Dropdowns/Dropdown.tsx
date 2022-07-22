@@ -1,13 +1,12 @@
 import { StyledComponent } from 'nativewind';
 import React, { Children, cloneElement, ReactElement, ReactNode, useRef, useState } from 'react';
-import { Text, View } from 'react-native';
+import { Pressable, Text, View } from 'react-native';
 import { twMerge } from 'tailwind-merge';
 
 import { Transition } from '@headlessui/react';
 import { ChevronDownIcon, DotsVerticalIcon } from '@heroicons/react/solid';
 import { usePress } from '@react-native-aria/interactions';
 
-import { Button } from '../Buttons/Button';
 import { IconButton, IIconButton } from '../Buttons/IconButton';
 
 export type TActuatorType = 'button' | 'minimal';
@@ -69,7 +68,7 @@ export const DropdownItem = ({ icon, label, onPress }: IDropdownItem): ReactElem
   });
 
   const className = twMerge(
-    'px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-gray-900 cursor-pointer bg-transparent shadow-none rounded-none',
+    'px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-gray-900',
     typeof icon !== 'undefined' ? 'group flex items-center' : 'block',
   );
 
@@ -86,9 +85,9 @@ export const DropdownItem = ({ icon, label, onPress }: IDropdownItem): ReactElem
     );
 
   return (
-    <Button {...pressProps} className={className} accessibilityRole="menuitem">
+    <StyledComponent component={Pressable} {...pressProps} className={className} accessibilityRole="menuitem">
       {content}
-    </Button>
+    </StyledComponent>
   );
 };
 

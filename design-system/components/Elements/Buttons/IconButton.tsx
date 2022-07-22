@@ -24,7 +24,7 @@ const classNames = {
     leadingIconClassName: '-ml-1 mr-3 h-5 w-5',
     trailingIconClassName: 'ml-3 -mr-1 h-5 w-5',
   },
-  '2xl': {
+  xl: {
     leadingIconClassName: '-ml-1 mr-3 h-5 w-5',
     trailingIconClassName: 'ml-3 -mr-1 h-5 w-5',
   },

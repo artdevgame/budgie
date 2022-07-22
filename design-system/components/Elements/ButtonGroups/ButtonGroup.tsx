@@ -3,14 +3,14 @@ import React, { cloneElement, ReactElement } from 'react';
 import { View } from 'react-native';
 import { twMerge } from 'tailwind-merge';
 
-import { ButtonSize, IButton } from '../Buttons/Button';
+import { IButton, IButtonSize } from '../Buttons/Button';
 import { IIconButton } from '../Buttons/IconButton';
 import { Dropdown, IDropdown } from '../Dropdowns/Dropdown';
 
 export interface ButtonGroupProps {
   className?: string;
   children: (ReactElement<IButton> | ReactElement<IIconButton> | ReactElement<IDropdown>)[];
-  size: ButtonSize;
+  size: IButtonSize;
 }
 
 export const ButtonGroup = ({ children = [], className, size = 'md' }: ButtonGroupProps): ReactElement => {

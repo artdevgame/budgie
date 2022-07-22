@@ -33,7 +33,7 @@ const classNames = {
     buttonClassName: twMerge(sharedClassNames, 'p-2'),
     iconClassName: 'h-6 w-6',
   },
-  '2xl': {
+  xl: {
     buttonClassName: twMerge(sharedClassNames, 'p-3'),
     iconClassName: 'h-6 w-6',
   },

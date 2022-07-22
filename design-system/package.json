@@ -3,21 +3,13 @@
   "version": "0.0.0",
   "type": "commonjs",
   "scripts": {
-    "storybook": "NODE_OPTIONS=--openssl-legacy-provider start-storybook -p 6006",
-    "storybook:build": "NODE_OPTIONS=--openssl-legacy-provider build-storybook"
+    "storybook": "NODE_OPTIONS=--openssl-legacy-provider start-storybook -p 6006 --ci",
+    "storybook:build": "NODE_OPTIONS=--openssl-legacy-provider build-storybook",
+    "start": "npm run storybook"
   },
-  "browserslist": {
-    "production": [
-      ">0.2%",
-      "not dead",
-      "not op_mini all"
-    ],
-    "development": [
-      "last 1 chrome version",
-      "last 1 firefox version",
-      "last 1 safari version"
-    ]
-  },
+  "browserslist": [
+    "defaults"
+  ],
   "msw": {
     "workerDirectory": "static"
   },
@@ -26,7 +18,7 @@
     "@heroicons/react": "^1.0.6",
     "@react-native-aria/button": "^0.2.4",
     "@react-native-aria/interactions": "^0.2.8",
-    "nativewind": "^2.0.0-next.51",
+    "nativewind": "^2.0.0-next.52",
     "react": "18.0.0",
     "react-dom": "18.0.0",
     "react-native": "^0.69.2",
@@ -47,12 +39,14 @@
     "@storybook/testing-library": "^0.0.13",
     "@storybook/theming": "^6.5.9",
     "@types/react-native": "^0.69.3",
+    "autoprefixer": "^10.4.7",
     "axe-playwright": "^1.1.11",
     "babel-loader": "^8.2.5",
-    "msw": "^0.42.1",
+    "msw": "^0.44.2",
     "msw-storybook-addon": "^1.6.3",
+    "postcss": "^8.4.14",
     "storybook-addon-designs": "^6.3.1",
-    "tailwind-merge": "^1.5.0",
+    "tailwind-merge": "^1.5.1",
     "tailwindcss": "^3.1.6"
   }
 }
