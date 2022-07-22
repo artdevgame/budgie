@@ -4,7 +4,7 @@ import { Image, ImageSourcePropType } from 'react-native';
 import { twMerge } from 'tailwind-merge';
 
 import { AbstractAvatar } from './AbstractAvatar';
-import { IAvatarCommon } from './common';
+import { IAvatarCommon, sizeClassMap } from './common';
 import { getScaledSize } from './getScaledSize';
 
 export interface IImageAvatar extends IAvatarCommon {
@@ -18,11 +18,10 @@ export const ImageAvatar = ({
   size = 'md',
   ...rest
 }: IImageAvatar): ReactElement => {
-  const imageScale = getScaledSize({ size, scale: 2, startAt: 4 });
   const imageClassName = twMerge(
     notificationPosition === 'none' && 'inline-block',
     rounded ? 'rounded-md' : 'rounded-full',
-    `h-${imageScale} w-${imageScale}`,
+    sizeClassMap[size],
   );
 
   const avatarProps = {
@@ -34,11 +33,7 @@ export const ImageAvatar = ({
 
   return (
     <AbstractAvatar {...avatarProps}>
-      <StyledComponent
-        component={Image}
-        className={imageClassName}
-        source={imageUrl as ImageSourcePropType}
-      ></StyledComponent>
+      <StyledComponent component={Image} className={imageClassName} source={imageUrl as ImageSourcePropType} />
     </AbstractAvatar>
   );
 };

@@ -4,7 +4,7 @@ import { Pressable, Text as NativeText, View as NativeView } from 'react-native'
 
 import { usePress } from '@react-native-aria/interactions';
 
-import { TAnyAvatar } from './common';
+import { IAvatarCommon, TAnyAvatar } from './common';
 
 export interface IAvatarWithText {
   avatar: TAnyAvatar;

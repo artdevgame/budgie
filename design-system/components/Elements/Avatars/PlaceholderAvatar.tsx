@@ -2,18 +2,15 @@ import React, { ReactElement } from 'react';
 import { twMerge } from 'tailwind-merge';
 
 import { AbstractAvatar } from './AbstractAvatar';
-import { IAvatarCommon } from './common';
-import { getScaledSize } from './getScaledSize';
+import { IAvatarCommon, sizeClassMap } from './common';
 
 export type IPlaceholderAvatar = IAvatarCommon;
 
 export const PlaceholderAvatar = ({ rounded = false, size = 'md', ...props }: IPlaceholderAvatar): ReactElement => {
-  const imageScale = getScaledSize({ size, scale: 2, startAt: 4 });
-
   const placeholderClassNames = twMerge(
     'bg-gray-100 inline-block overflow-hidden',
     rounded ? 'rounded-md' : 'rounded-full',
-    `h-${imageScale} w-${imageScale}`,
+    sizeClassMap[size],
   );
 
   return (
