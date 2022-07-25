@@ -1,10 +1,11 @@
 import { styled, StyledComponent } from 'nativewind';
 import React, { ReactElement } from 'react';
-import { Pressable, Text as NativeText, View as NativeView } from 'react-native';
+import { Pressable, View as NativeView } from 'react-native';
 
 import { usePress } from '@react-native-aria/interactions';
 
-import { IAvatarCommon, TAnyAvatar } from './common';
+import { Text } from '../Typography/Text';
+import { TAnyAvatar } from './common';
 
 export interface IAvatarWithText {
   avatar: TAnyAvatar;
@@ -13,7 +14,6 @@ export interface IAvatarWithText {
   onPress({ name }: { name: string }): void;
 }
 
-const Text = styled(NativeText);
 const View = styled(NativeView);
 
 export const AvatarWithText = ({ avatar, label = 'View profile', name, onPress }: IAvatarWithText): ReactElement => {

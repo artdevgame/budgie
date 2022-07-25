@@ -18,7 +18,7 @@ export const ButtonGroup = ({ children = [], className, size = 'md' }: ButtonGro
 
   const groupedButtons = children.map((component: ReactElement, buttonIdx: number) => {
     const className = twMerge(
-      'text-sm font-medium text-gray-700 hover:bg-gray-50 rounded-none relative focus:border-indigo-500 focus:ring-1 focus:z-10',
+      'text-sm font-medium text-gray-700 hover:bg-gray-50 rounded-none relative focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 focus:ring-1 focus:z-10 focus:ring-offset-0',
       buttonIdx > 0 && '-ml-px',
       buttonIdx === 0 && 'rounded-l-md',
       buttonIdx === totalComponents && 'rounded-r-md',

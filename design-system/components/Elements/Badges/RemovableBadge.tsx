@@ -18,7 +18,7 @@ export interface IRemovableBadge extends IBasicBadge {
 }
 
 const sharedClassNames =
-  'flex-shrink-0 focus:outline-none focus:ring-0 focus:ring-offset-0 focus:text-white h-4 inline-flex items-center justify-center ml-0.5 rounded-full w-4';
+  'shrink-0 focus:outline-none focus:ring-0 focus:ring-offset-0 focus:text-white h-4 inline-flex items-center justify-center ml-0.5 rounded-full w-4';
 
 const removeClassNames = {
   blue: twMerge(sharedClassNames, 'focus:bg-blue-500 hover:bg-blue-200 hover:text-blue-500 text-blue-400'),

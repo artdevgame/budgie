@@ -16,7 +16,9 @@ export function ServerSideStack(context: StackContext) {
     BUS_NAME: bus.eventBusName,
   });
 
+  // api needs permissions to publish to the bus
   api.attachPermissions([bus]);
+
   // auth.attachPermissionsForAuthUsers([api]);
 
   stack.addOutputs({

@@ -1,7 +1,9 @@
 import { StyledComponent } from 'nativewind';
 import React, { forwardRef, PropsWithChildren } from 'react';
-import { Text, View } from 'react-native';
+import { View } from 'react-native';
 import { twMerge } from 'tailwind-merge';
+
+import { Text } from '../Typography/Text';
 
 type IColor = keyof typeof classNames;
 
@@ -50,9 +52,9 @@ export const BasicBadge = forwardRef<View, IBasicBadge>(
     const content = React.isValidElement(children) ? (
       children
     ) : (
-      <StyledComponent component={Text} className={large ? 'text-sm' : 'text-xs'} style={{ color: 'inherit' }}>
+      <Text className={large ? 'text-sm' : 'text-xs'} style={{ color: 'inherit' }}>
         {children}
-      </StyledComponent>
+      </Text>
     );
 
     return (

@@ -5,8 +5,8 @@ export function getEventBus({ stack }: StackContext) {
     rules: {
       ACCOUNT_CLOSED: {
         pattern: {
-          source: ['budgie:ACCOUNT_CLOSED'],
-          detailType: ['Account'],
+          source: ['budgie'],
+          detailType: ['ACCOUNT_CLOSED'],
         },
         targets: {
           accountClosed: 'functions/projections/account.accountClosed',
@@ -14,8 +14,8 @@ export function getEventBus({ stack }: StackContext) {
       },
       ACCOUNT_CREATED: {
         pattern: {
-          source: ['budgie:ACCOUNT_CREATED'],
-          detailType: ['Account'],
+          source: ['budgie'],
+          detailType: ['ACCOUNT_CREATED'],
         },
         targets: {
           accountCreated: 'functions/projections/account.accountCreated',
@@ -23,8 +23,8 @@ export function getEventBus({ stack }: StackContext) {
       },
       ACCOUNT_UPDATED: {
         pattern: {
-          source: ['budgie:ACCOUNT_UPDATED'],
-          detailType: ['Account'],
+          source: ['budgie'],
+          detailType: ['ACCOUNT_UPDATED'],
         },
         targets: {
           accountUpdated: 'functions/projections/account.accountUpdated',
@@ -32,8 +32,8 @@ export function getEventBus({ stack }: StackContext) {
       },
       // ACCOUNTS_RETRIEVED: {
       //   pattern: {
-      //     source: ['budgie:ACCOUNTS_RETRIEVED'],
-      //     detailType: ['Account'],
+      //     source: ['budgie'],
+      //     detailType: ['ACCOUNTS_RETRIEVED'],
       //   },
       //   targets: {
       //     accountsRetrieved: 'functions/projections/account.accountsRetrieved',
@@ -42,8 +42,8 @@ export function getEventBus({ stack }: StackContext) {
 
       // BUDGET_RETRIEVED: {
       //   pattern: {
-      //     source: ['budgie:BUDGET_RETRIEVED'],
-      //     detailType: ['Budget'],
+      //     source: ['budgie'],
+      //     detailType: ['BUDGET_RETRIEVED'],
       //   },
       //   targets: {
       //     budgetRetrieved: 'functions/projections/budget.budgetRetrieved',
@@ -51,8 +51,8 @@ export function getEventBus({ stack }: StackContext) {
       // },
       BUDGET_UPDATED: {
         pattern: {
-          source: ['budgie:BUDGET_UPDATED'],
-          detailType: ['Budget'],
+          source: ['budgie'],
+          detailType: ['BUDGET_UPDATED'],
         },
         targets: {
           budgetUpdated: 'functions/projections/budget.budgetUpdated',
@@ -61,8 +61,8 @@ export function getEventBus({ stack }: StackContext) {
 
       CATEGORY_CREATED: {
         pattern: {
-          source: ['budgie:CATEGORY_CREATED'],
-          detailType: ['BudgetCategory'],
+          source: ['budgie'],
+          detailType: ['CATEGORY_CREATED'],
         },
         targets: {
           categoryCreated: 'functions/projections/category.categoryCreated',
@@ -70,8 +70,8 @@ export function getEventBus({ stack }: StackContext) {
       },
       CATEGORY_DELETED: {
         pattern: {
-          source: ['budgie:CATEGORY_DELETED'],
-          detailType: ['BudgetCategory'],
+          source: ['budgie'],
+          detailType: ['CATEGORY_DELETED'],
         },
         targets: {
           categoryDeleted: 'functions/projections/category.categoryDeleted',
@@ -79,8 +79,8 @@ export function getEventBus({ stack }: StackContext) {
       },
       CATEGORY_UPDATED: {
         pattern: {
-          source: ['budgie:CATEGORY_UPDATED'],
-          detailType: ['BudgetCategory'],
+          source: ['budgie'],
+          detailType: ['CATEGORY_UPDATED'],
         },
         targets: {
           categoryUpdated: 'functions/projections/category.categoryUpdated',
@@ -89,8 +89,8 @@ export function getEventBus({ stack }: StackContext) {
 
       CATEGORY_GROUP_CREATED: {
         pattern: {
-          source: ['budgie:CATEGORY_GROUP_CREATED'],
-          detailType: ['BudgetCategoryGroup'],
+          source: ['budgie'],
+          detailType: ['CATEGORY_GROUP_CREATED'],
         },
         targets: {
           categoryGroupCreated: 'functions/projections/category-group.categoryGroupCreated',
@@ -98,8 +98,8 @@ export function getEventBus({ stack }: StackContext) {
       },
       CATEGORY_GROUP_DELETED: {
         pattern: {
-          source: ['budgie:CATEGORY_GROUP_DELETED'],
-          detailType: ['BudgetCategoryGroup'],
+          source: ['budgie'],
+          detailType: ['CATEGORY_GROUP_DELETED'],
         },
         targets: {
           categoryGroupDeleted: 'functions/projections/category-group.categoryGroupDeleted',
@@ -107,8 +107,8 @@ export function getEventBus({ stack }: StackContext) {
       },
       CATEGORY_GROUP_UPDATED: {
         pattern: {
-          source: ['budgie:CATEGORY_GROUP_UPDATED'],
-          detailType: ['BudgetCategoryGroup'],
+          source: ['budgie'],
+          detailType: ['CATEGORY_GROUP_UPDATED'],
         },
         targets: {
           categoryGroupUpdated: 'functions/projections/category-group.categoryGroupUpdated',
@@ -117,8 +117,8 @@ export function getEventBus({ stack }: StackContext) {
 
       TRANSACTION_ADDED: {
         pattern: {
-          source: ['budgie:TRANSACTION_ADDED'],
-          detailType: ['Ledger'],
+          source: ['budgie'],
+          detailType: ['TRANSACTION_ADDED'],
         },
         targets: {
           transactionAdded: 'functions/projections/ledger.transactionAdded',
@@ -126,8 +126,8 @@ export function getEventBus({ stack }: StackContext) {
       },
       // TRANSACTIONS_RETRIEVED: {
       //   pattern: {
-      //     source: ['budgie:TRANSACTIONS_RETRIEVED'],
-      //     detailType: ['Ledger'],
+      //     source: ['budgie'],
+      //     detailType: ['TRANSACTIONS_RETRIEVED'],
       //   },
       //   targets: {
       //     transactionsRetrieved: 'functions/projections/ledger.transactionsRetrieved',
@@ -136,8 +136,8 @@ export function getEventBus({ stack }: StackContext) {
 
       USER_CREATED: {
         pattern: {
-          source: ['budgie:USER_CREATED'],
-          detailType: ['User'],
+          source: ['budgie'],
+          detailType: ['USER_CREATED'],
         },
         targets: {
           userCreated: 'functions/projections/user.userCreated',
@@ -145,22 +145,22 @@ export function getEventBus({ stack }: StackContext) {
       },
       // USER_LOGGED_IN: {
       //   pattern: {
-      //     source: ['budgie:USER_LOGGED_IN'],
-      //     detailType: ['User'],
+      //     source: ['budgie'],
+      //     detailType: ['USER_LOGGED_IN'],
       //   },
       //   targets: {},
       // },
       // USER_LOGGED_OUT: {
       //   pattern: {
-      //     source: ['budgie:USER_LOGGED_OUT'],
-      //     detailType: ['User'],
+      //     source: ['budgie'],
+      //     detailType: ['USER_LOGGED_OUT'],
       //   },
       //   targets: {},
       // },
       // USER_RETRIEVED: {
       //   pattern: {
-      //     source: ['budgie:USER_RETRIEVED'],
-      //     detailType: ['User'],
+      //     source: ['budgie'],
+      //     detailType: ['USER_RETRIEVED'],
       //   },
       //   targets: {
       //     userRetrieved: 'functions/projections/user.userRetrieved',
@@ -168,8 +168,8 @@ export function getEventBus({ stack }: StackContext) {
       // },
       USER_UPDATED: {
         pattern: {
-          source: ['budgie:USER_UPDATED'],
-          detailType: ['User'],
+          source: ['budgie'],
+          detailType: ['USER_UPDATED'],
         },
         targets: {
           userUpdated: 'functions/projections/user.userUpdated',

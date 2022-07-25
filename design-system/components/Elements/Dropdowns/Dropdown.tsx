@@ -1,6 +1,6 @@
 import { StyledComponent } from 'nativewind';
-import React, { Children, cloneElement, ReactElement, ReactNode, useRef, useState } from 'react';
-import { Pressable, Text, View } from 'react-native';
+import React, { Children, cloneElement, ReactElement, ReactNode, useState } from 'react';
+import { Pressable, View } from 'react-native';
 import { twMerge } from 'tailwind-merge';
 
 import { Transition } from '@headlessui/react';
@@ -8,6 +8,7 @@ import { ChevronDownIcon, DotsVerticalIcon } from '@heroicons/react/solid';
 import { usePress } from '@react-native-aria/interactions';
 
 import { IconButton, IIconButton } from '../Buttons/IconButton';
+import { Text } from '../Typography/Text';
 
 export type TActuatorType = 'button' | 'minimal';
 
@@ -79,9 +80,7 @@ export const DropdownItem = ({ icon, label, onPress }: IDropdownItem): ReactElem
         <Text>{label}</Text>
       </StyledComponent>
     ) : (
-      <StyledComponent component={Text} className="self-start">
-        {label}
-      </StyledComponent>
+      <Text className="self-start">{label}</Text>
     );
 
   return (

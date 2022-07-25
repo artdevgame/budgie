@@ -1,9 +1,7 @@
-import { styled } from 'nativewind';
-import { Text as NativeText } from 'react-native';
-
 import { ComponentMeta, ComponentStory } from '@storybook/react';
 
 import { transactions } from '../../../stubs/transactions';
+import { Text } from '../../Elements/Typography/Text';
 import { Cell } from './Cell';
 import { Row } from './Row';
 import { Table } from './Table';
@@ -27,8 +25,6 @@ const columns = {
   quantity: { width: 'min(12%, 120px)' },
   net: { width: 'min(12%, 120px)' },
 };
-
-const Text = styled(NativeText);
 
 const Template: ComponentStory<typeof Table> = (args) => (
   <Table {...args} columns={columns} style={{ width: 'min(1000px, 100%)' }}>

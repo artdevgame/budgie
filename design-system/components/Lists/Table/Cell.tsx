@@ -1,10 +1,11 @@
 import { StyledComponent } from 'nativewind';
 import React, { ReactNode } from 'react';
-import { Pressable, PressableProps, Text } from 'react-native';
+import { Pressable, PressableProps } from 'react-native';
 import { twMerge } from 'tailwind-merge';
 
 import { isPressable } from '@budgie/design-system/common/isPressable';
 
+import { Text } from '../../Elements/Typography/Text';
 import { useTableContext } from './TableContext';
 
 export interface ICell extends PressableProps {
@@ -30,9 +31,7 @@ export const Cell = ({ children, className, columnId, variant, ...rest }: ICell)
   if (!React.isValidElement(children)) {
     return (
       <StyledComponent {...rest} disabled={!isPressable(rest)} component={Pressable} style={{ width }}>
-        <StyledComponent component={Text} className={styles}>
-          {children}
-        </StyledComponent>
+        <Text className={styles}>{children}</Text>
       </StyledComponent>
     );
   }

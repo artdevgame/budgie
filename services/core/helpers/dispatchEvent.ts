@@ -7,8 +7,8 @@ export function dispatchEvent<TPayload = unknown>(eventName: TEventName, payload
     Entries: [
       {
         EventBusName: process.env.BUS_NAME,
-        Source: `budgie:${eventName}`,
-        DetailType: 'Account',
+        Source: `budgie`,
+        DetailType: eventName,
         Detail: JSON.stringify(payload),
       },
     ],

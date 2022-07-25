@@ -1,10 +1,11 @@
 import { styled } from 'nativewind';
 import React, { ReactElement } from 'react';
-import { Text as NativeText, View as NativeView } from 'react-native';
+import { View as NativeView } from 'react-native';
 import { twMerge } from 'tailwind-merge';
 
 import { sizeMap } from '@budgie/design-system/common/size';
 
+import { Text } from '../Typography/Text';
 import { AbstractAvatar } from './AbstractAvatar';
 import { IAvatarCommon, sizeClassMap } from './common';
 
@@ -12,7 +13,6 @@ export interface IInitialsAvatar extends IAvatarCommon {
   initials: string;
 }
 
-const Text = styled(NativeText);
 const View = styled(NativeView);
 
 export const InitialsAvatar = ({ initials, size = 'md', ...props }: IInitialsAvatar): ReactElement => {

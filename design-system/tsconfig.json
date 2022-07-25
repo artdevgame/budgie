@@ -7,7 +7,7 @@
     "jsx": "react-native",
     "moduleResolution": "node",
     "paths": {
-      "@budgie/design-system/*": ["./components/*"],
+      "@budgie/design-system/components/*": ["./components/*"],
       "@budgie/design-system/common/*": ["./common/*"]
     },
     "resolveJsonModule": true

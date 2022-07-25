@@ -1,10 +1,12 @@
 import { StyledComponent } from 'nativewind';
 import React, { PropsWithChildren, ReactElement } from 'react';
-import { Pressable, Text } from 'react-native';
+import { Pressable } from 'react-native';
 import { twMerge } from 'tailwind-merge';
 
 import { TSize } from '@budgie/design-system/common/size';
 import { PressHookProps, usePress } from '@react-native-aria/interactions';
+
+import { Text } from '../Typography/Text';
 
 interface IRoundedButton {
   className?: string;
@@ -90,9 +92,9 @@ export const Button = ({
   const content = React.isValidElement(children) ? (
     children
   ) : (
-    <StyledComponent component={Text} className="font-medium" style={{ color: 'inherit' }}>
+    <Text className="font-medium" style={{ color: 'inherit' }}>
       {children}
-    </StyledComponent>
+    </Text>
   );
 
   return (
