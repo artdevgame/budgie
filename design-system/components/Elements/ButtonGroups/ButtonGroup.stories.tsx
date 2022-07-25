@@ -7,7 +7,7 @@ import { IconButton } from '../Buttons/IconButton';
 import {
     Dropdown, DropdownGroup, DropdownItem, IDropdownItemCallback
 } from '../Dropdowns/Dropdown';
-import { ButtonGroup, ButtonGroupProps } from './ButtonGroup';
+import { ButtonGroup, IButtonGroup } from './ButtonGroup';
 
 export default {
   title: 'Elements/ButtonGroups/ButtonGroup',
@@ -21,7 +21,7 @@ export default {
   // },
 } as Meta;
 
-const Template: Story<ButtonGroupProps> = (args) => (
+const Template: Story<IButtonGroup> = (args) => (
   <ButtonGroup size={args.size}>
     <Button onPress={() => console.log('Pressed: Years')}>Years</Button>
     <Button onPress={() => console.log('Pressed: Months')}>Months</Button>
@@ -29,14 +29,14 @@ const Template: Story<ButtonGroupProps> = (args) => (
   </ButtonGroup>
 );
 
-const Template2: Story<ButtonGroupProps> = (args) => (
+const Template2: Story<IButtonGroup> = (args) => (
   <ButtonGroup size={args.size}>
     <IconButton icon={<ChevronLeftIcon />} onPress={() => console.log('Pressed: Left button')} />
     <IconButton icon={<ChevronRightIcon />} onPress={() => console.log('Pressed: Right button')} />
   </ButtonGroup>
 );
 
-const Template3: Story<ButtonGroupProps> = (args) => (
+const Template3: Story<IButtonGroup> = (args) => (
   <ButtonGroup size={args.size}>
     <IconButton icon={<BookmarkIcon />} onPress={() => console.log('Pressed: Bookmark')}>
       Bookmark
@@ -47,7 +47,7 @@ const Template3: Story<ButtonGroupProps> = (args) => (
 
 const onDropdownItemPressed = ({ item, label }: IDropdownItemCallback) => console.log(`Pressed: ${label}`, item);
 
-const Template4: Story<ButtonGroupProps> = (args) => (
+const Template4: Story<IButtonGroup> = (args) => (
   <ButtonGroup size={args.size}>
     <Button onPress={() => console.log('Pressed: Save changes')}>Save changes</Button>
     <Dropdown>

@@ -7,13 +7,13 @@ import { IButton, IButtonSize } from '../Buttons/Button';
 import { IIconButton } from '../Buttons/IconButton';
 import { Dropdown, IDropdown } from '../Dropdowns/Dropdown';
 
-export interface ButtonGroupProps {
+export interface IButtonGroup {
   className?: string;
   children: (ReactElement<IButton> | ReactElement<IIconButton> | ReactElement<IDropdown>)[];
   size: IButtonSize;
 }
 
-export const ButtonGroup = ({ children = [], className, size = 'md' }: ButtonGroupProps): ReactElement => {
+export const ButtonGroup = ({ children = [], className, size = 'md' }: IButtonGroup): ReactElement => {
   const totalComponents = children.length - 1;
 
   const groupedButtons = children.map((component: ReactElement, buttonIdx: number) => {
