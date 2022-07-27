@@ -15,7 +15,8 @@
     "start": "sst start",
     "storybook": "npm start --prefix design-system",
     "test": "vitest run",
-    "typecheck": "tsc --noEmit"
+    "typecheck": "tsc --noEmit",
+    "web": "npm run dev --prefix web"
   },
   "devDependencies": {
     "@serverless-stack/cli": "^1.6.1",
@@ -35,6 +36,7 @@
   ],
   "overrides": {
     "graphql": "16.5.0",
+    "react": "18.0.0",
     "react-dom": "18.0.0"
   }
 }

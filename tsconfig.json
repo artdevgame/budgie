@@ -1,4 +1,4 @@
 {
   "extends": "@tsconfig/node16/tsconfig.json",
-  "include": ["stacks", "env.d.ts"]
+  "include": ["stacks", "**/*.d.ts"]
 }

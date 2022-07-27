@@ -1,12 +1,20 @@
 {
   "name": "@budgie/web",
   "version": "0.0.0",
-  "type": "module",
-  "scripts": {},
+  "scripts": {
+    "dev": "sst-env -- next",
+    "build": "next build",
+    "start": "next start"
+  },
   "dependencies": {
-    "react": "^18.2.0",
-    "react-dom": "^18.2.0",
+    "@sls-next/lambda-at-edge": "^3.7.0",
+    "next": "latest",
+    "react": "18.0.0",
+    "react-dom": "18.0.0",
     "react-native-web": "^0.18.7"
   },
-  "devDependencies": {}
+  "devDependencies": {
+    "@serverless-stack/static-site-env": "^1.6.1",
+    "babel-plugin-react-native-web": "^0.18.7"
+  }
 }

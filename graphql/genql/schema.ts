@@ -52,7 +52,7 @@ export interface Query {
     budget: Budget[]
     events: Event[]
     transactions: Transaction[]
-    user: User
+    user?: User
     __typename: 'Query'
 }
 
@@ -292,7 +292,7 @@ export interface QueryPromiseChain{
     budget: ((args: {date: Scalars['String']}) => {get: <R extends BudgetRequest>(request: R, defaultValue?: FieldsSelection<Budget, R>[]) => Promise<FieldsSelection<Budget, R>[]>}),
     events: ({get: <R extends EventRequest>(request: R, defaultValue?: FieldsSelection<Event, R>[]) => Promise<FieldsSelection<Event, R>[]>}),
     transactions: ((args: {accountId: Scalars['String']}) => {get: <R extends TransactionRequest>(request: R, defaultValue?: FieldsSelection<Transaction, R>[]) => Promise<FieldsSelection<Transaction, R>[]>}),
-    user: (UserPromiseChain & {get: <R extends UserRequest>(request: R, defaultValue?: FieldsSelection<User, R>) => Promise<FieldsSelection<User, R>>})
+    user: (UserPromiseChain & {get: <R extends UserRequest>(request: R, defaultValue?: (FieldsSelection<User, R> | undefined)) => Promise<(FieldsSelection<User, R> | undefined)>})
 }
 
 export interface QueryObservableChain{
@@ -300,7 +300,7 @@ export interface QueryObservableChain{
     budget: ((args: {date: Scalars['String']}) => {get: <R extends BudgetRequest>(request: R, defaultValue?: FieldsSelection<Budget, R>[]) => Observable<FieldsSelection<Budget, R>[]>}),
     events: ({get: <R extends EventRequest>(request: R, defaultValue?: FieldsSelection<Event, R>[]) => Observable<FieldsSelection<Event, R>[]>}),
     transactions: ((args: {accountId: Scalars['String']}) => {get: <R extends TransactionRequest>(request: R, defaultValue?: FieldsSelection<Transaction, R>[]) => Observable<FieldsSelection<Transaction, R>[]>}),
-    user: (UserObservableChain & {get: <R extends UserRequest>(request: R, defaultValue?: FieldsSelection<User, R>) => Observable<FieldsSelection<User, R>>})
+    user: (UserObservableChain & {get: <R extends UserRequest>(request: R, defaultValue?: (FieldsSelection<User, R> | undefined)) => Observable<(FieldsSelection<User, R> | undefined)>})
 }
 
 export interface TransactionPromiseChain{

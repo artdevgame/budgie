@@ -18,12 +18,6 @@ export function getApi({ app, stack }: StackContext, environment: Record<string,
       },
     },
     routes: {
-      'GET /private': 'functions/private.handler',
-      'GET /public': {
-        function: 'functions/public.handler',
-        authorizer: 'none',
-      },
-
       'POST /graphql': {
         type: 'pothos',
         authorizer: 'none',
@@ -34,6 +28,7 @@ export function getApi({ app, stack }: StackContext, environment: Record<string,
         output: 'graphql/schema.graphql',
         commands: ['npx genql --output ./graphql/genql --schema ./graphql/schema.graphql --esm'],
       },
+      'ANY /auth/{proxy+}': 'functions/auth/auth.handler',
     },
   });
 }

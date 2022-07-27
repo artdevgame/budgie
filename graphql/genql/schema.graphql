@@ -47,7 +47,7 @@ type Query {
   budget(date: String!): [Budget!]!
   events: [Event!]!
   transactions(accountId: String!): [Transaction!]!
-  user: User!
+  user: User
 }
 
 type Transaction {

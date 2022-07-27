@@ -15,7 +15,8 @@ const UserType = builder.objectRef<IUser>('User').implement({
 builder.queryFields((t) => ({
   user: t.field({
     type: UserType,
-    resolve: (_, {}, { authId }) => User.getUser(authId),
+    resolve: (_, {}, { authId }) => User.withAuthId(authId),
+    nullable: true,
   }),
 }));
 

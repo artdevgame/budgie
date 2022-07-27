@@ -8,6 +8,7 @@
     "@prisma/client": "^4.0.0",
     "@sentry/integrations": "^7.5.0",
     "@sentry/serverless": "^7.5.0",
+    "@serverless-stack/lambda": "latest",
     "@serverless-stack/node": "^1.2.36",
     "aws-sdk": "^2.1166.0",
     "fs-extra": "^10.1.0",
