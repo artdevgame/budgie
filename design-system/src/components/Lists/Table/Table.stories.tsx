@@ -1,6 +1,6 @@
 import { ComponentMeta, ComponentStory } from '@storybook/react';
 
-import { transactions } from '../../../stubs/transactions';
+import { transactions } from '../../../../stubs/transactions';
 import { Text } from '../../Elements/Typography/Text';
 import { Cell } from './Cell';
 import { Row } from './Row';

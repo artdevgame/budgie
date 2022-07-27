@@ -2,7 +2,7 @@ import '../static/styles.css';
 
 import { INITIAL_VIEWPORTS } from '@storybook/addon-viewport';
 
-import { viewports as breakpoints } from '../common/breakpoints';
+import { viewports as breakpoints } from '../src/common/breakpoints';
 import { globalDecorators } from './decorators';
 
 // Create custom viewports using widths defined in design tokens

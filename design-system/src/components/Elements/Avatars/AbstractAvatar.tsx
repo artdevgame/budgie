@@ -1,6 +1,6 @@
 import { StyledComponent } from 'nativewind';
 import React, { ReactElement } from 'react';
-import { View, ViewProps } from 'react-native';
+import { View } from 'react-native';
 import { twMerge } from 'tailwind-merge';
 
 import { IAvatarCommon, TAnyAvatar, TNotificationPosition } from './common';

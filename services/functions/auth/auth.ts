@@ -3,42 +3,40 @@ import { AuthHandler, GoogleAdapter, Session } from '@serverless-stack/lambda/au
 
 // import { useSentry } from '@budgie/core/lib/sentry';
 
-const handleAuthSuccess = async (claims) => {
-  let user = await User.withAuthId(claims.sub);
-
-  if (!user) {
-    user = await User.createUser({
-      authId: claims.sub,
-      givenName: claims.given_name,
-      familyName: claims.family_name,
-      email: claims.email,
-    });
-  }
-
-  const token = Session.create({
-    type: 'user',
-    properties: {
-      authId: user.authId,
-    },
-    options: {
-      expiresIn: 1000 * 60 * 60 * 24,
-    },
-  });
-
-  return {
-    statusCode: 302,
-    headers: {
-      location: `http://localhost:5173?token=${token}`,
-    },
-  };
-};
-
 const main = AuthHandler({
   providers: {
     google: {
       adapter: GoogleAdapter,
-      clientID: process.env.GOOGLE_CLIENT_ID,
-      onSuccess: handleAuthSuccess,
+      clientID: process.env.GOOGLE_CLIENT_ID!,
+      onSuccess: async (claims) => {
+        let user = await User.withAuthId(claims.sub);
+
+        if (!user) {
+          user = await User.createUser({
+            authId: claims.sub,
+            givenName: claims.given_name!,
+            familyName: claims.family_name!,
+            email: claims.email!,
+          });
+        }
+
+        const token = Session.create({
+          type: 'user',
+          properties: {
+            authId: user.authId,
+          },
+          options: {
+            expiresIn: 1000 * 60 * 60 * 24,
+          },
+        });
+
+        return {
+          statusCode: 302,
+          headers: {
+            location: `http://localhost:5173?token=${token}`,
+          },
+        };
+      },
     },
   },
 });

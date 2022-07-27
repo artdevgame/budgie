@@ -5,7 +5,6 @@ import { twMerge } from 'tailwind-merge';
 
 import { AbstractAvatar } from './AbstractAvatar';
 import { IAvatarCommon, sizeClassMap } from './common';
-import { getScaledSize } from './getScaledSize';
 
 export interface IImageAvatar extends IAvatarCommon {
   imageUrl: string;

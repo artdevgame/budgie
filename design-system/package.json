@@ -2,6 +2,9 @@
   "name": "@budgie/design-system",
   "version": "0.0.0",
   "type": "commonjs",
+  "@see": "https://turborepo.com/posts/you-might-not-need-typescript-project-references",
+  "main": "./src",
+  "types": "./src",
   "scripts": {
     "storybook": "NODE_OPTIONS=--openssl-legacy-provider start-storybook -p 6006 --ci",
     "storybook:build": "NODE_OPTIONS=--openssl-legacy-provider build-storybook",
@@ -18,9 +21,9 @@
     "@heroicons/react": "^1.0.6",
     "@react-native-aria/button": "^0.2.4",
     "@react-native-aria/interactions": "^0.2.8",
-    "nativewind": "^2.0.0-next.52",
-    "react": "18.0.0",
-    "react-dom": "18.0.0",
+    "nativewind": "^2.0.0-next.53",
+    "react": "17.0.2",
+    "react-dom": "17.0.2",
     "react-native": "^0.69.2",
     "react-native-web": "^0.18.7"
   },

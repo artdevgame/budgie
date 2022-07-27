@@ -16,10 +16,9 @@
     "isolatedModules": true,
     "jsx": "preserve",
     "paths": {
-      "@budgie/design-system/components/*": ["../design-system/components/*"],
-      "@budgie/design-system/common/*": ["../design-system/common/*"]
+      "@budgie/design-system/*": ["../design-system/src/*"]
     }
   },
-  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", "../design-system/components"],
+  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", "../design-system"],
   "exclude": ["node_modules"]
 }

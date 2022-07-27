@@ -3,7 +3,7 @@ import React, { forwardRef, MutableRefObject, PropsWithChildren, ReactElement } 
 import { Pressable, View as NativeView } from 'react-native';
 import { twMerge } from 'tailwind-merge';
 
-import { IButton } from '../../../components/Elements/Buttons/Button';
+import { IButton } from '../../Elements/Buttons/Button';
 import { Text } from '../../Elements/Typography/Text';
 import {
     AbstractNotification, NotificationActions, NotificationIcon

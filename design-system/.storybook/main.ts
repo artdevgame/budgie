@@ -1,3 +1,5 @@
+const path = require('path');
+
 module.exports = {
   addons: [
     '@storybook/addon-a11y',
@@ -19,12 +21,16 @@ module.exports = {
   },
   framework: '@storybook/react',
   staticDirs: ['../static'],
-  stories: ['../components/**/*.stories.mdx', '../components/**/*.stories.@(js|jsx|ts|tsx)'],
+  stories: ['../src/components/**/*.stories.mdx', '../src/components/**/*.stories.@(js|jsx|ts|tsx)'],
   webpackFinal: (config) => ({
     ...config,
     resolve: {
       ...config.resolve,
-      alias: { ...config.resolve.alias, 'react-native$': 'react-native-web' },
+      alias: {
+        ...config.resolve.alias,
+        'react-native$': 'react-native-web',
+        '@budgie/design-system': path.resolve(__dirname, '../src'),
+      },
     },
   }),
 };
