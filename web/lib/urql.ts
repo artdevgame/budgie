@@ -7,8 +7,6 @@ import {
     generateMutationOp, generateQueryOp, MutationRequest, MutationResult, QueryRequest, QueryResult
 } from '@budgie/graphql/genql';
 
-export { Provider as UrqlProvider } from 'urql';
-
 export function useTypedQuery<Query extends QueryRequest>(opts: {
   query: Query;
   requestPolicy?: RequestPolicy;
@@ -45,15 +43,20 @@ export function useTypedMutation<Variables extends Record<string, any>, Mutation
   return [result, executeWrapper] as const;
 }
 
-const authToken = global?.localStorage?.getItem('x-budgie-auth');
+// const token = new URLSearchParams(global?.location?.search).get('token');
+// if (token) {
+//   global?.localStorage?.setItem('x-budgie-auth', token);
+// }
+
+// const authToken = global?.localStorage?.getItem('x-budgie-auth');
 
 export const urql = createClient({
-  url: process.env.GRAPHQL_URL,
+  url: process.env.NEXT_PUBLIC_GRAPHQL_URL,
   exchanges: defaultExchanges,
   fetchOptions: {
-    credentials: 'include',
+    // credentials: 'include',
     headers: {
-      ...(authToken && { authorization: `Bearer ${authToken}` }),
+      // ...(authToken && { authorization: `Bearer ${authToken}` }),
     },
   },
 });

@@ -1,14 +1,10 @@
 import '../styles/globals.css';
 
-import { urql, UrqlProvider } from 'lib/urql';
+import { urql } from 'lib/urql';
 import { AppProps } from 'next/app';
 import Head from 'next/head';
 import * as React from 'react';
-
-const token = new URLSearchParams(global?.location?.search).get('token');
-if (token) {
-  global?.localStorage?.setItem('x-budgie-auth', token);
-}
+import { Provider as UrqlProvider } from 'urql';
 
 function MyApp({ Component, pageProps }: AppProps) {
   return (
