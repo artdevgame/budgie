@@ -1,8 +1,7 @@
-import { Event } from '@prisma/client';
 import { SessionTypes } from '@serverless-stack/lambda/auth';
 
 import { Actor } from './actor';
-import { createEvent } from './event';
+import { createEvent, getEvents, IEventEntity } from './event';
 import { dispatchEvent } from './helpers/dispatchEvent';
 import { useUser } from './hooks/useUser';
 import { cache } from './lib/cache';
@@ -61,10 +60,10 @@ export async function withAuthId(authId: IUser['authId']) {
     return JSON.parse(cacheResult) as IUser;
   }
 
-  const userInEvents = await database.event.findFirst({ where: { data: { equals: [{ authId }] } } });
+  const userInEvents = await getEvents({ authId, limit: 1 });
 
   if (userInEvents) {
-    const existingUser = fromEvent(userInEvents);
+    const existingUser = fromEvent(userInEvents[0]);
     await dispatchEvent<IUser>('USER_CREATED', existingUser);
     return existingUser;
   }
@@ -75,7 +74,7 @@ export async function me() {
   return withAuthId(authId);
 }
 
-export function fromEvent(event: Event) {
+export function fromEvent(event: IEventEntity) {
   const { authId, givenName, familyName, email } = event.data as unknown as IUser;
   return { authId, givenName, familyName, email, role: 'user' } as IUser;
 }

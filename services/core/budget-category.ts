@@ -1,7 +1,5 @@
-import { Event } from '@prisma/client';
-
 import { Actor } from './actor';
-import { createEvent } from './event';
+import { createEvent, IEventEntity } from './event';
 import { dispatchEvent } from './helpers/dispatchEvent';
 import { useUser } from './hooks/useUser';
 import { cache } from './lib/cache';
@@ -102,7 +100,7 @@ export async function getCategories() {
   }
 }
 
-export function fromEvent(event: Event) {
+export function fromEvent(event: IEventEntity) {
   const { categoryId, categoryGroupId, name, order } = event.data as unknown as ICategory;
   return { categoryId, categoryGroupId, name, order } as ICategory;
 }

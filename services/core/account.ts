@@ -1,7 +1,5 @@
-import { Event } from '@prisma/client';
-
 import { Actor } from './actor';
-import { createEvent } from './event';
+import { createEvent, IEventEntity } from './event';
 import { dispatchEvent } from './helpers/dispatchEvent';
 import { useUser } from './hooks/useUser';
 import { cache } from './lib/cache';
@@ -81,7 +79,7 @@ export async function getAccounts() {
   }
 }
 
-export function fromEvent(event: Event) {
+export function fromEvent(event: IEventEntity) {
   const { accountId, name, active } = event.data as unknown as IAccount;
   return { accountId, active, name } as IAccount;
 }

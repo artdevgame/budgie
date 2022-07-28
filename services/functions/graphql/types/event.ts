@@ -1,14 +1,13 @@
-import { Event } from '@budgie/core/event';
-import { Event as IEvent } from '@prisma/client';
+import { Event, IEventEntity } from '@budgie/core/event';
 
 import { builder } from '../builder';
 
-const EventType = builder.objectRef<IEvent>('Event').implement({
+const EventType = builder.objectRef<IEventEntity>('Event').implement({
   fields: (t) => ({
     id: t.exposeString('id'),
     data: t.expose('data', { type: 'JSON' }),
     sequence: t.exposeInt('sequence'),
-    timestamp: t.expose('timestamp', { type: 'DateTime' }),
+    timestamp: t.exposeString('timestamp'),
     version: t.exposeString('version'),
   }),
 });
@@ -16,6 +15,6 @@ const EventType = builder.objectRef<IEvent>('Event').implement({
 builder.queryFields((t) => ({
   events: t.field({
     type: [EventType],
-    resolve: async (_, {}, { authId }) => Event.getEvents(authId),
+    resolve: async (_, {}, { authId }) => Event.getEvents({ authId }),
   }),
 }));

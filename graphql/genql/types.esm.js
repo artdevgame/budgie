@@ -4,8 +4,7 @@ export default {
         2,
         3,
         5,
-        6,
-        8
+        7
     ],
     "types": {
         "Account": {
@@ -40,10 +39,9 @@ export default {
             ]
         },
         "Int": {},
-        "DateTime": {},
         "Event": {
             "data": [
-                8
+                7
             ],
             "id": [
                 1
@@ -52,7 +50,7 @@ export default {
                 5
             ],
             "timestamp": [
-                6
+                1
             ],
             "version": [
                 1
@@ -64,7 +62,7 @@ export default {
         "JSON": {},
         "Mutation": {
             "addTransaction": [
-                11,
+                10,
                 {
                     "accountId": [
                         1,
@@ -115,7 +113,7 @@ export default {
                 }
             ],
             "createUser": [
-                12,
+                11,
                 {
                     "authId": [
                         1,
@@ -149,7 +147,7 @@ export default {
                 }
             ],
             "updateUser": [
-                12,
+                11,
                 {
                     "email": [
                         1
@@ -197,10 +195,10 @@ export default {
                 }
             ],
             "events": [
-                7
+                6
             ],
             "transactions": [
-                11,
+                10,
                 {
                     "accountId": [
                         1,
@@ -209,7 +207,7 @@ export default {
                 }
             ],
             "user": [
-                12
+                11
             ],
             "__typename": [
                 1

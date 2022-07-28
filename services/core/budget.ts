@@ -1,8 +1,6 @@
-import { Event } from '@prisma/client';
-
 import { Actor } from './actor';
 import { TCategoryId } from './budget-category';
-import { createEvent } from './event';
+import { createEvent, IEventEntity } from './event';
 import { dispatchEvent } from './helpers/dispatchEvent';
 import { useUser } from './hooks/useUser';
 import { cache } from './lib/cache';
@@ -60,7 +58,7 @@ export async function withDate(date: string) {
   }
 }
 
-export function fromEvent(event: Event) {
+export function fromEvent(event: IEventEntity) {
   const { categoryId, date, amount } = event.data as unknown as IBudget;
   return { categoryId, date, amount } as IBudget;
 }

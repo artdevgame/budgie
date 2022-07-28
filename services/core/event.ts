@@ -1,3 +1,4 @@
+import { sql } from 'kysely';
 import { ulid } from 'ulid';
 
 import { database } from './lib/database';
@@ -109,7 +110,7 @@ interface IUserUpdate extends Partial<Omit<IUserCreate, 'command'>> {
   command: 'UPDATE_USER';
 }
 
-type TEventData =
+export type TEventData =
   | IAccountCreate
   | IAccountClose
   | IAccountRetrieve
@@ -129,24 +130,31 @@ type TEventData =
   | IUserLogout
   | IUserUpdate;
 
-export async function createEvent(data: TEventData, sequence: number = 0) {
-  return await database.event.create({
-    data: {
-      data: JSON.stringify(data),
-      id: ulid(),
-      sequence,
-      timestamp: new Date().toISOString(),
-      version: '1.0.0',
-    },
-  });
+export interface IEventEntity {
+  data: string;
+  id: string;
+  sequence: number;
+  timestamp: string;
+  version: '1.0.0';
 }
 
-export async function getEvents(authId: string) {
-  return database.event.findMany({
-    where: {
-      data: {
-        equals: { authId },
-      },
-    },
-  });
+export async function createEvent(data: TEventData, sequence: number = 0) {
+  const event: IEventEntity = {
+    data: JSON.stringify(data),
+    id: ulid(),
+    sequence,
+    timestamp: new Date().toISOString(),
+    version: '1.0.0',
+  };
+  await database.insertInto('events').values(event).executeTakeFirst();
+  return event;
+}
+
+export async function getEvents({ authId, limit = 0 }: { authId: string; limit?: number }) {
+  return database
+    .selectFrom('events')
+    .selectAll()
+    .where(sql`JSON_EXTRACT(data, "$.authId")`, '=', authId)
+    .limit(limit)
+    .execute();
 }

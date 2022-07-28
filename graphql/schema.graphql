@@ -20,13 +20,11 @@ type Budget {
   date: String!
 }
 
-scalar DateTime
-
 type Event {
   data: JSON!
   id: String!
   sequence: Int!
-  timestamp: DateTime!
+  timestamp: String!
   version: String!
 }
 

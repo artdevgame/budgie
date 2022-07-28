@@ -5,9 +5,6 @@
   "scripts": {
     "build": "sst build",
     "console": "sst console",
-    "db:generate": "npx prisma generate",
-    "db:gui": "npx prisma studio",
-    "db:push": "npx prisma push",
     "db:shell": "pscale shell budgie dev",
     "db:start": "pscale connect budgie dev --port 3309",
     "deploy": "nsst deploy --stage=production",

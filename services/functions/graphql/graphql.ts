@@ -1,5 +1,3 @@
-import '@budgie/core/helpers/esm';
-
 import { GraphQLHandler } from '@serverless-stack/lambda/graphql/graphql';
 
 import { schema } from './schema';

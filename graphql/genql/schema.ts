@@ -4,7 +4,6 @@ export type Scalars = {
     String: string,
     Boolean: boolean,
     Int: number,
-    DateTime: any,
     JSON: any,
 }
 
@@ -31,7 +30,7 @@ export interface Event {
     data: Scalars['JSON']
     id: Scalars['String']
     sequence: Scalars['Int']
-    timestamp: Scalars['DateTime']
+    timestamp: Scalars['String']
     version: Scalars['String']
     __typename: 'Event'
 }
@@ -255,7 +254,7 @@ export interface EventPromiseChain{
     data: ({get: (request?: boolean|number, defaultValue?: Scalars['JSON']) => Promise<Scalars['JSON']>}),
     id: ({get: (request?: boolean|number, defaultValue?: Scalars['String']) => Promise<Scalars['String']>}),
     sequence: ({get: (request?: boolean|number, defaultValue?: Scalars['Int']) => Promise<Scalars['Int']>}),
-    timestamp: ({get: (request?: boolean|number, defaultValue?: Scalars['DateTime']) => Promise<Scalars['DateTime']>}),
+    timestamp: ({get: (request?: boolean|number, defaultValue?: Scalars['String']) => Promise<Scalars['String']>}),
     version: ({get: (request?: boolean|number, defaultValue?: Scalars['String']) => Promise<Scalars['String']>})
 }
 
@@ -263,7 +262,7 @@ export interface EventObservableChain{
     data: ({get: (request?: boolean|number, defaultValue?: Scalars['JSON']) => Observable<Scalars['JSON']>}),
     id: ({get: (request?: boolean|number, defaultValue?: Scalars['String']) => Observable<Scalars['String']>}),
     sequence: ({get: (request?: boolean|number, defaultValue?: Scalars['Int']) => Observable<Scalars['Int']>}),
-    timestamp: ({get: (request?: boolean|number, defaultValue?: Scalars['DateTime']) => Observable<Scalars['DateTime']>}),
+    timestamp: ({get: (request?: boolean|number, defaultValue?: Scalars['String']) => Observable<Scalars['String']>}),
     version: ({get: (request?: boolean|number, defaultValue?: Scalars['String']) => Observable<Scalars['String']>})
 }
 
