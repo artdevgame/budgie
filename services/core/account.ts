@@ -1,5 +1,5 @@
 import { Actor } from './actor';
-import { createEvent, IEventEntity } from './event';
+import { createEvent, IEvent } from './event';
 import { dispatchEvent } from './helpers/dispatchEvent';
 import { useUser } from './hooks/useUser';
 import { cache } from './lib/cache';
@@ -79,7 +79,7 @@ export async function getAccounts() {
   }
 }
 
-export function fromEvent(event: IEventEntity) {
+export function fromEvent(event: IEvent) {
   const { accountId, name, active } = event.data as unknown as IAccount;
   return { accountId, active, name } as IAccount;
 }

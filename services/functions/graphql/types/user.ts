@@ -4,9 +4,11 @@ import { builder } from '../builder';
 
 const UserType = builder.objectRef<IUser>('User').implement({
   fields: (t) => ({
+    authId: t.exposeString('authId'),
     email: t.exposeString('email'),
     familyName: t.exposeString('familyName'),
     givenName: t.exposeString('givenName'),
+    picture: t.exposeString('picture', { nullable: true }),
   }),
 });
 

@@ -1,11 +1,10 @@
 import { SessionTypes } from '@serverless-stack/lambda/auth';
 
 import { Actor } from './actor';
-import { createEvent, getEvents, IEventEntity } from './event';
+import { createEvent, getEvents, IEvent } from './event';
 import { dispatchEvent } from './helpers/dispatchEvent';
 import { useUser } from './hooks/useUser';
 import { cache } from './lib/cache';
-import { database } from './lib/database';
 
 export * as User from './user';
 
@@ -15,6 +14,7 @@ export interface IUser {
   familyName: string;
   email: string;
   role: keyof SessionTypes;
+  picture?: string;
 }
 
 export async function createUser(user: IUser) {
@@ -62,7 +62,7 @@ export async function withAuthId(authId: IUser['authId']) {
 
   const userInEvents = await getEvents({ authId, limit: 1 });
 
-  if (userInEvents) {
+  if (userInEvents.length) {
     const existingUser = fromEvent(userInEvents[0]);
     await dispatchEvent<IUser>('USER_CREATED', existingUser);
     return existingUser;
@@ -74,7 +74,7 @@ export async function me() {
   return withAuthId(authId);
 }
 
-export function fromEvent(event: IEventEntity) {
-  const { authId, givenName, familyName, email } = event.data as unknown as IUser;
-  return { authId, givenName, familyName, email, role: 'user' } as IUser;
+export function fromEvent(event: IEvent) {
+  const { authId, givenName, familyName, email, picture } = event.data as unknown as IUser;
+  return { authId, givenName, familyName, email, role: 'user', picture } as IUser;
 }

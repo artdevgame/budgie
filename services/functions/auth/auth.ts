@@ -28,14 +28,15 @@ const main = AuthHandler({
             familyName: claims.family_name!,
             email: claims.email!,
             role: 'user',
+            picture: claims.picture,
           });
         }
 
         return Session.parameter({
-          redirect: 'http://localhost:3000',
+          redirect: 'http://localhost:3000/',
           type: 'user',
           properties: {
-            authId: claims.sub,
+            authId: user.authId,
           },
           options: {
             expiresIn: 1000 * 60 * 60 * 24,

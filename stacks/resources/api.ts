@@ -2,6 +2,9 @@ import { Api, StackContext } from '@serverless-stack/resources';
 
 export function getApi({ stack }: StackContext, environment: Record<string, string>) {
   return new Api(stack, 'ServerSide', {
+    cors: {
+      allowOrigins: ['*'],
+    },
     defaults: {
       function: {
         environment: {

@@ -43,12 +43,17 @@ export function useTypedMutation<Variables extends Record<string, any>, Mutation
   return [result, executeWrapper] as const;
 }
 
-// const token = new URLSearchParams(global?.location?.search).get('token');
-// if (token) {
-//   global?.localStorage?.setItem('x-budgie-auth', token);
-// }
+let authToken;
 
-// const authToken = global?.localStorage?.getItem('x-budgie-auth');
+if (typeof window !== 'undefined') {
+  const token = new URLSearchParams(window.location.search).get('token');
+
+  if (token) {
+    window.localStorage.setItem('x-budgie-auth', token);
+  }
+
+  authToken = window.localStorage.getItem('x-budgie-auth');
+}
 
 export const urql = createClient({
   url: process.env.NEXT_PUBLIC_GRAPHQL_URL,
@@ -56,7 +61,7 @@ export const urql = createClient({
   fetchOptions: {
     // credentials: 'include',
     headers: {
-      // ...(authToken && { authorization: `Bearer ${authToken}` }),
+      ...(authToken && { authorization: `Bearer ${authToken}` }),
     },
   },
 });

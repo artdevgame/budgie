@@ -4,6 +4,7 @@ import { View as NativeView } from 'react-native';
 import { twMerge } from 'tailwind-merge';
 
 export type ICard = PropsWithChildren<{
+  bodyClassName?: string;
   className?: string;
   footer?: ReactNode;
   header?: ReactNode;
@@ -21,7 +22,15 @@ export type ICardHeader = {
 
 const View = styled(NativeView);
 
-export const Card = ({ children, className, footer, header, isFullWidth, isGrayBody }: ICard): ReactElement => {
+export const Card = ({
+  children,
+  bodyClassName,
+  className,
+  footer,
+  header,
+  isFullWidth,
+  isGrayBody,
+}: ICard): ReactElement => {
   const styles = twMerge(
     'bg-white overflow-hidden shadow',
     isFullWidth ? 'sm:rounded-lg' : 'rounded-lg',
@@ -32,7 +41,7 @@ export const Card = ({ children, className, footer, header, isFullWidth, isGrayB
   return (
     <View className={styles}>
       {header}
-      <View className={twMerge('px-4 py-5 sm:p-6', isGrayBody && 'bg-gray-50')}>{children}</View>
+      <View className={twMerge('px-4 py-5 sm:p-6', isGrayBody && 'bg-gray-50', bodyClassName)}>{children}</View>
       {footer}
     </View>
   );

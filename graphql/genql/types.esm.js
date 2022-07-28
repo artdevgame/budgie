@@ -243,6 +243,9 @@ export default {
             ]
         },
         "User": {
+            "authId": [
+                1
+            ],
             "email": [
                 1
             ],
@@ -250,6 +253,9 @@ export default {
                 1
             ],
             "givenName": [
+                1
+            ],
+            "picture": [
                 1
             ],
             "__typename": [

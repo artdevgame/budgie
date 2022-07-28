@@ -130,23 +130,30 @@ export type TEventData =
   | IUserLogout
   | IUserUpdate;
 
-export interface IEventEntity {
-  data: string;
+export interface IEvent {
+  data: TEventData;
   id: string;
   sequence: number;
-  timestamp: string;
+  timestamp?: string;
   version: '1.0.0';
 }
 
+export interface IEventEntity extends Omit<IEvent, 'data'> {
+  data: string;
+}
+
 export async function createEvent(data: TEventData, sequence: number = 0) {
-  const event: IEventEntity = {
-    data: JSON.stringify(data),
+  const event: IEvent = {
+    data,
     id: ulid(),
     sequence,
-    timestamp: new Date().toISOString(),
+    // timestamp: new Date().toISOString(),
     version: '1.0.0',
   };
-  await database.insertInto('events').values(event).executeTakeFirst();
+  await database
+    .insertInto('events')
+    .values({ ...event, data: JSON.stringify(data) })
+    .executeTakeFirst();
   return event;
 }
 
@@ -156,5 +163,5 @@ export async function getEvents({ authId, limit = 0 }: { authId: string; limit?:
     .selectAll()
     .where(sql`JSON_EXTRACT(data, "$.authId")`, '=', authId)
     .limit(limit)
-    .execute();
+    .execute() as unknown as Promise<IEvent[]>;
 }

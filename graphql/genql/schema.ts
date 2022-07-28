@@ -74,9 +74,11 @@ export interface Transaction {
 }
 
 export interface User {
+    authId: Scalars['String']
     email: Scalars['String']
     familyName: Scalars['String']
     givenName: Scalars['String']
+    picture?: Scalars['String']
     __typename: 'User'
 }
 
@@ -151,9 +153,11 @@ export interface TransactionRequest{
 }
 
 export interface UserRequest{
+    authId?: boolean | number
     email?: boolean | number
     familyName?: boolean | number
     givenName?: boolean | number
+    picture?: boolean | number
     __typename?: boolean | number
     __scalar?: boolean | number
 }
@@ -349,13 +353,17 @@ txReference: ({get: (request?: boolean|number, defaultValue?: Scalars['String'])
 }
 
 export interface UserPromiseChain{
+    authId: ({get: (request?: boolean|number, defaultValue?: Scalars['String']) => Promise<Scalars['String']>}),
     email: ({get: (request?: boolean|number, defaultValue?: Scalars['String']) => Promise<Scalars['String']>}),
     familyName: ({get: (request?: boolean|number, defaultValue?: Scalars['String']) => Promise<Scalars['String']>}),
-    givenName: ({get: (request?: boolean|number, defaultValue?: Scalars['String']) => Promise<Scalars['String']>})
+    givenName: ({get: (request?: boolean|number, defaultValue?: Scalars['String']) => Promise<Scalars['String']>}),
+    picture: ({get: (request?: boolean|number, defaultValue?: (Scalars['String'] | undefined)) => Promise<(Scalars['String'] | undefined)>})
 }
 
 export interface UserObservableChain{
+    authId: ({get: (request?: boolean|number, defaultValue?: Scalars['String']) => Observable<Scalars['String']>}),
     email: ({get: (request?: boolean|number, defaultValue?: Scalars['String']) => Observable<Scalars['String']>}),
     familyName: ({get: (request?: boolean|number, defaultValue?: Scalars['String']) => Observable<Scalars['String']>}),
-    givenName: ({get: (request?: boolean|number, defaultValue?: Scalars['String']) => Observable<Scalars['String']>})
+    givenName: ({get: (request?: boolean|number, defaultValue?: Scalars['String']) => Observable<Scalars['String']>}),
+    picture: ({get: (request?: boolean|number, defaultValue?: (Scalars['String'] | undefined)) => Observable<(Scalars['String'] | undefined)>})
 }

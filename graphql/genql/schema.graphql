@@ -76,7 +76,9 @@ type Transaction {
 }
 
 type User {
+  authId: String!
   email: String!
   familyName: String!
   givenName: String!
+  picture: String
 }

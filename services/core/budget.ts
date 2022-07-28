@@ -1,6 +1,6 @@
 import { Actor } from './actor';
 import { TCategoryId } from './budget-category';
-import { createEvent, IEventEntity } from './event';
+import { createEvent, IEvent } from './event';
 import { dispatchEvent } from './helpers/dispatchEvent';
 import { useUser } from './hooks/useUser';
 import { cache } from './lib/cache';
@@ -58,7 +58,7 @@ export async function withDate(date: string) {
   }
 }
 
-export function fromEvent(event: IEventEntity) {
+export function fromEvent(event: IEvent) {
   const { categoryId, date, amount } = event.data as unknown as IBudget;
   return { categoryId, date, amount } as IBudget;
 }

@@ -25,7 +25,7 @@ Here's a [primer video](https://www.youtube.com/watch?v=rolfJR9ERxo) on the theo
 - Serverless via [SST](https://sst.dev) (based on `create-sst`)
 - Authentication via [Amazon Cognito](https://aws.amazon.com/cognito)
 - MySQL database via [PlanetScale](https://planetscale.com) (used for event storage - "writes")
-- ORM via [Prisma](https://prisma.io) (might change this to [Kysely](https://koskimas.github.io/kysely) eventually)
+- ORM via [Kysely](https://koskimas.github.io/kysely)
 - Redis caching via [Upstash](https://upstash.com) (used to generate projections - "reads")
 - GraphQL (and [Pothos](https://pothos-graphql.dev) for TS schema building) - this is the data access layer from the frontend
 - Event bus via [Amazon EventBridge](https://aws.amazon.com/eventbridge), which is used to update projections and to dispatch [Server-Sent Events (SSE)](https://en.wikipedia.org/wiki/Server-sent_events) to help keep the frontend in sync
@@ -35,8 +35,9 @@ Here's a [primer video](https://www.youtube.com/watch?v=rolfJR9ERxo) on the theo
 
 ## 🔧 Environment variables
 
-| Name         | Description                                   |
-| ------------ | --------------------------------------------- |
-| CACHE_URL    | Location of the Redis cache on Upstash        |
-| DATABASE_URL | Location of the MySQL database on PlanetScale |
-| SENTRY_DSN   | Location of the error/performance logs        |
+| Name             | Description                                   |
+| ---------------- | --------------------------------------------- |
+| CACHE_URL        | Location of the Redis cache on Upstash        |
+| DATABASE_URL     | Location of the MySQL database on PlanetScale |
+| GOOGLE_CLIENT_ID | OIDC key to use Google social login           |
+| SENTRY_DSN       | Location of the error/performance logs        |

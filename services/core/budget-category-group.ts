@@ -1,5 +1,5 @@
 import { Actor } from './actor';
-import { createEvent, IEventEntity } from './event';
+import { createEvent, IEvent } from './event';
 import { dispatchEvent } from './helpers/dispatchEvent';
 import { useUser } from './hooks/useUser';
 import { cache } from './lib/cache';
@@ -89,7 +89,7 @@ export async function getGroups() {
   }
 }
 
-export function fromEvent(event: IEventEntity) {
+export function fromEvent(event: IEvent) {
   const { categoryGroupId, name, order } = event.data as unknown as ICategoryGroup;
   return { categoryGroupId, name, order } as ICategoryGroup;
 }
