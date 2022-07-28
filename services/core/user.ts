@@ -1,6 +1,7 @@
 import { Event } from '@prisma/client';
 import { SessionTypes } from '@serverless-stack/lambda/auth';
 
+import { Actor } from './actor';
 import { createEvent } from './event';
 import { dispatchEvent } from './helpers/dispatchEvent';
 import { useUser } from './hooks/useUser';
@@ -15,13 +16,6 @@ export interface IUser {
   familyName: string;
   email: string;
   role: keyof SessionTypes;
-}
-
-export async function assertRole(role: IUser['role']) {
-  const user = await useUser();
-  if (user.role !== role) {
-    throw new Error(`User must have "${role}" role`);
-  }
 }
 
 export async function createUser(user: IUser) {
@@ -42,7 +36,7 @@ export async function updateUser({
   familyName,
   givenName,
 }: Partial<Pick<IUser, 'email' | 'familyName' | 'givenName'>>) {
-  assertRole('user');
+  Actor.assertRole('user');
 
   const { authId } = await useUser();
 

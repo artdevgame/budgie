@@ -1,11 +1,11 @@
 import { Event } from '@prisma/client';
 
+import { Actor } from './actor';
 import { createEvent } from './event';
 import { dispatchEvent } from './helpers/dispatchEvent';
 import { useUser } from './hooks/useUser';
 import { cache } from './lib/cache';
 import { TWithAuth } from './types/TWithAuth';
-import { User } from './user';
 
 export * as Account from './account';
 
@@ -21,7 +21,7 @@ export type TAccounts = Record<TAccountId, TAccountEntry>;
 export type TAccountEntry = Omit<IAccount, 'accountId'>;
 
 export async function createAccount({ name }: Pick<IAccount, 'name'>) {
-  User.assertRole('user');
+  Actor.assertRole('user');
 
   const { authId } = await useUser();
   const event = await createEvent({ command: 'CREATE_ACCOUNT', name });
@@ -33,7 +33,7 @@ export async function createAccount({ name }: Pick<IAccount, 'name'>) {
 }
 
 export async function updateAccount({ accountId, name }: Pick<IAccount, 'accountId' | 'name'>) {
-  User.assertRole('user');
+  Actor.assertRole('user');
 
   const { authId } = await useUser();
   const event = await createEvent({
@@ -49,7 +49,7 @@ export async function updateAccount({ accountId, name }: Pick<IAccount, 'account
 }
 
 export async function closeAccount({ accountId }: Pick<IAccount, 'accountId'>) {
-  User.assertRole('user');
+  Actor.assertRole('user');
 
   const { authId } = await useUser();
   const event = await createEvent({
@@ -64,7 +64,7 @@ export async function closeAccount({ accountId }: Pick<IAccount, 'accountId'>) {
 }
 
 export async function getAccounts() {
-  User.assertRole('user');
+  Actor.assertRole('user');
 
   const { authId } = await useUser();
   try {

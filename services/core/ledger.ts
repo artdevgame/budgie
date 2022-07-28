@@ -1,12 +1,12 @@
 import { Event } from '@prisma/client';
 
+import { Actor } from './actor';
 import { createEvent } from './event';
 import { dispatchEvent } from './helpers/dispatchEvent';
 import { useUser } from './hooks/useUser';
 import { cache } from './lib/cache';
 import { TOptional } from './types/TOptional';
 import { TWithAuth } from './types/TWithAuth';
-import { User } from './user';
 
 export * as Ledger from './ledger';
 
@@ -31,7 +31,7 @@ export async function addTransaction({
   txInformation,
   txReference,
 }: TOptional<ITransaction, 'categoryId' | 'txId' | 'txInformation' | 'txReference'>) {
-  User.assertRole('user');
+  Actor.assertRole('user');
 
   const { authId } = await useUser();
 
@@ -55,7 +55,7 @@ export async function addTransaction({
 }
 
 export async function withAccountId({ accountId }: Pick<ITransaction, 'accountId'>) {
-  User.assertRole('user');
+  Actor.assertRole('user');
 
   const { authId } = await useUser();
 

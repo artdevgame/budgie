@@ -1,12 +1,12 @@
 import { Event } from '@prisma/client';
 
+import { Actor } from './actor';
 import { TCategoryId } from './budget-category';
 import { createEvent } from './event';
 import { dispatchEvent } from './helpers/dispatchEvent';
 import { useUser } from './hooks/useUser';
 import { cache } from './lib/cache';
 import { TWithAuth } from './types/TWithAuth';
-import { User } from './user';
 
 export * as Budget from './budget';
 
@@ -19,7 +19,7 @@ export interface IBudget {
 export type TBudget = Record<TCategoryId, number>;
 
 export async function upsertBudget({ amount, categoryId, date }: IBudget) {
-  User.assertRole('user');
+  Actor.assertRole('user');
 
   const { authId } = await useUser();
 
@@ -37,7 +37,7 @@ export async function upsertBudget({ amount, categoryId, date }: IBudget) {
 }
 
 export async function withDate(date: string) {
-  User.assertRole('user');
+  Actor.assertRole('user');
 
   const { authId } = await useUser();
 

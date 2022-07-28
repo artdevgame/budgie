@@ -1,12 +1,12 @@
 import { Event } from '@prisma/client';
 
+import { Actor } from './actor';
 import { createEvent } from './event';
 import { dispatchEvent } from './helpers/dispatchEvent';
 import { useUser } from './hooks/useUser';
 import { cache } from './lib/cache';
 import { TOptional } from './types/TOptional';
 import { TWithAuth } from './types/TWithAuth';
-import { User } from './user';
 
 export * as BudgetCategory from './budget-category';
 
@@ -26,7 +26,7 @@ export async function createCategory({
   categoryGroupId,
   order,
 }: TOptional<TCategoryEntry, 'categoryGroupId' | 'order'>) {
-  User.assertRole('user');
+  Actor.assertRole('user');
 
   const { authId } = await useUser();
 
@@ -44,7 +44,7 @@ export async function createCategory({
 }
 
 export async function deleteCategory({ categoryId }: Pick<ICategory, 'categoryId'>) {
-  User.assertRole('user');
+  Actor.assertRole('user');
 
   const { authId } = await useUser();
 
@@ -65,7 +65,7 @@ export async function updateCategory({
   name,
   order,
 }: TOptional<ICategory, 'categoryGroupId' | 'name' | 'order'>) {
-  User.assertRole('user');
+  Actor.assertRole('user');
 
   const { authId } = await useUser();
 
@@ -84,7 +84,7 @@ export async function updateCategory({
 }
 
 export async function getCategories() {
-  User.assertRole('user');
+  Actor.assertRole('user');
 
   const { authId } = await useUser();
 
