@@ -5,9 +5,9 @@ import { AppProps } from 'next/app';
 import Head from 'next/head';
 import * as React from 'react';
 
-const token = new URLSearchParams(window.location.search).get('token');
+const token = new URLSearchParams(global?.location?.search).get('token');
 if (token) {
-  localStorage.setItem('x-budgie-auth', token);
+  global?.localStorage?.setItem('x-budgie-auth', token);
 }
 
 function MyApp({ Component, pageProps }: AppProps) {

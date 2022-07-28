@@ -45,7 +45,7 @@ export function useTypedMutation<Variables extends Record<string, any>, Mutation
   return [result, executeWrapper] as const;
 }
 
-const authToken = localStorage.getItem('x-budgie-auth');
+const authToken = global?.localStorage?.getItem('x-budgie-auth');
 
 export const urql = createClient({
   url: process.env.GRAPHQL_URL,

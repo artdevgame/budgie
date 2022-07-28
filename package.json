@@ -26,8 +26,13 @@
   ],
   "overrides": {
     "graphql": "16.5.0",
+    "node-fetch": ">=2.6.7",
+    "glob-parent": ">=5.1.2",
     "react": "17.0.2",
-    "react-dom": "17.0.2"
+    "react-dom": "17.0.2",
+    "sharp": ">=0.30.5",
+    "shell-quote": ">=1.7.3",
+    "trim-newlines": ">=3.0.1"
   },
   "devDependencies": {
     "@serverless-stack/cli": "^1.6.2",

@@ -14,6 +14,7 @@ export function getApi({ app, stack }: StackContext, environment: Record<string,
         bundle: {
           // Only reference external modules when deployed
           externalModules: app.local ? [] : ['@prisma/client', '.prisma'],
+          format: 'esm',
         },
       },
     },

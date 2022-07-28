@@ -1,6 +1,7 @@
 {
   "extends": "../tsconfig.json",
   "include": ["functions", "core"],
+  "exclude": ["./core/lib/esm.ts"],
   "compilerOptions": {
     "module": "esnext",
     "target": "es2017",
