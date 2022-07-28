@@ -1,4 +1,4 @@
-import { Event } from '@budgie/core/models/event';
+import { Event } from '@budgie/core/event';
 import { Event as IEvent } from '@prisma/client';
 
 import { builder } from '../builder';

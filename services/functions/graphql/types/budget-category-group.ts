@@ -1,7 +1,4 @@
-import { dispatchEvent } from '@budgie/core/helpers/dispatchEvent';
-import { CategoryGroup, ICategoryGroup } from '@budgie/core/models/category-group';
-import { createEvent } from '@budgie/core/models/event';
-import { TWithAuth } from '@budgie/core/types/TWithAuth';
+import { BudgetCategoryGroup, ICategoryGroup } from '@budgie/core/budget-category-group';
 
 import { builder } from '../builder';
 
@@ -16,8 +13,8 @@ const BudgetCategoryGroupType = builder.objectRef<ICategoryGroup>('BudgetCategor
 builder.queryFields((t) => ({
   categoryGroups: t.field({
     type: [BudgetCategoryGroupType],
-    resolve: async (_, {}, { authId }) => {
-      const categoryGroups = await CategoryGroup.getCategoryGroups(authId);
+    resolve: async (_, {}) => {
+      const categoryGroups = await BudgetCategoryGroup.getGroups();
       return Object.entries(categoryGroups).map(([categoryGroupId, categoryGroup]) => {
         return { ...categoryGroup, categoryGroupId };
       });
@@ -32,35 +29,14 @@ builder.mutationFields((t) => ({
       name: t.arg.string({ required: true }),
       order: t.arg.int({ defaultValue: 0 }),
     },
-    resolve: async (_, { name, order }) => {
-      const event = await createEvent({
-        command: 'CREATE_CATEGORY_GROUP',
-        name,
-        ...(order && { order }),
-      });
-      const categoryGroup = CategoryGroup.fromEvent(event);
-
-      await dispatchEvent('CATEGORY_GROUP_CREATED', categoryGroup);
-
-      return categoryGroup;
-    },
+    resolve: async (_, { name, order }) => BudgetCategoryGroup.createGroup({ name, ...(order && { order }) }),
   }),
   deleteCategoryGroup: t.field({
     type: BudgetCategoryGroupType,
     args: {
       categoryGroupId: t.arg.string({ required: true }),
     },
-    resolve: async (_, { categoryGroupId }, { authId }) => {
-      const event = await createEvent({
-        command: 'DELETE_CATEGORY_GROUP',
-        categoryGroupId,
-      });
-      const categoryGroup = CategoryGroup.fromEvent(event);
-
-      await dispatchEvent<TWithAuth<ICategoryGroup>>('CATEGORY_GROUP_DELETED', { authId, ...categoryGroup });
-
-      return categoryGroup;
-    },
+    resolve: async (_, { categoryGroupId }) => BudgetCategoryGroup.deleteGroup({ categoryGroupId }),
   }),
   updateCategoryGroup: t.field({
     type: BudgetCategoryGroupType,
@@ -69,18 +45,7 @@ builder.mutationFields((t) => ({
       name: t.arg.string(),
       order: t.arg.int(),
     },
-    resolve: async (_, { categoryGroupId, name, order }, { authId }) => {
-      const event = await createEvent({
-        command: 'UPDATE_CATEGORY_GROUP',
-        categoryGroupId,
-        ...(name && { name }),
-        ...(order && { order }),
-      });
-      const categoryGroup = CategoryGroup.fromEvent(event);
-
-      await dispatchEvent<TWithAuth<ICategoryGroup>>('CATEGORY_GROUP_UPDATED', { authId, ...categoryGroup });
-
-      return categoryGroup;
-    },
+    resolve: async (_, { categoryGroupId, name, order }) =>
+      BudgetCategoryGroup.updateGroup({ categoryGroupId, ...(name && { name }), ...(order && { order }) }),
   }),
 }));

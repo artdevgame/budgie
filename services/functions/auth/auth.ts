@@ -1,14 +1,24 @@
-import { User } from '@budgie/core/models/user';
+import { User } from '@budgie/core/user';
 import { AuthHandler, GoogleAdapter, Session } from '@serverless-stack/lambda/auth';
 
 // import { useSentry } from '@budgie/core/lib/sentry';
 
+declare module '@serverless-stack/lambda/auth' {
+  export interface SessionTypes {
+    user: {
+      authId: string;
+    };
+  }
+}
+
 const main = AuthHandler({
   providers: {
-    google: {
-      adapter: GoogleAdapter,
+    google: GoogleAdapter({
+      mode: 'oidc',
       clientID: process.env.GOOGLE_CLIENT_ID!,
-      onSuccess: async (claims) => {
+      onSuccess: async (tokenset) => {
+        const claims = tokenset.claims();
+
         let user = await User.withAuthId(claims.sub);
 
         if (!user) {
@@ -17,27 +27,22 @@ const main = AuthHandler({
             givenName: claims.given_name!,
             familyName: claims.family_name!,
             email: claims.email!,
+            role: 'user',
           });
         }
 
-        const token = Session.create({
+        return Session.parameter({
+          redirect: 'http://localhost:3000',
           type: 'user',
           properties: {
-            authId: user.authId,
+            authId: claims.sub,
           },
           options: {
             expiresIn: 1000 * 60 * 60 * 24,
           },
         });
-
-        return {
-          statusCode: 302,
-          headers: {
-            location: `http://localhost:5173?token=${token}`,
-          },
-        };
       },
-    },
+    }),
   },
 });
 

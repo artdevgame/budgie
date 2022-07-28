@@ -1,7 +1,4 @@
-import { dispatchEvent } from '@budgie/core/helpers/dispatchEvent';
-import { createEvent } from '@budgie/core/models/event';
-import { ITransaction, Ledger } from '@budgie/core/models/ledger';
-import { TWithAuth } from '@budgie/core/types/TWithAuth';
+import { ITransaction, Ledger } from '@budgie/core/ledger';
 
 import { builder } from '../builder';
 
@@ -32,7 +29,7 @@ builder.queryFields((t) => ({
     args: {
       accountId: t.arg.string({ required: true }),
     },
-    resolve: (_, { accountId }, { authId }) => Ledger.getTransactions(authId, accountId),
+    resolve: (_, { accountId }) => Ledger.withAccountId({ accountId }),
   }),
 }));
 
@@ -49,28 +46,16 @@ builder.mutationFields((t) => ({
       currency: t.arg.string({ required: true }),
       amountDir: t.arg({ type: AmountDir, required: true }),
     },
-    resolve: async (
-      _,
-      { accountId, categoryId, txId, txReference, txInformation, amount, currency, amountDir },
-      { authId },
-    ) => {
-      const event = await createEvent({
-        command: 'ADD_TRANSACTION',
+    resolve: async (_, { accountId, categoryId, txId, txReference, txInformation, amount, currency, amountDir }) =>
+      Ledger.addTransaction({
         accountId,
         amount,
         amountDir,
-        authId,
         currency,
         ...(categoryId && { categoryId }),
         ...(txId && { txId }),
         ...(txInformation && { txInformation }),
         ...(txReference && { txReference }),
-      });
-      const transaction = Ledger.fromEvent(event);
-
-      await dispatchEvent<TWithAuth<ITransaction>>('TRANSACTION_ADDED', { authId, ...transaction });
-
-      return transaction;
-    },
+      }),
   }),
 }));

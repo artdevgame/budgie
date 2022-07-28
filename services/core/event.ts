@@ -1,6 +1,6 @@
 import { ulid } from 'ulid';
 
-import { database } from '../lib/database';
+import { database } from './lib/database';
 
 export * as Event from './event';
 

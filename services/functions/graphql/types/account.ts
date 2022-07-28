@@ -1,7 +1,4 @@
-import { dispatchEvent } from '@budgie/core/helpers/dispatchEvent';
-import { Account, IAccount } from '@budgie/core/models/account';
-import { createEvent } from '@budgie/core/models/event';
-import { TWithAuth } from '@budgie/core/types/TWithAuth';
+import { Account, IAccount } from '@budgie/core/account';
 
 import { builder } from '../builder';
 
@@ -16,8 +13,8 @@ const AccountType = builder.objectRef<IAccount>('Account').implement({
 builder.queryFields((t) => ({
   accounts: t.field({
     type: [AccountType],
-    resolve: async (_, {}, { authId }) => {
-      const accounts = await Account.getAccounts(authId);
+    resolve: async (_, {}) => {
+      const accounts = await Account.getAccounts();
       return Object.entries(accounts).map(([accountId, account]) => {
         return { ...account, accountId };
       });
@@ -31,14 +28,7 @@ builder.mutationFields((t) => ({
     args: {
       name: t.arg.string({ required: true }),
     },
-    resolve: async (_, { name }, { authId }) => {
-      const event = await createEvent({ command: 'CREATE_ACCOUNT', name });
-      const account = Account.fromEvent(event);
-
-      await dispatchEvent<TWithAuth<IAccount>>('ACCOUNT_CREATED', { authId, ...account });
-
-      return account;
-    },
+    resolve: async (_, { name }) => Account.createAccount({ name }),
   }),
   updateAccount: t.field({
     type: AccountType,
@@ -46,34 +36,13 @@ builder.mutationFields((t) => ({
       accountId: t.arg.string({ required: true }),
       name: t.arg.string({ required: true }),
     },
-    resolve: async (_, { accountId, name }, { authId }) => {
-      const event = await createEvent({
-        command: 'UPDATE_ACCOUNT',
-        accountId,
-        name,
-      });
-      const account = Account.fromEvent(event);
-
-      await dispatchEvent<TWithAuth<IAccount>>('ACCOUNT_UPDATED', { authId, ...account });
-
-      return account;
-    },
+    resolve: async (_, { accountId, name }) => Account.updateAccount({ accountId, name }),
   }),
   closeAccount: t.field({
     type: AccountType,
     args: {
       accountId: t.arg.string({ required: true }),
     },
-    resolve: async (_, { accountId }, { authId }) => {
-      const event = await createEvent({
-        command: 'CLOSE_ACCOUNT',
-        accountId,
-      });
-      const account = Account.fromEvent(event);
-
-      await dispatchEvent<TWithAuth<IAccount>>('ACCOUNT_CLOSED', { authId, ...account });
-
-      return account;
-    },
+    resolve: async (_, { accountId }) => Account.closeAccount({ accountId }),
   }),
 }));

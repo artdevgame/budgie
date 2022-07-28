@@ -8,14 +8,16 @@
   },
   "dependencies": {
     "@sls-next/lambda-at-edge": "^3.7.0",
-    "next": "latest",
+    "graphql": "^16.5.0",
     "next-transpile-modules": "^9.0.0",
-    "react": "17.0.2",
+    "next": "latest",
     "react-dom": "17.0.2",
-    "react-native-web": "^0.18.7"
+    "react-native-web": "^0.18.7",
+    "react": "17.0.2",
+    "urql": "^2.2.3"
   },
   "devDependencies": {
-    "@serverless-stack/static-site-env": "^1.6.1",
+    "@serverless-stack/static-site-env": "^1.6.2",
     "autoprefixer": "^10.4.7",
     "babel-plugin-react-native-web": "^0.18.7",
     "postcss": "^8.4.14",

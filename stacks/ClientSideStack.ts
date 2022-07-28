@@ -8,7 +8,7 @@ export function ClientSideStack({ stack }: StackContext) {
   const site = new NextjsSite(stack, 'ClientSide', {
     path: 'web',
     environment: {
-      VITE_GRAPHQL_URL: api.url + '/graphql',
+      GRAPHQL_URL: api.url + '/graphql',
     },
   });
 

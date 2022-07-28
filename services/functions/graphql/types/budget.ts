@@ -1,7 +1,4 @@
-import { dispatchEvent } from '@budgie/core/helpers/dispatchEvent';
-import { Budget, IBudget } from '@budgie/core/models/budget';
-import { createEvent } from '@budgie/core/models/event';
-import { TWithAuth } from '@budgie/core/types/TWithAuth';
+import { Budget, IBudget } from '@budgie/core/budget';
 
 import { builder } from '../builder';
 
@@ -19,8 +16,8 @@ builder.queryFields((t) => ({
     args: {
       date: t.arg.string({ required: true }),
     },
-    resolve: async (_, { date }, { authId }) => {
-      const budget = await Budget.getBudget(authId, date);
+    resolve: async (_, { date }) => {
+      const budget = await Budget.withDate(date);
       return Object.entries(budget).map(([categoryId, amount]) => {
         return { categoryId, date, amount };
       });
@@ -36,18 +33,6 @@ builder.mutationFields((t) => ({
       date: t.arg.string({ required: true }),
       amount: t.arg.int({ required: true }),
     },
-    resolve: async (_, { amount, categoryId, date }, { authId }) => {
-      const event = await createEvent({
-        command: 'UPDATE_BUDGET',
-        amount,
-        categoryId,
-        date,
-      });
-      const budget = Budget.fromEvent(event);
-
-      await dispatchEvent<TWithAuth<IBudget>>('BUDGET_UPDATED', { authId, ...budget });
-
-      return budget;
-    },
+    resolve: async (_, { amount, categoryId, date }) => Budget.upsertBudget({ amount, categoryId, date }),
   }),
 }));

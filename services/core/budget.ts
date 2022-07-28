@@ -1,11 +1,14 @@
 import { Event } from '@prisma/client';
 
-import { cache } from '../lib/cache';
-import { TCategoryId } from './category';
+import { TCategoryId } from './budget-category';
+import { createEvent } from './event';
+import { dispatchEvent } from './helpers/dispatchEvent';
+import { useUser } from './hooks/useUser';
+import { cache } from './lib/cache';
+import { TWithAuth } from './types/TWithAuth';
+import { User } from './user';
 
 export * as Budget from './budget';
-
-type TIsoDate = string;
 
 export interface IBudget {
   amount: number;
@@ -15,7 +18,29 @@ export interface IBudget {
 
 export type TBudget = Record<TCategoryId, number>;
 
-export async function getBudget(authId: string, date: string) {
+export async function upsertBudget({ amount, categoryId, date }: IBudget) {
+  User.assertRole('user');
+
+  const { authId } = await useUser();
+
+  const event = await createEvent({
+    command: 'UPDATE_BUDGET',
+    amount,
+    categoryId,
+    date,
+  });
+  const budget = fromEvent(event);
+
+  await dispatchEvent<TWithAuth<IBudget>>('BUDGET_UPDATED', { authId, ...budget });
+
+  return budget;
+}
+
+export async function withDate(date: string) {
+  User.assertRole('user');
+
+  const { authId } = await useUser();
+
   const dateKey = date.substring(0, 7); // YYYY-MM
 
   try {

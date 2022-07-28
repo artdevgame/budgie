@@ -1,7 +1,4 @@
-import { dispatchEvent } from '@budgie/core/helpers/dispatchEvent';
-import { Category, ICategory } from '@budgie/core/models/category';
-import { createEvent } from '@budgie/core/models/event';
-import { TWithAuth } from '@budgie/core/types/TWithAuth';
+import { BudgetCategory, ICategory } from '@budgie/core/budget-category';
 
 import { builder } from '../builder';
 
@@ -17,8 +14,8 @@ const BudgetCategoryType = builder.objectRef<ICategory>('BudgetCategory').implem
 builder.queryFields((t) => ({
   categories: t.field({
     type: [BudgetCategoryType],
-    resolve: async (_, {}, { authId }) => {
-      const categories = await Category.getCategories(authId);
+    resolve: async (_, {}) => {
+      const categories = await BudgetCategory.getCategories();
       return Object.entries(categories).map(([categoryId, category]) => {
         return { ...category, categoryId };
       });
@@ -34,36 +31,19 @@ builder.mutationFields((t) => ({
       name: t.arg.string({ required: true }),
       order: t.arg.int({ defaultValue: 0 }),
     },
-    resolve: async (_, { categoryGroupId, name, order }, { authId }) => {
-      const event = await createEvent({
-        command: 'CREATE_CATEGORY',
+    resolve: async (_, { categoryGroupId, name, order }) =>
+      BudgetCategory.createCategory({
         name,
         ...(categoryGroupId && { categoryGroupId }),
         ...(order && { order }),
-      });
-      const category = Category.fromEvent(event);
-
-      await dispatchEvent<TWithAuth<ICategory>>('CATEGORY_CREATED', { authId, ...category });
-
-      return category;
-    },
+      }),
   }),
   deleteCategory: t.field({
     type: BudgetCategoryType,
     args: {
       categoryId: t.arg.string({ required: true }),
     },
-    resolve: async (_, { categoryId }, { authId }) => {
-      const event = await createEvent({
-        command: 'DELETE_CATEGORY',
-        categoryId,
-      });
-      const category = Category.fromEvent(event);
-
-      await dispatchEvent<TWithAuth<ICategory>>('CATEGORY_DELETED', { authId, ...category });
-
-      return category;
-    },
+    resolve: async (_, { categoryId }) => BudgetCategory.deleteCategory({ categoryId }),
   }),
   updateCategory: t.field({
     type: BudgetCategoryType,
@@ -73,19 +53,12 @@ builder.mutationFields((t) => ({
       name: t.arg.string(),
       order: t.arg.int(),
     },
-    resolve: async (_, { categoryId, categoryGroupId, name, order }, { authId }) => {
-      const event = await createEvent({
-        command: 'UPDATE_CATEGORY',
+    resolve: async (_, { categoryId, categoryGroupId, name, order }) =>
+      BudgetCategory.updateCategory({
         categoryId,
         ...(categoryGroupId && { categoryGroupId }),
         ...(name && { name }),
         ...(order && { order }),
-      });
-      const category = Category.fromEvent(event);
-
-      await dispatchEvent<TWithAuth<ICategory>>('CATEGORY_UPDATED', { authId, ...category });
-
-      return category;
-    },
+      }),
   }),
 }));
