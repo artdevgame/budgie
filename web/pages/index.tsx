@@ -6,32 +6,15 @@ import { Button } from '@budgie/design-system/components/Elements/Buttons/Button
 import { Text } from '@budgie/design-system/components/Elements/Typography/Text';
 import { Card } from '@budgie/design-system/components/Layout/Panels/Card';
 
-const LoggedInView = () => {
-  const [{ data }] = useTypedQuery({
-    query: {
-      user: {
-        email: true,
-        familyName: true,
-        givenName: true,
-        picture: true,
-      },
-    },
-  });
-
+const LoggedInView = ({ user }) => {
   const handleLogout = () => {
-    window?.localStorage.removeItem('x-budgie-auth');
+    // todo: needs implementing in sst / or new endpoint to clear session
     location.href = '/';
   };
 
-  if (!data?.user) {
-    return null;
-  }
-
-  const { user } = data;
-
   return (
     <Card className="m-4 max-w-fit" bodyClassName="items-center">
-      <ImageAvatar imageUrl={user.picture} size="xl" className="mb-2.5" />
+      <ImageAvatar imageUrl={`/api/profile-pic?url=${user.picture}`} size="xl" className="mb-2.5" />
 
       <Text className="mb-1 text-xl">
         {user.givenName} {user.familyName}
@@ -58,8 +41,24 @@ const LoggedOutView = () => {
 };
 
 export default function App() {
-  if (typeof window === 'undefined' || !window.localStorage.getItem('x-budgie-auth')) {
+  const [{ data, fetching }] = useTypedQuery({
+    query: {
+      user: {
+        email: true,
+        familyName: true,
+        givenName: true,
+        picture: true,
+      },
+    },
+  });
+
+  if (fetching) {
+    return <Text>Getting ready</Text>;
+  }
+
+  if (!data?.user) {
     return <LoggedOutView />;
   }
-  return <LoggedInView />;
+
+  return <LoggedInView user={data.user} />;
 }

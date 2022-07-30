@@ -6,7 +6,7 @@ export function getApi({ stack }: StackContext, environment: Record<string, stri
   return new Api(stack, 'ServerSide', {
     cors: {
       allowCredentials: true,
-      allowHeaders: ['*'],
+      allowHeaders: ['content-type'],
       allowMethods: ['ANY'],
       allowOrigins: ['http://localhost:3000'],
     },
