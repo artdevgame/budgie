@@ -32,7 +32,7 @@ const main = AuthHandler({
           });
         }
 
-        return Session.parameter({
+        return Session.cookie({
           redirect: 'http://localhost:3000/',
           type: 'user',
           properties: {

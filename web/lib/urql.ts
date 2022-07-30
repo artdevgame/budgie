@@ -59,9 +59,9 @@ export const urql = createClient({
   url: process.env.NEXT_PUBLIC_GRAPHQL_URL,
   exchanges: defaultExchanges,
   fetchOptions: {
-    // credentials: 'include',
-    headers: {
-      ...(authToken && { authorization: `Bearer ${authToken}` }),
-    },
+    credentials: 'include',
+    // headers: {
+    //   ...(authToken && { authorization: `Bearer ${authToken}` }),
+    // },
   },
 });

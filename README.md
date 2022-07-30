@@ -41,3 +41,19 @@ Here's a [primer video](https://www.youtube.com/watch?v=rolfJR9ERxo) on the theo
 | DATABASE_URL     | Location of the MySQL database on PlanetScale |
 | GOOGLE_CLIENT_ID | OIDC key to use Google social login           |
 | SENTRY_DSN       | Location of the error/performance logs        |
+
+## 🌐 Domain setup
+
+I have created a domain outside of the AWS ecosystem, my setup looks like this:
+
+```
+Namecheap -> Cloudflare -> AWS
+```
+
+Namecheap uses Cloudflare as for DNS, and Cloudflare uses a [CNAME entry to point to the urls created by AWS](https://stackoverflow.com/a/61866193/349755).
+
+Cloudflare provide a free SSL certificate via Let's Encrypt, but to make it work with SST I've requested a public certificate through [AWS Certfificate Manager](https://us-east-1.console.aws.amazon.com/acm/home?region=us-east-1#/certificates/list) (AWM) in the `us-east-1` region.
+
+The certificate uses DNS validation to ensure ownership of the domain.
+
+The reason I'm not using Route 53 as recommended by SST is to avoid the monthly $.50 fee. This is something I would probably reconsider if I wasn't building a hobby project.
