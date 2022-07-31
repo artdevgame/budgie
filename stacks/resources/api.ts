@@ -3,24 +3,26 @@ import { Certificate } from 'aws-cdk-lib/aws-certificatemanager';
 import { Api, StackContext } from '@serverless-stack/resources';
 
 export function getApi({ stack }: StackContext, environment: Record<string, string>) {
+  const customDomain = !process.env.IS_LOCAL && {
+    isExternalDomain: true,
+    domainName: 'budgie.highsnr.dev',
+    cdk: {
+      certificate: Certificate.fromCertificateArn(
+        stack,
+        'highsnr.dev',
+        'arn:aws:acm:us-east-1:807572323218:certificate/32d76744-faea-4524-ae82-b2e063853d54',
+      ),
+    },
+  };
+
   return new Api(stack, 'ServerSide', {
+    ...(customDomain && { customDomain }),
     cors: {
       allowCredentials: true,
       allowHeaders: ['content-type'],
       allowMethods: ['ANY'],
       allowOrigins: ['http://localhost:3000'],
     },
-    // customDomain: {
-    //   isExternalDomain: true,
-    //   domainName: 'budgie.highsnr.dev',
-    //   cdk: {
-    //     certificate: Certificate.fromCertificateArn(
-    //       stack,
-    //       'highsnr.dev',
-    //       'arn:aws:acm:us-east-1:807572323218:certificate/32d76744-faea-4524-ae82-b2e063853d54',
-    //     ),
-    //   },
-    // },
     defaults: {
       function: {
         environment: {
