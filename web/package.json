@@ -18,7 +18,7 @@
     "urql": "^2.2.3"
   },
   "devDependencies": {
-    "@serverless-stack/static-site-env": "^1.6.2",
+    "@serverless-stack/static-site-env": "^1.6.7",
     "autoprefixer": "^10.4.7",
     "babel-plugin-react-native-web": "^0.18.7",
     "postcss": "^8.4.14",

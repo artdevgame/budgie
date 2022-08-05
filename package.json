@@ -32,8 +32,8 @@
     "trim-newlines": ">=3.0.1"
   },
   "devDependencies": {
-    "@serverless-stack/cli": "^1.6.2",
-    "@serverless-stack/resources": "^1.6.2",
+    "@serverless-stack/cli": "1.6.7",
+    "@serverless-stack/resources": "1.6.7",
     "@tsconfig/node16": "^1.0.3",
     "@types/node": "^18.0.6",
     "aws-cdk-lib": "2.32.0",
