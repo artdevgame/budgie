@@ -23,7 +23,7 @@ Here's a [primer video](https://www.youtube.com/watch?v=rolfJR9ERxo) on the theo
 ## 🧰 Toolbox
 
 - Serverless via [SST](https://sst.dev) (based on `create-sst`)
-- Authentication via [Amazon Cognito](https://aws.amazon.com/cognito)
+- Authentication via [@serverless-stack/lambda](https://github.com/serverless-stack/sst/tree/lambda/packages/lambda)
 - MySQL database via [PlanetScale](https://planetscale.com) (used for event storage - "writes")
 - ORM via [Kysely](https://koskimas.github.io/kysely)
 - Redis caching via [Upstash](https://upstash.com) (used to generate projections - "reads")
@@ -33,7 +33,7 @@ Here's a [primer video](https://www.youtube.com/watch?v=rolfJR9ERxo) on the theo
 - [Tailwind UI](https://tailwindui.com) for the design system, built with [React Native for Web](https://necolas.github.io/react-native-web) to allow the components to be shared between mobile/web.
 - Component catalogue / testing with [Storybook](https://storybook.js.org)
 
-## 🔧 Environment variables
+## <a name="#env"></a> 🔧 Environment variables
 
 | Name             | Description                                   |
 | ---------------- | --------------------------------------------- |
@@ -41,6 +41,28 @@ Here's a [primer video](https://www.youtube.com/watch?v=rolfJR9ERxo) on the theo
 | DATABASE_URL     | Location of the MySQL database on PlanetScale |
 | GOOGLE_CLIENT_ID | OIDC key to use Google social login           |
 | SENTRY_DSN       | Location of the error/performance logs        |
+
+### 🔌 Running locally
+
+#### Prerequisites
+
+1. Create a database at [PlanetScale](https://planetscale.com) - use [schema.mysql](./schema.mysql)
+2. Create a redis cache at [Upstash](https://upstash.com)
+3. Create a new OAuth client with [Google](https://console.cloud.google.com/apis/credentials/oauthclient)
+4. Create an account with [Sentry](https://sentry.io)
+5. Assign the relevant [environment variables](#env) based on the above
+
+#### Spinning up
+
+1. Install dependencies with `npm install`
+2. Run the database with `npm run db:start`
+3. In another shell, run `npm start` - the first time you do this it will take some time as it sets up the various bits of infrastructure.
+4. In another shell, run `npm run web` - this will run the website at http://localhost:3000/
+
+### Design system component library
+
+1. Install dependencies with `npm install`
+2. Run `npm run storybook` - Visit http://localhost:6006/ in the browser
 
 ## 🌐 Domain setup
 
