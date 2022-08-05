@@ -2,7 +2,9 @@
 
 A simple personal budgeting tool, inspired by [YNAB](https://www.youneedabudget.com/).
 
-🚧 Work is in progress / under construction. This is a hobby project and I'm only working on it occassionally. You're welcome to browse the code and follow along but it won't be complete for a while.
+> 🚧 &nbsp; 👷 &nbsp; 🚧 &nbsp;
+>
+> Work is in progress / under construction. This is a hobby project and I'm only working on it occassionally. You're welcome to browse the code and follow along but it won't be complete for a while.
 
 ## Why?
 
