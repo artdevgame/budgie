@@ -2,6 +2,8 @@
 
 A simple personal budgeting tool, inspired by [YNAB](https://www.youneedabudget.com/).
 
+🚧 Work is in progress / under construction. This is a hobby project and I'm only working on it occassionally. You're welcome to browse the code and follow along but it won't be complete for a while.
+
 ## Why?
 
 I love YNAB and have used the desktop version for years. At some point in the past they moved their business model over to a subscription service. I didn't see the value of switching as I had all the features I required in their original version.
@@ -33,7 +35,7 @@ Here's a [primer video](https://www.youtube.com/watch?v=rolfJR9ERxo) on the theo
 - [Tailwind UI](https://tailwindui.com) for the design system, built with [React Native for Web](https://necolas.github.io/react-native-web) to allow the components to be shared between mobile/web.
 - Component catalogue / testing with [Storybook](https://storybook.js.org)
 
-## <a name="#env"></a> 🔧 Environment variables
+## 🔧 Environment variables
 
 | Name             | Description                                   |
 | ---------------- | --------------------------------------------- |
@@ -50,7 +52,7 @@ Here's a [primer video](https://www.youtube.com/watch?v=rolfJR9ERxo) on the theo
 2. Create a redis cache at [Upstash](https://upstash.com)
 3. Create a new OAuth client with [Google](https://console.cloud.google.com/apis/credentials/oauthclient)
 4. Create an account with [Sentry](https://sentry.io)
-5. Assign the relevant [environment variables](#env) based on the above
+5. Assign the relevant [environment variables](https://github.com/artdevgame/budgie#--environment-variables) based on the above
 
 #### Spinning up
 
