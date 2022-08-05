@@ -1,6 +1,6 @@
 import { styled } from 'nativewind';
 import React, { ReactElement } from 'react';
-import { View as NativeView, ViewProps } from 'react-native';
+import { View, ViewProps } from 'react-native';
 import { twMerge } from 'tailwind-merge';
 
 import { ITableBody, TableBody } from './TableBody';
@@ -12,7 +12,7 @@ interface ITable extends ViewProps, ITableContext {
   className?: string;
 }
 
-const View = styled(NativeView);
+const StyledView = styled(View);
 
 export const Table = ({ children, className, columns, condensed, striped, ...rest }: ITable) => {
   const context = { columns, condensed, striped };
@@ -23,18 +23,18 @@ export const Table = ({ children, className, columns, condensed, striped, ...res
 
   return (
     <TableContext.Provider value={context ?? initialTableContext}>
-      <View {...rest} className={twMerge('flex flex-col', className)}>
-        <View className="-my-1 overflow-x-auto flex-row px-0.5">
-          <View className="inline-block min-w-full py-0.5 align-middle">
-            <View className="overflow-hidden shadow ring-1 ring-black ring-opacity-5 sm:rounded-lg">
-              <View className="min-w-full divide-y divide-gray-300">
+      <StyledView {...rest} className={twMerge('flex flex-col', className)}>
+        <StyledView className="-my-1 overflow-x-auto flex-row px-0.5">
+          <StyledView className="inline-block min-w-full py-0.5 align-middle">
+            <StyledView className="overflow-hidden shadow ring-1 ring-black ring-opacity-5 sm:rounded-lg">
+              <StyledView className="min-w-full divide-y divide-gray-300">
                 {THead}
                 {TBody}
-              </View>
-            </View>
-          </View>
-        </View>
-      </View>
+              </StyledView>
+            </StyledView>
+          </StyledView>
+        </StyledView>
+      </StyledView>
     </TableContext.Provider>
   );
 };

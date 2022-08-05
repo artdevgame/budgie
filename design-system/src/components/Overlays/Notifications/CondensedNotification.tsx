@@ -1,6 +1,6 @@
 import { styled } from 'nativewind';
 import React, { forwardRef, MutableRefObject, ReactElement } from 'react';
-import { Pressable, View as NativeView } from 'react-native';
+import { Pressable, View } from 'react-native';
 
 import { Text } from '../../Elements/Typography/Text';
 import { AbstractNotification, NotificationActions } from './AbstractNotification';
@@ -9,12 +9,12 @@ import { INotificationAction } from './common';
 export interface CondensedNotificationProps {
   action?: INotificationAction;
   children: string;
-  onClose(notification: NativeView): void;
+  onClose(notification: View): void;
 }
 
-const View = styled(NativeView);
+const StyledView = styled(View);
 
-const NotificationBody = forwardRef<NativeView, CondensedNotificationProps>(({ action, children, onClose }, ref) => {
+const NotificationBody = forwardRef<View, CondensedNotificationProps>(({ action, children, onClose }, ref) => {
   const buttonClassName =
     'ml-3 shrink-0 bg-white rounded-md text-sm font-medium text-indigo-600 hover:text-indigo-500 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500';
 
@@ -26,20 +26,20 @@ const NotificationBody = forwardRef<NativeView, CondensedNotificationProps>(({ a
     ) : null;
 
   return (
-    <View className="p-4">
-      <View className="flex items-center">
-        <View className="flex flex-row justify-between">
+    <StyledView className="p-4">
+      <StyledView className="flex items-center">
+        <StyledView className="flex flex-row justify-between">
           <Text className="text-sm font-medium text-gray-900">{children}</Text>
           {actionButton}
           <NotificationActions
             actions={{
               type: 'close',
-              onPress: () => onClose((ref as MutableRefObject<NativeView>).current),
+              onPress: () => onClose((ref as MutableRefObject<View>).current),
             }}
           />
-        </View>
-      </View>
-    </View>
+        </StyledView>
+      </StyledView>
+    </StyledView>
   );
 });
 

@@ -1,6 +1,6 @@
-import { styled, StyledComponent } from 'nativewind';
+import { styled } from 'nativewind';
 import React, { cloneElement, ReactElement } from 'react';
-import { View as NativeView } from 'react-native';
+import { View } from 'react-native';
 import { twMerge } from 'tailwind-merge';
 
 import { sizeMap, TSize } from '@budgie/design-system/common/size';
@@ -15,7 +15,7 @@ export interface IAvatarStack {
   stackOrder: TStackOrder;
 }
 
-const View = styled(NativeView);
+const StyledView = styled(View);
 
 export const AvatarStack = ({
   avatars = [],
@@ -50,8 +50,8 @@ export const AvatarStack = ({
   }
 
   return (
-    <View className="inline-flex">
-      <View className={stackClassName}>{orderedAvatars}</View>
-    </View>
+    <StyledView className="inline-flex">
+      <StyledView className={stackClassName}>{orderedAvatars}</StyledView>
+    </StyledView>
   );
 };

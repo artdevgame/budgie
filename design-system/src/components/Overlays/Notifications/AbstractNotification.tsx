@@ -1,6 +1,6 @@
 import { styled, StyledComponent } from 'nativewind';
 import React, { Children, cloneElement, ReactElement, useRef, useState } from 'react';
-import { Pressable, View as NativeView } from 'react-native';
+import { Pressable, View } from 'react-native';
 import { twMerge } from 'tailwind-merge';
 
 import { IIconButton } from '@budgie/design-system/components/Elements/Buttons/IconButton';
@@ -39,14 +39,14 @@ export interface INotification {
   className?: string;
 }
 
-const View = styled(NativeView);
+const StyledView = styled(View);
 
 const NotificationCloseAction = (props: Partial<IIconButton>) => (
-  <View className="ml-4 shrink-0 flex">
+  <StyledView className="ml-4 shrink-0 flex">
     <StyledComponent component={Pressable} {...props} className="w-5 h-5 hover:text-gray-500 text-gray-400">
       <XIcon />
     </StyledComponent>
-  </View>
+  </StyledView>
 );
 
 export const NotificationActions = ({ actions }: INotifcationActions): ReactElement | null => {
@@ -67,7 +67,7 @@ export const NotificationIcon = ({ children }: INotificationIcon): ReactElement 
     viewBox: '0 0 24 24',
   });
 
-  return <View className="shrink-0">{icon}</View>;
+  return <StyledView className="shrink-0">{icon}</StyledView>;
 };
 
 export const NotificationDescription = ({ children: description }: NotificationDescriptionProps): ReactElement => (
@@ -88,7 +88,7 @@ export const AbstractNotification = ({ children, className }: INotification): Re
   );
 
   return (
-    <View
+    <StyledView
       ref={notificationRef}
       className="fixed inset-0 flex flex-row items-end justify-center px-4 py-6 pointer-events-none sm:p-6 sm:items-start sm:justify-end"
     >
@@ -107,12 +107,12 @@ export const AbstractNotification = ({ children, className }: INotification): Re
           );
 
           return (
-            <View ref={ref} className={wrapperClassNames}>
+            <StyledView ref={ref} className={wrapperClassNames}>
               {notificationBody}
-            </View>
+            </StyledView>
           );
         }}
       </Transition>
-    </View>
+    </StyledView>
   );
 };

@@ -1,6 +1,6 @@
 import { styled } from 'nativewind';
 import React, { cloneElement, ReactElement } from 'react';
-import { View as NativeView } from 'react-native';
+import { View } from 'react-native';
 import { twMerge } from 'tailwind-merge';
 
 import { TSize } from '@budgie/design-system/common/size';
@@ -21,7 +21,7 @@ export interface IDivider {
   size?: TLabelSize;
 }
 
-const View = styled(NativeView);
+const StyledView = styled(View);
 
 const placementClassNames = (size: TLabelSize) => ({
   'justify-center': size === 'md' ? 'px-2' : 'px-3',
@@ -36,14 +36,16 @@ const DividerBody = ({ children, placement = 'justify-center', size = 'md' }: ID
 };
 
 export const Divider = ({ children, placement = 'justify-center', size = 'md' }: IDivider): ReactElement => (
-  <View className="relative">
-    <View className="absolute inset-0 flex flex-row items-center" aria-hidden="true">
-      <View className="w-full border-t border-gray-300"></View>
-    </View>
-    <View className={twMerge('relative flex flex-row', placement, placement === 'justify-between' && 'items-center')}>
+  <StyledView className="relative">
+    <StyledView className="absolute inset-0 flex flex-row items-center" aria-hidden="true">
+      <StyledView className="w-full border-t border-gray-300"></StyledView>
+    </StyledView>
+    <StyledView
+      className={twMerge('relative flex flex-row', placement, placement === 'justify-between' && 'items-center')}
+    >
       <DividerBody placement={placement} size={size}>
         {children}
       </DividerBody>
-    </View>
-  </View>
+    </StyledView>
+  </StyledView>
 );

@@ -1,6 +1,6 @@
 import { styled } from 'nativewind';
 import React, { ReactElement } from 'react';
-import { View as NativeView } from 'react-native';
+import { View } from 'react-native';
 import { twMerge } from 'tailwind-merge';
 
 import { sizeMap } from '@budgie/design-system/common/size';
@@ -13,7 +13,7 @@ export interface IInitialsAvatar extends IAvatarCommon {
   initials: string;
 }
 
-const View = styled(NativeView);
+const StyledView = styled(View);
 
 export const InitialsAvatar = ({ initials, size = 'md', ...props }: IInitialsAvatar): ReactElement => {
   const initialsClassName = twMerge(
@@ -32,9 +32,9 @@ export const InitialsAvatar = ({ initials, size = 'md', ...props }: IInitialsAva
 
   return (
     <AbstractAvatar size={size} {...props}>
-      <View className={initialsClassName}>
+      <StyledView className={initialsClassName}>
         <Text className={fontSizeClassName}>{initials}</Text>
-      </View>
+      </StyledView>
     </AbstractAvatar>
   );
 };
