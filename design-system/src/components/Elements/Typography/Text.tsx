@@ -10,7 +10,7 @@ interface IText extends PropsWithChildren, TextProps {
 const StyledText = styled(NativeText);
 
 export const Text = ({ children, className, ...props }: IText) => {
-  const styles = twMerge('font-sans', className);
+  const styles = twMerge('font-sans antialiased', className);
   return (
     <StyledText {...props} className={styles}>
       {children}

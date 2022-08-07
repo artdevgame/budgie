@@ -1,6 +1,6 @@
 {
   "extends": "../tsconfig.json",
-  "include": ["./src"],
+  "include": ["./src", "./**/*.d.ts"],
   "compilerOptions": {
     "jsx": "react-native",
     "paths": {
