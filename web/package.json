@@ -8,20 +8,24 @@
   },
   "dependencies": {
     "@sls-next/lambda-at-edge": "^3.7.0",
-    "graphql": "^16.5.0",
-    "next-transpile-modules": "^9.0.0",
-    "next": "^12.2.3",
-    "react-dom": "17.0.2",
-    "react-native": "^0.69.3",
+    "graphql": "^16.6.0",
+    "native-base": "^3.4.13",
+    "next": "^12.2.5",
+    "react-dom": "18.2.0",
+    "react-native-safe-area-context": "^4.3.3",
+    "react-native-svg": "^13.0.0",
     "react-native-web": "^0.18.7",
-    "react": "17.0.2",
-    "urql": "^2.2.3"
+    "react-native": "^0.69.4",
+    "react": "18.2.0",
+    "urql": "^3.0.1"
   },
   "devDependencies": {
-    "@serverless-stack/static-site-env": "^1.6.7",
-    "autoprefixer": "^10.4.7",
+    "@expo/next-adapter": "^4.0.12",
+    "@serverless-stack/static-site-env": "^1.8.2",
+    "@types/react-native": "^0.69.5",
     "babel-plugin-react-native-web": "^0.18.7",
-    "postcss": "^8.4.14",
-    "tailwindcss": "^3.1.6"
+    "next-compose-plugins": "^2.2.1",
+    "next-fonts": "^1.5.1",
+    "next-transpile-modules": "^9.0.0"
   }
 }

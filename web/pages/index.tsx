@@ -1,10 +1,6 @@
 import { useTypedQuery } from 'lib/urql';
+import { Avatar, Button, Card, Text } from 'native-base';
 import React from 'react';
-
-import { ImageAvatar } from '@budgie/design-system/components/Elements/Avatars/ImageAvatar';
-import { Button } from '@budgie/design-system/components/Elements/Buttons/Button';
-import { Text } from '@budgie/design-system/components/Elements/Typography/Text';
-import { Card } from '@budgie/design-system/components/Layout/Panels/Card';
 
 const LoggedInView = ({ user }) => {
   const handleLogout = () => {
@@ -13,13 +9,13 @@ const LoggedInView = ({ user }) => {
   };
 
   return (
-    <Card className="m-4 max-w-fit" bodyClassName="items-center">
-      <ImageAvatar imageUrl={`/api/profile-pic?url=${user.picture}`} size="xl" className="mb-2.5" />
+    <Card m="4" maxW="container" alignItems="center">
+      <Avatar source={{ uri: `/api/profile-pic?url=${user.picture}` }} size="xl" mb="2.5" />
 
-      <Text className="mb-1 text-xl">
+      <Text mb="1" size="xl">
         {user.givenName} {user.familyName}
       </Text>
-      <Text className="mb-4">{user.email}</Text>
+      <Text mb="4">{user.email}</Text>
 
       <Button onPress={handleLogout}>Logout</Button>
     </Card>
@@ -32,8 +28,8 @@ const LoggedOutView = () => {
   };
 
   return (
-    <Card className="m-4 max-w-fit" bodyClassName="items-center">
-      <ImageAvatar imageUrl="https://avatars.githubusercontent.com/u/353729?v=4" size="xl" className="mb-2.5" />
+    <Card m="4" maxW="container" alignItems="center">
+      <Avatar source={{ uri: 'https://avatars.githubusercontent.com/u/353729?v=4' }} size="xl" mb="2.5" />
 
       <Button onPress={handleLogin}>Sign in</Button>
     </Card>

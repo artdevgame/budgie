@@ -34,8 +34,7 @@ Here's a [primer video](https://www.youtube.com/watch?v=rolfJR9ERxo) on the theo
 - GraphQL (and [Pothos](https://pothos-graphql.dev) for TS schema building) - this is the data access layer from the frontend
 - Event bus via [Amazon EventBridge](https://aws.amazon.com/eventbridge), which is used to update projections and to dispatch [Server-Sent Events (SSE)](https://en.wikipedia.org/wiki/Server-sent_events) to help keep the frontend in sync
 - Monitoring with [Sentry](https://sentry.io)
-- [Tailwind UI](https://tailwindui.com) for the design system, built with [React Native for Web](https://necolas.github.io/react-native-web) to allow the components to be shared between mobile/web.
-- Component catalogue / testing with [Storybook](https://storybook.js.org)
+- [NativeBase](https://nativebase.io/) for the design system
 
 ## 🔧 Environment variables
 
