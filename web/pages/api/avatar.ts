@@ -9,7 +9,10 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
     return res.status(400).json({ message: 'Missing url in query params' });
   }
 
-  https.get(url, (stream) => {
-    stream.pipe(res);
+  await new Promise((resolve) => {
+    https.get(url, (stream) => {
+      stream.pipe(res);
+      stream.on('end', resolve);
+    });
   });
 };

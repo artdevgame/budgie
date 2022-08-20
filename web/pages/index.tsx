@@ -1,5 +1,5 @@
 import { useTypedQuery } from 'lib/urql';
-import { Avatar, Button, Card, Text } from 'native-base';
+import { Avatar, Box, Button, Text } from 'native-base';
 import React from 'react';
 
 const LoggedInView = ({ user }) => {
@@ -9,16 +9,14 @@ const LoggedInView = ({ user }) => {
   };
 
   return (
-    <Card m="4" maxW="container" alignItems="center">
-      <Avatar source={{ uri: `/api/profile-pic?url=${user.picture}` }} size="xl" mb="2.5" />
-
-      <Text mb="1" size="xl">
+    <Box shadow="2" maxWidth="sm" p="8" borderRadius="lg" alignItems="center" m="8">
+      <Avatar source={{ uri: `/api/avatar?url=${user.picture}` }} size="lg" mb="2.5" />
+      <Text mb="1" fontWeight="semibold" fontSize="xl">
         {user.givenName} {user.familyName}
       </Text>
       <Text mb="4">{user.email}</Text>
-
       <Button onPress={handleLogout}>Logout</Button>
-    </Card>
+    </Box>
   );
 };
 
@@ -28,11 +26,11 @@ const LoggedOutView = () => {
   };
 
   return (
-    <Card m="4" maxW="container" alignItems="center">
+    <Box shadow="2" maxWidth="sm" p="8" borderRadius="lg" alignItems="center" m="8">
       <Avatar source={{ uri: 'https://avatars.githubusercontent.com/u/353729?v=4' }} size="xl" mb="2.5" />
 
       <Button onPress={handleLogin}>Sign in</Button>
-    </Card>
+    </Box>
   );
 };
 
@@ -49,7 +47,11 @@ export default function App() {
   });
 
   if (fetching) {
-    return <Text>Getting ready</Text>;
+    return (
+      <Box shadow="2" maxWidth="sm" p="8" borderRadius="lg" alignItems="center" m="8">
+        <Text>Getting ready</Text>
+      </Box>
+    );
   }
 
   if (!data?.user) {
