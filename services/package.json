@@ -4,21 +4,23 @@
   "type": "module",
   "scripts": {},
   "dependencies": {
-    "@pothos/core": "^3.12.1",
-    "@sentry/integrations": "^7.5.0",
-    "@sentry/serverless": "^7.5.0",
+    "@pothos/core": "^3.21.0",
+    "@sentry/integrations": "^7.13.0",
+    "@sentry/serverless": "^7.13.0",
     "@serverless-stack/lambda": "^0.0.0-20220728004859",
-    "@serverless-stack/node": "^1.8.2",
-    "aws-sdk": "^2.1166.0",
+    "@serverless-stack/node": "^1.14.4",
+    "aws-sdk": "^2.1218.0",
     "fs-extra": "^10.1.0",
-    "graphql-scalars": "^1.17.0",
-    "ioredis": "^5.1.0",
+    "graphql-scalars": "^1.18.0",
+    "ioredis": "^5.2.3",
+    "kysely": "^0.21.6",
     "mysql2": "^2.3.3",
-    "kysely": "^0.19.12",
     "ulid": "^2.3.0"
   },
   "devDependencies": {
-    "@types/aws-lambda": "^8.10.101",
+    "@serverless-stack/cli": "1.14.4",
+    "@serverless-stack/resources": "1.14.4",
+    "@types/aws-lambda": "^8.10.104",
     "@types/fs-extra": "^9.0.13"
   }
 }

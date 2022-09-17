@@ -21,21 +21,19 @@
     "web"
   ],
   "overrides": {
-    "graphql": "16.5.0",
-    "node-fetch": ">=2.6.7",
-    "glob-parent": ">=5.1.2",
-    "sharp": ">=0.30.5",
-    "shell-quote": ">=1.7.3",
-    "trim-newlines": ">=3.0.1"
+    "graphql": "16.5.0"
   },
   "devDependencies": {
-    "@serverless-stack/cli": "^1.8.2",
-    "@serverless-stack/resources": "^1.8.2",
+    "@serverless-stack/cli": "1.14.4",
+    "@serverless-stack/resources": "1.14.4",
     "@tsconfig/node16": "^1.0.3",
-    "@types/node": "^18.0.6",
-    "aws-cdk-lib": "2.32.0",
+    "@types/node": "^18.7.18",
+    "aws-cdk-lib": "2.39.1",
     "prettier": "^2.7.1",
-    "typescript": "^4.7.4",
-    "vitest": "^0.18.1"
+    "typescript": "^4.8.3",
+    "vitest": "^0.23.2"
+  },
+  "dependencies": {
+    "react-native-web": "^0.17.7"
   }
 }
