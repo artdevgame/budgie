@@ -13,7 +13,6 @@ function MyApp({ Component, pageProps }: AppProps) {
     <>
       <Head>
         <meta name="viewport" content="width=device-width, initial-scale=1" key="viewport" />
-        <link rel="stylesheet" href="https://rsms.me/inter/inter.css" />
       </Head>
       <NativeBaseProvider theme={theme}>
         <UrqlProvider value={urql}>

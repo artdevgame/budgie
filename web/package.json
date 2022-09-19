@@ -7,6 +7,7 @@
     "start": "next start"
   },
   "dependencies": {
+    "@heroicons/react": "^2.0.11",
     "@sls-next/lambda-at-edge": "^3.7.0",
     "expo": "^46.0.10",
     "graphql": "^16.6.0",
