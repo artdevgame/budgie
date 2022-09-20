@@ -21,7 +21,7 @@ export const Menu = () => {
       <Box p="4" mt="4" flexGrow="1">
         <VStack mb="8">
           <Heading display="flex" size="sm" color="black" gap="1" mb="4" alignItems="center">
-            <ShoppingBagIcon width={fontSizes['2xl']} />
+            <ShoppingBagIcon width={fontSizes['2xl']} style={{ transform: `translateY(-2px)` }} />
             Budget
           </Heading>
           <Button
@@ -36,7 +36,7 @@ export const Menu = () => {
         </VStack>
         <VStack>
           <Heading display="flex" size="sm" color="black" gap="1" mb="4" alignItems="center">
-            <BuildingLibraryIcon width={fontSizes['2xl']} />
+            <BuildingLibraryIcon width={fontSizes['2xl']} style={{ transform: `translateY(-2px)` }} />
             Accounts
           </Heading>
           {accounts.length > 0 && (
