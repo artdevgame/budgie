@@ -1,5 +1,6 @@
 import { useUser } from 'features/common/hooks/useUser';
 import { Avatar, HStack, Skeleton, Text, useTheme, VStack } from 'native-base';
+import React from 'react';
 
 export const AuthenticatedUser = () => {
   const [user] = useUser();

@@ -1,4 +1,4 @@
-import { Badge, Box, Checkbox, HStack, Input, Text } from 'native-base';
+import { Badge, Box, Checkbox, HStack, Input, Text, useMediaQuery, useTheme } from 'native-base';
 
 interface CategoryProps {
   id: string;
@@ -6,6 +6,12 @@ interface CategoryProps {
 }
 
 export const Category = ({ id, name }: CategoryProps) => {
+  const { breakpoints } = useTheme();
+
+  const [isSmallScreen] = useMediaQuery({
+    maxWidth: Number(breakpoints.md),
+  });
+
   return (
     <HStack
       alignItems="center"
@@ -16,14 +22,16 @@ export const Category = ({ id, name }: CategoryProps) => {
       borderTopStyle="dotted"
       space="4"
     >
-      <Checkbox value={id} />
+      {!isSmallScreen && <Checkbox value={id} accessibilityLabel={name} />}
       <Text flexGrow="1" fontSize="xs" fontWeight="medium" color="muted.600">
         {name}
       </Text>
-      <HStack justifyContent="flex-end" flexBasis="15%" alignItems="center" space="1">
-        <Text>&pound;</Text>
-        <Input width="full" maxW="24" placeholder="0.00" textAlign="right" />
-      </HStack>
+      {!isSmallScreen && (
+        <HStack justifyContent="flex-end" flexBasis="15%" alignItems="center" space="1">
+          <Text>&pound;</Text>
+          <Input width="full" maxW="24" placeholder="0.00" textAlign="right" />
+        </HStack>
+      )}
       <Text textAlign="right" flexBasis="15%" fontSize="xs" fontWeight="medium" color="muted.600">
         -&pound;600
       </Text>

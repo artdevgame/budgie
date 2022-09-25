@@ -1,4 +1,5 @@
-import { Box, Button, Heading, HStack, IconButton, MinusIcon, useTheme, VStack } from 'native-base';
+import { Box, Button, Heading, HStack, IconButton, useTheme, VStack } from 'native-base';
+import { ResponsiveValue } from 'native-base/lib/typescript/components/types';
 
 import {
     ArrowSmallRightIcon, BuildingLibraryIcon, MinusCircleIcon, ShoppingBagIcon
@@ -8,13 +9,17 @@ import { accountsStub } from '../../stubs/accounts';
 import { AppName } from '../Logo/AppName';
 import { AuthenticatedUser } from './AuthenticatedUser';
 
-export const Menu = () => {
+interface MenuProps {
+  width?: ResponsiveValue<string>;
+}
+
+export const Menu = ({ width = '56' }: MenuProps) => {
   const accounts = Object.entries(accountsStub).filter(([, account]) => account.active);
 
   const { colors, fontSizes } = useTheme();
 
   return (
-    <VStack width="56" borderRightColor="coolGray.100" borderRightWidth="2">
+    <VStack width={width} backgroundColor="white" height="full" borderRightColor="coolGray.100" borderRightWidth="2">
       <Box minH="24" p="4" justifyContent="center" borderBottomColor={colors.muted['200']} borderBottomWidth="1">
         <AppName />
       </Box>
@@ -51,7 +56,7 @@ export const Menu = () => {
                 All accounts
               </Button>
               {accounts.map(([accountId, account]) => (
-                <HStack>
+                <HStack key={`account-${accountId}`}>
                   <Button
                     key={`account-${accountId}`}
                     variant="ghost"

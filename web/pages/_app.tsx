@@ -1,5 +1,6 @@
 import '../styles/global.css';
 
+import { InteractiveMenuProvider } from 'features/common/context/InteractiveMenu';
 import { urql } from 'lib/urql';
 import { NativeBaseProvider } from 'native-base';
 import { AppProps } from 'next/app';
@@ -16,7 +17,9 @@ function MyApp({ Component, pageProps }: AppProps) {
       </Head>
       <NativeBaseProvider theme={theme}>
         <UrqlProvider value={urql}>
-          <Component {...pageProps} />
+          <InteractiveMenuProvider>
+            <Component {...pageProps} />
+          </InteractiveMenuProvider>
         </UrqlProvider>
       </NativeBaseProvider>
     </>
