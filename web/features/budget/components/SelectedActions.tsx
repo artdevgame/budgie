@@ -1,6 +1,17 @@
 import { Button, Heading, HStack } from 'native-base';
+import { useModal } from 'react-modal-hook';
+
+import { DeleteCategoryModal } from './DeleteCategoryModal';
+import { RenameCategoryModal } from './RenameCategoryModal';
 
 export const SelectedActions = () => {
+  const [showDeleteCategoryModal, hideDeleteCategoryModal] = useModal(() => (
+    <DeleteCategoryModal onClose={hideDeleteCategoryModal} />
+  ));
+  const [showRenameCategoryModal, hideRenameCategoryModal] = useModal(() => (
+    <RenameCategoryModal onClose={hideRenameCategoryModal} />
+  ));
+
   return (
     <HStack
       alignItems="center"
@@ -15,10 +26,12 @@ export const SelectedActions = () => {
         With selected:
       </Heading>
       <HStack space="4">
-        <Button colorScheme="secondary" size="xs">
+        <Button onPress={showDeleteCategoryModal} colorScheme="secondary" size="xs">
           Delete Category
         </Button>
-        <Button size="xs">Rename Category</Button>
+        <Button onPress={showRenameCategoryModal} size="xs">
+          Rename Category
+        </Button>
       </HStack>
     </HStack>
   );

@@ -6,6 +6,7 @@ import { NativeBaseProvider } from 'native-base';
 import { AppProps } from 'next/app';
 import Head from 'next/head';
 import * as React from 'react';
+import { ModalProvider } from 'react-modal-hook';
 import { theme } from 'theme';
 import { Provider as UrqlProvider } from 'urql';
 
@@ -18,7 +19,9 @@ function MyApp({ Component, pageProps }: AppProps) {
       <NativeBaseProvider theme={theme}>
         <UrqlProvider value={urql}>
           <InteractiveMenuProvider>
-            <Component {...pageProps} />
+            <ModalProvider>
+              <Component {...pageProps} />
+            </ModalProvider>
           </InteractiveMenuProvider>
         </UrqlProvider>
       </NativeBaseProvider>

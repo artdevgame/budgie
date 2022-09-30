@@ -7,7 +7,7 @@ import { categoryGroupsStub } from 'features/common/stubs/category-groups';
 import {
     AddIcon, Box, Button, Checkbox, HStack, Text, useMediaQuery, useTheme, VStack
 } from 'native-base';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 
 export default function Budget() {
   const [selectedCategories, setSelectedCategories] = useState<string[]>([]);
@@ -94,6 +94,10 @@ export default function Budget() {
         />
       );
     });
+
+  useEffect(() => {
+    setSelectedCategories([]);
+  }, [isSmallScreen]);
 
   return (
     <MainLayout>

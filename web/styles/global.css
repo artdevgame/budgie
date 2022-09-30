@@ -9,3 +9,9 @@ body,
 #__next > div {
   height: 100%;
 }
+
+html,
+body {
+  /* disable swipe back (history) */
+  overscroll-behavior-x: none;
+}
