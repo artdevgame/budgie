@@ -4,7 +4,11 @@ import { useModal } from 'react-modal-hook';
 import { DeleteCategoryModal } from './DeleteCategoryModal';
 import { RenameCategoryModal } from './RenameCategoryModal';
 
-export const SelectedActions = () => {
+interface SelectedActionsProps {
+  categories: string[];
+}
+
+export const SelectedActions = ({ categories }: SelectedActionsProps) => {
   const [showDeleteCategoryModal, hideDeleteCategoryModal] = useModal(() => (
     <DeleteCategoryModal onClose={hideDeleteCategoryModal} />
   ));

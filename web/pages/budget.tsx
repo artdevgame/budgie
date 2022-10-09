@@ -1,3 +1,4 @@
+import { AddCategoryModal } from 'features/budget/components/AddCategoryModal';
 import { BudgetHeader } from 'features/budget/components/BudgetHeader';
 import { CategoryGroup } from 'features/budget/components/CategoryGroup';
 import { SelectedActions } from 'features/budget/components/SelectedActions';
@@ -8,9 +9,13 @@ import {
     AddIcon, Box, Button, Checkbox, HStack, Text, useMediaQuery, useTheme, VStack
 } from 'native-base';
 import { useEffect, useState } from 'react';
+import { useModal } from 'react-modal-hook';
 
 export default function Budget() {
   const [selectedCategories, setSelectedCategories] = useState<string[]>([]);
+  const [showAddCategoryModal, hideAddCategoryModal] = useModal(() => (
+    <AddCategoryModal onClose={hideAddCategoryModal} />
+  ));
 
   const { breakpoints } = useTheme();
 
@@ -111,7 +116,13 @@ export default function Budget() {
           borderBottomColor="light.200"
           borderBottomWidth="1"
         >
-          <Button variant="unstyled" fontWeight="medium" size="xs" startIcon={<AddIcon size="2xs" />}>
+          <Button
+            onPress={showAddCategoryModal}
+            variant="unstyled"
+            fontWeight="medium"
+            size="xs"
+            startIcon={<AddIcon size="2xs" />}
+          >
             Category
           </Button>
         </Box>
@@ -151,7 +162,7 @@ export default function Budget() {
           </Checkbox.Group>
         </VStack>
 
-        {selectedCategories.length > 0 && <SelectedActions />}
+        {selectedCategories.length > 0 && <SelectedActions categories={selectedCategories} />}
       </Box>
     </MainLayout>
   );

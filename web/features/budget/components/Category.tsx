@@ -10,6 +10,7 @@ import { PencilIcon, TrashIcon } from '@heroicons/react/24/outline';
 
 import { DeleteCategoryModal } from './DeleteCategoryModal';
 import { RenameCategoryModal } from './RenameCategoryModal';
+import { SetBudgetModal } from './SetBudgetModal';
 
 interface CategoryProps {
   id: string;
@@ -45,19 +46,45 @@ export const Category = ({ id, name }: CategoryProps) => {
   const { breakpoints } = useTheme();
   const [showActions, setShowActions] = useState(false);
   const translateX = useRef(new Animated.Value(0)).current;
+  const hasSwiped = useRef(false);
 
-  const handlers = useSwipeable({
-    onSwipedLeft: () => {
-      setShowActions(true);
-    },
-    onSwipedRight: () => {
-      setShowActions(false);
-    },
-  });
+  const [showSetBudgetModal, hideSetBudgetModal] = useModal(() => <SetBudgetModal onClose={hideSetBudgetModal} />);
 
   const [isSmallScreen] = useMediaQuery({
     maxWidth: Number(breakpoints.md),
   });
+
+  const handlers = useSwipeable({
+    trackMouse: true,
+    onSwipedLeft: () => {
+      hasSwiped.current = true;
+      setShowActions(true);
+      resetHasSwiped();
+    },
+    onSwipedRight: () => {
+      hasSwiped.current = true;
+      setShowActions(false);
+      resetHasSwiped();
+    },
+  });
+
+  const resetHasSwiped = () => setTimeout(() => (hasSwiped.current = false), 500);
+
+  const openBudgetModal = () => {
+    if (!hasSwiped.current) {
+      showSetBudgetModal();
+      resetHasSwiped();
+    }
+  };
+
+  const onToggleMenu = () => {
+    setShowActions((p) => !p);
+  };
+
+  const smallScreenHandlers = isSmallScreen && {
+    onPress: openBudgetModal,
+    onLongPress: onToggleMenu,
+  };
 
   useEffect(() => {
     setShowActions(false);
@@ -77,7 +104,13 @@ export const Category = ({ id, name }: CategoryProps) => {
   }, [translateX, showActions]);
 
   return (
-    <Box {...handlers} borderTopColor="blueGray.300" borderTopWidth="1" borderTopStyle="dotted">
+    <Pressable
+      {...(isSmallScreen && handlers)}
+      {...smallScreenHandlers}
+      borderTopColor="blueGray.300"
+      borderTopWidth="1"
+      borderTopStyle="dotted"
+    >
       <Box bgColor="warmGray.700" overflowX="hidden">
         <Animated.View style={{ transform: [{ translateX }] }}>
           <HStack alignItems="center" px="4" py="2.5" space="4" bgColor="white">
@@ -103,6 +136,6 @@ export const Category = ({ id, name }: CategoryProps) => {
         </Animated.View>
         {showActions && <SwipeableActions />}
       </Box>
-    </Box>
+    </Pressable>
   );
 };
