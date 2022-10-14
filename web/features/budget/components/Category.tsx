@@ -17,13 +17,17 @@ interface CategoryProps {
   name: string;
 }
 
-const SwipeableActions = () => {
+interface SwipeableActionsProps {
+  category: string;
+}
+
+const SwipeableActions = ({ category }: SwipeableActionsProps) => {
   const { fontSizes } = useTheme();
   const [showDeleteCategoryModal, hideDeleteCategoryModal] = useModal(() => (
     <DeleteCategoryModal onClose={hideDeleteCategoryModal} />
   ));
   const [showRenameCategoryModal, hideRenameCategoryModal] = useModal(() => (
-    <RenameCategoryModal onClose={hideRenameCategoryModal} />
+    <RenameCategoryModal categories={[category]} onClose={hideRenameCategoryModal} />
   ));
 
   return (
@@ -48,7 +52,9 @@ export const Category = ({ id, name }: CategoryProps) => {
   const translateX = useRef(new Animated.Value(0)).current;
   const hasSwiped = useRef(false);
 
-  const [showSetBudgetModal, hideSetBudgetModal] = useModal(() => <SetBudgetModal onClose={hideSetBudgetModal} />);
+  const [showSetBudgetModal, hideSetBudgetModal] = useModal(() => (
+    <SetBudgetModal category={id} onClose={hideSetBudgetModal} />
+  ));
 
   const [isSmallScreen] = useMediaQuery({
     maxWidth: Number(breakpoints.md),
@@ -134,7 +140,7 @@ export const Category = ({ id, name }: CategoryProps) => {
             </Box>
           </HStack>
         </Animated.View>
-        {showActions && <SwipeableActions />}
+        {showActions && <SwipeableActions category={id} />}
       </Box>
     </Pressable>
   );

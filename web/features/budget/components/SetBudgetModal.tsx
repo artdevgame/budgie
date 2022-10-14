@@ -1,3 +1,4 @@
+import { categoriesStub } from 'features/common/stubs/categories';
 import {
     Button, HStack, IModalProps, Input, Modal, Slide, Text, useBreakpointValue
 } from 'native-base';
@@ -12,11 +13,24 @@ interface FormFields {
 }
 
 interface SetBudgetModalProps {
+  category: string;
   onClose: ModalContextType['hideModal'];
 }
 
-const SetBudget = (props: InterfaceBoxProps<IModalProps> & { onClose: SetBudgetModalProps['onClose'] }) => {
+type SetBudgetProps = InterfaceBoxProps<IModalProps> & SetBudgetModalProps;
+
+const getBudgetForCategory = (category: string) => {
+  const { name } = categoriesStub[category];
+
+  return {
+    category: { id: category, name },
+    amount: 0,
+  };
+};
+
+const SetBudget = (props: SetBudgetProps) => {
   const { formatMessage } = useIntl();
+  const budget = getBudgetForCategory(props.category);
 
   const {
     control,
@@ -24,7 +38,7 @@ const SetBudget = (props: InterfaceBoxProps<IModalProps> & { onClose: SetBudgetM
     handleSubmit,
   } = useForm<FormFields>({
     defaultValues: {
-      amount: '0.00',
+      amount: budget.amount.toFixed(2),
     },
   });
 
@@ -36,7 +50,7 @@ const SetBudget = (props: InterfaceBoxProps<IModalProps> & { onClose: SetBudgetM
       <Modal.Header>{formatMessage({ defaultMessage: 'Set Budget' })}</Modal.Header>
       <Modal.Body>
         <HStack justifyContent="space-between" alignItems="center">
-          <Text numberOfLines={1}>Mortgage</Text>
+          <Text numberOfLines={1}>{budget.category.name}</Text>
 
           <Controller
             control={control}
@@ -71,7 +85,7 @@ const SetBudget = (props: InterfaceBoxProps<IModalProps> & { onClose: SetBudgetM
   );
 };
 
-export const SetBudgetModal = ({ onClose }: SetBudgetModalProps) => {
+export const SetBudgetModal = ({ category, onClose }: SetBudgetModalProps) => {
   const isSmallScreen = useBreakpointValue({
     base: true,
     sm: false,
@@ -91,10 +105,10 @@ export const SetBudgetModal = ({ onClose }: SetBudgetModalProps) => {
     >
       {isSmallScreen ? (
         <Slide in={true} justifyContent="flex-end" placement="bottom">
-          <SetBudget onClose={onClose} roundedBottom="0" width="full" />
+          <SetBudget category={category} onClose={onClose} roundedBottom="0" width="full" />
         </Slide>
       ) : (
-        <SetBudget onClose={onClose} />
+        <SetBudget category={category} onClose={onClose} />
       )}
     </Modal>
   );

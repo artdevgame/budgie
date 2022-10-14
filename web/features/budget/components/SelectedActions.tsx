@@ -15,9 +15,10 @@ export const SelectedActions = ({ categories }: SelectedActionsProps) => {
   const [showDeleteCategoryModal, hideDeleteCategoryModal] = useModal(() => (
     <DeleteCategoryModal onClose={hideDeleteCategoryModal} />
   ));
-  const [showRenameCategoryModal, hideRenameCategoryModal] = useModal(() => (
-    <RenameCategoryModal onClose={hideRenameCategoryModal} />
-  ));
+  const [showRenameCategoryModal, hideRenameCategoryModal] = useModal(
+    () => <RenameCategoryModal categories={categories} onClose={hideRenameCategoryModal} />,
+    [categories],
+  );
 
   return (
     <HStack
@@ -34,10 +35,16 @@ export const SelectedActions = ({ categories }: SelectedActionsProps) => {
       </Heading>
       <HStack space="4">
         <Button onPress={showDeleteCategoryModal} colorScheme="secondary" size="xs">
-          {formatMessage({ defaultMessage: 'Delete Category' })}
+          {formatMessage(
+            { defaultMessage: 'Delete {count, plural, one {Category} other {# Categories}}' },
+            { count: categories.length },
+          )}
         </Button>
         <Button onPress={showRenameCategoryModal} size="xs">
-          {formatMessage({ defaultMessage: 'Rename Category' })}
+          {formatMessage(
+            { defaultMessage: 'Rename {count, plural, one {Category} other {# Categories}}' },
+            { count: categories.length },
+          )}
         </Button>
       </HStack>
     </HStack>
