@@ -1,8 +1,9 @@
 import {
-    Button, FormControl, HStack, IModalProps, Input, Modal, Slide, Text, useBreakpointValue
+    Button, HStack, IModalProps, Input, Modal, Slide, Text, useBreakpointValue
 } from 'native-base';
 import { InterfaceBoxProps } from 'native-base/lib/typescript/components/primitives/Box';
 import { Controller, SubmitHandler, useForm } from 'react-hook-form';
+import { useIntl } from 'react-intl';
 
 import type { ModalContextType } from 'react-modal-hook';
 
@@ -15,6 +16,8 @@ interface SetBudgetModalProps {
 }
 
 const SetBudget = (props: InterfaceBoxProps<IModalProps> & { onClose: SetBudgetModalProps['onClose'] }) => {
+  const { formatMessage } = useIntl();
+
   const {
     control,
     formState: { errors },
@@ -30,7 +33,7 @@ const SetBudget = (props: InterfaceBoxProps<IModalProps> & { onClose: SetBudgetM
   return (
     <Modal.Content {...props}>
       <Modal.CloseButton onPress={() => props.onClose('close-delete-category-modal')} />
-      <Modal.Header>Set Budget</Modal.Header>
+      <Modal.Header>{formatMessage({ defaultMessage: 'Set Budget' })}</Modal.Header>
       <Modal.Body>
         <HStack justifyContent="space-between" alignItems="center">
           <Text numberOfLines={1}>Mortgage</Text>
@@ -57,12 +60,12 @@ const SetBudget = (props: InterfaceBoxProps<IModalProps> & { onClose: SetBudgetM
         </HStack>
         {errors.amount && (
           <Text fontSize="xs" color="red.400" mt="2">
-            Numbers only
+            {formatMessage({ defaultMessage: 'Numbers only' })}
           </Text>
         )}
       </Modal.Body>
       <Modal.Footer>
-        <Button>Update</Button>
+        <Button>{formatMessage({ defaultMessage: 'Update' })}</Button>
       </Modal.Footer>
     </Modal.Content>
   );

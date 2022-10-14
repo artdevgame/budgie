@@ -1,4 +1,5 @@
 import { Button, Heading, HStack } from 'native-base';
+import { useIntl } from 'react-intl';
 import { useModal } from 'react-modal-hook';
 
 import { DeleteCategoryModal } from './DeleteCategoryModal';
@@ -9,6 +10,8 @@ interface SelectedActionsProps {
 }
 
 export const SelectedActions = ({ categories }: SelectedActionsProps) => {
+  const { formatMessage } = useIntl();
+
   const [showDeleteCategoryModal, hideDeleteCategoryModal] = useModal(() => (
     <DeleteCategoryModal onClose={hideDeleteCategoryModal} />
   ));
@@ -27,14 +30,14 @@ export const SelectedActions = ({ categories }: SelectedActionsProps) => {
       borderTopWidth="2"
     >
       <Heading fontSize="xs" color="muted.900">
-        With selected:
+        {formatMessage({ defaultMessage: 'With selected:' })}
       </Heading>
       <HStack space="4">
         <Button onPress={showDeleteCategoryModal} colorScheme="secondary" size="xs">
-          Delete Category
+          {formatMessage({ defaultMessage: 'Delete Category' })}
         </Button>
         <Button onPress={showRenameCategoryModal} size="xs">
-          Rename Category
+          {formatMessage({ defaultMessage: 'Rename Category' })}
         </Button>
       </HStack>
     </HStack>

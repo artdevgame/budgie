@@ -1,5 +1,6 @@
-import { Box, Button, Heading, HStack, IconButton, useTheme, VStack } from 'native-base';
+import { Box, Button, Heading, HStack, IconButton, theme, useTheme, VStack } from 'native-base';
 import { ResponsiveValue } from 'native-base/lib/typescript/components/types';
+import { useIntl } from 'react-intl';
 
 import {
     ArrowSmallRightIcon, BuildingLibraryIcon, MinusCircleIcon, ShoppingBagIcon
@@ -14,6 +15,7 @@ interface MenuProps {
 }
 
 export const Menu = ({ width = '56' }: MenuProps) => {
+  const { formatMessage } = useIntl();
   const accounts = Object.entries(accountsStub).filter(([, account]) => account.active);
 
   const { colors, fontSizes } = useTheme();
@@ -25,9 +27,12 @@ export const Menu = ({ width = '56' }: MenuProps) => {
       </Box>
       <Box p="4" mt="4" flexGrow="1">
         <VStack mb="8">
-          <Heading display="flex" size="sm" color="black" gap="1" mb="4" alignItems="center">
-            <ShoppingBagIcon width={fontSizes['2xl']} style={{ transform: `translateY(-2px)` }} />
-            Budget
+          <Heading display="flex" fontSize="sm" color="black" mb="4" alignItems="center">
+            <ShoppingBagIcon
+              width={fontSizes['xl']}
+              style={{ transform: `translateY(-2px)`, marginRight: theme.space['1'] }}
+            />
+            {formatMessage({ defaultMessage: 'Budget' })}
           </Heading>
           <Button
             variant="ghost"
@@ -36,13 +41,16 @@ export const Menu = ({ width = '56' }: MenuProps) => {
             leftIcon={<ArrowSmallRightIcon color={colors.primary['500']} width={fontSizes['sm']} />}
             justifyContent="flex-start"
           >
-            Manage budget
+            {formatMessage({ defaultMessage: 'Manage budget' })}
           </Button>
         </VStack>
         <VStack>
-          <Heading display="flex" size="sm" color="black" gap="1" mb="4" alignItems="center">
-            <BuildingLibraryIcon width={fontSizes['2xl']} style={{ transform: `translateY(-2px)` }} />
-            Accounts
+          <Heading display="flex" fontSize="sm" color="black" mb="4" alignItems="center">
+            <BuildingLibraryIcon
+              width={fontSizes['xl']}
+              style={{ transform: `translateY(-2px)`, marginRight: theme.space['1'] }}
+            />
+            {formatMessage({ defaultMessage: 'Accounts' })}
           </Heading>
           {accounts.length > 0 && (
             <>
@@ -53,7 +61,7 @@ export const Menu = ({ width = '56' }: MenuProps) => {
                 leftIcon={<ArrowSmallRightIcon color={colors.primary['500']} width={fontSizes['sm']} />}
                 justifyContent="flex-start"
               >
-                All accounts
+                {formatMessage({ defaultMessage: 'All accounts' })}
               </Button>
               {accounts.map(([accountId, account]) => (
                 <HStack key={`account-${accountId}`}>
@@ -79,7 +87,7 @@ export const Menu = ({ width = '56' }: MenuProps) => {
             </>
           )}
           <Button size="xs" mt="4">
-            Add account
+            {formatMessage({ defaultMessage: 'Add account' })}
           </Button>
         </VStack>
       </Box>

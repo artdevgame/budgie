@@ -1,9 +1,9 @@
 import {
-    Button, Checkbox, FormControl, IModalProps, Input, Modal, Slide, Text, useBreakpointValue,
-    VStack, WarningOutlineIcon
+    Button, Checkbox, IModalProps, Input, Modal, Slide, Text, useBreakpointValue, VStack
 } from 'native-base';
 import { InterfaceBoxProps } from 'native-base/lib/typescript/components/primitives/Box';
 import { Controller, SubmitHandler, useForm } from 'react-hook-form';
+import { useIntl } from 'react-intl';
 
 import type { ModalContextType } from 'react-modal-hook';
 
@@ -17,6 +17,7 @@ interface AddCategoryModalProps {
 }
 
 const AddCategory = (props: InterfaceBoxProps<IModalProps> & { onClose: AddCategoryModalProps['onClose'] }) => {
+  const { formatMessage } = useIntl();
   const {
     control,
     formState: { errors },
@@ -33,7 +34,7 @@ const AddCategory = (props: InterfaceBoxProps<IModalProps> & { onClose: AddCateg
   return (
     <Modal.Content {...props}>
       <Modal.CloseButton onPress={() => props.onClose('close-delete-category-modal')} />
-      <Modal.Header>Add Category</Modal.Header>
+      <Modal.Header>{formatMessage({ defaultMessage: 'Add Category' })}</Modal.Header>
       <Modal.Body>
         <VStack space="4">
           <Controller
@@ -46,7 +47,7 @@ const AddCategory = (props: InterfaceBoxProps<IModalProps> & { onClose: AddCateg
           />
           {errors.name && (
             <Text fontSize="xs" color="red.400">
-              Category name is required
+              {formatMessage({ defaultMessage: 'Category name is required' })}
             </Text>
           )}
 
@@ -56,7 +57,7 @@ const AddCategory = (props: InterfaceBoxProps<IModalProps> & { onClose: AddCateg
             rules={{ required: false }}
             render={({ field: { onChange, name, value } }) => (
               <Checkbox name={name} onChange={onChange} value={value.toString()} _text={{ fontSize: 'xs' }}>
-                Treat this category as a group
+                {formatMessage({ defaultMessage: 'Treat this category as a group' })}
               </Checkbox>
             )}
           />

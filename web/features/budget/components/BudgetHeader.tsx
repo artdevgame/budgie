@@ -2,9 +2,11 @@ import { DateNavigator } from 'features/common/components/DateNavigator';
 import { HamburgerButton } from 'features/common/components/Menu/HamburgerButton';
 import { Box, Heading, HStack, useMediaQuery, useTheme, VStack } from 'native-base';
 import { useState } from 'react';
+import { useIntl } from 'react-intl';
 import { LayoutChangeEvent } from 'react-native';
 
 export const BudgetHeader = () => {
+  const { formatMessage } = useIntl();
   const [x, setX] = useState(0);
 
   const { breakpoints } = useTheme();
@@ -26,10 +28,10 @@ export const BudgetHeader = () => {
         </Box>
         <VStack alignItems="center" p="4">
           <Heading fontSize="2xl" color="warmGray.700">
-            £0.00
+            &pound;0.00
           </Heading>
           <Heading fontSize="xs" color="warmGray.400">
-            To be budgeted
+            {formatMessage({ defaultMessage: 'To be budgeted' })}
           </Heading>
         </VStack>
         <Box borderTopWidth="5" borderTopColor="gray.100" width="full" alignItems="center">
@@ -46,10 +48,10 @@ export const BudgetHeader = () => {
       <Box style={{ transform: [{ translateX: x }] }}>
         <VStack alignItems="center" onLayout={handleLayout}>
           <Heading fontSize="2xl" color="warmGray.700">
-            £0.00
+            &pound;0.00
           </Heading>
           <Heading fontSize="xs" color="warmGray.400">
-            To be budgeted
+            {formatMessage({ defaultMessage: 'To be budgeted' })}
           </Heading>
         </VStack>
       </Box>

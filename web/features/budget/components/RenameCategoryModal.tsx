@@ -2,6 +2,7 @@ import {
     Button, FormControl, IModalProps, Input, Modal, Slide, useBreakpointValue
 } from 'native-base';
 import { InterfaceBoxProps } from 'native-base/lib/typescript/components/primitives/Box';
+import { useIntl } from 'react-intl';
 
 import type { ModalContextType } from 'react-modal-hook';
 
@@ -10,17 +11,18 @@ interface RenameCategoryModalProps {
 }
 
 const RenameCategory = (props: InterfaceBoxProps<IModalProps> & { onClose: RenameCategoryModalProps['onClose'] }) => {
+  const { formatMessage } = useIntl();
   return (
     <Modal.Content {...props}>
       <Modal.CloseButton onPress={() => props.onClose('close-delete-category-modal')} />
-      <Modal.Header>Edit Category Name</Modal.Header>
+      <Modal.Header>{formatMessage({ defaultMessage: 'Edit Category Name' })}</Modal.Header>
       <Modal.Body>
         <FormControl>
           <Input placeholder="Mortgage" />
         </FormControl>
       </Modal.Body>
       <Modal.Footer>
-        <Button>Update</Button>
+        <Button>{formatMessage({ defaultMessage: 'Update' })}</Button>
       </Modal.Footer>
     </Modal.Content>
   );

@@ -3,7 +3,7 @@ import {
     Badge, Box, Checkbox, ChevronDownIcon, ChevronRightIcon, HStack, IconButton, Text,
     useMediaQuery, useTheme, VStack
 } from 'native-base';
-import { useRef, useState } from 'react';
+import { useState } from 'react';
 
 import { Category } from './Category';
 

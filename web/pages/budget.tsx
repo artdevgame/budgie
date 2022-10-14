@@ -9,9 +9,11 @@ import {
     AddIcon, Box, Button, Checkbox, HStack, Text, useMediaQuery, useTheme, VStack
 } from 'native-base';
 import { useEffect, useState } from 'react';
+import { useIntl } from 'react-intl';
 import { useModal } from 'react-modal-hook';
 
 export default function Budget() {
+  const { formatMessage } = useIntl();
   const [selectedCategories, setSelectedCategories] = useState<string[]>([]);
   const [showAddCategoryModal, hideAddCategoryModal] = useModal(() => (
     <AddCategoryModal onClose={hideAddCategoryModal} />
@@ -123,7 +125,7 @@ export default function Budget() {
             size="xs"
             startIcon={<AddIcon size="2xs" />}
           >
-            Category
+            {formatMessage({ defaultMessage: 'Category' })}
           </Button>
         </Box>
         <HStack bgColor="gray.50" p="4" space="4" alignItems="center">
@@ -136,18 +138,18 @@ export default function Budget() {
             />
           )}
           <Text flexGrow="1" fontSize="xs" fontWeight="medium" color="muted.500">
-            CATEGORY
+            {formatMessage({ defaultMessage: 'CATEGORY' })}
           </Text>
           {!isSmallScreen && (
             <Text textAlign="right" flexBasis="15%" fontSize="xs" fontWeight="medium" color="muted.500">
-              BUDGETED
+              {formatMessage({ defaultMessage: 'BUDGETED' })}
             </Text>
           )}
           <Text textAlign="right" flexBasis="15%" fontSize="xs" fontWeight="medium" color="muted.500">
-            ACTIVITY
+            {formatMessage({ defaultMessage: 'ACTIVITY' })}
           </Text>
           <Text textAlign="right" flexBasis="15%" fontSize="xs" fontWeight="medium" color="muted.500">
-            AVAILABLE
+            {formatMessage({ defaultMessage: 'AVAILABLE' })}
           </Text>
         </HStack>
 

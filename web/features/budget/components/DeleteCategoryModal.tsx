@@ -1,5 +1,6 @@
 import { Button, IModalProps, Modal, Slide, useBreakpointValue } from 'native-base';
 import { InterfaceBoxProps } from 'native-base/lib/typescript/components/primitives/Box';
+import { useIntl } from 'react-intl';
 
 import type { ModalContextType } from 'react-modal-hook';
 
@@ -8,12 +9,16 @@ interface DeleteCategoryModalProps {
 }
 
 const DeleteCategory = (props: InterfaceBoxProps<IModalProps> & { onClose: DeleteCategoryModalProps['onClose'] }) => {
+  const { formatMessage } = useIntl();
   return (
     <Modal.Content {...props}>
       <Modal.CloseButton onPress={() => props.onClose('close-delete-category-modal')} />
-      <Modal.Header>Delete Category</Modal.Header>
+      <Modal.Header>{formatMessage({ defaultMessage: 'Delete Category' })}</Modal.Header>
       <Modal.Body>
-        Removing this category will unassign any allocated budget, which can then be allocated to a different one.
+        {formatMessage({
+          defaultMessage:
+            'Removing this category will unassign any allocated budget, which can then be allocated to a different one.',
+        })}
       </Modal.Body>
       <Modal.Footer>
         <Button colorScheme="secondary">Delete Category</Button>
