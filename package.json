@@ -24,8 +24,8 @@
     "graphql": "16.6.0"
   },
   "devDependencies": {
-    "@serverless-stack/cli": "1.15.13",
-    "@serverless-stack/resources": "1.15.13",
+    "@serverless-stack/cli": "1.15.16",
+    "@serverless-stack/resources": "1.15.16",
     "@tsconfig/node16": "^1.0.3",
     "@types/node": "^18.8.5",
     "aws-cdk-lib": "2.39.1",

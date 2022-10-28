@@ -1,6 +1,11 @@
+import { RemoveAccountModal } from 'features/accounts/components/RemoveAccountModal';
+import { useInteractiveMenu } from 'features/common/context/InteractiveMenu';
 import { Box, Button, Heading, HStack, IconButton, theme, useTheme, VStack } from 'native-base';
 import { ResponsiveValue } from 'native-base/lib/typescript/components/types';
+import { useRouter } from 'next/router';
+import { useEffect, useState } from 'react';
 import { useIntl } from 'react-intl';
+import { useModal } from 'react-modal-hook';
 
 import {
     ArrowSmallRightIcon, BuildingLibraryIcon, MinusCircleIcon, ShoppingBagIcon
@@ -17,8 +22,28 @@ interface MenuProps {
 export const Menu = ({ width = '56' }: MenuProps) => {
   const { formatMessage } = useIntl();
   const accounts = Object.entries(accountsStub).filter(([, account]) => account.active);
+  const router = useRouter();
+  const { onClose } = useInteractiveMenu();
+  const [selectedAccountId, setSelectedAccountId] = useState<string>();
+
+  const [showRemoveAccountModal, hideRemoveAccountModal] = useModal(
+    () => <RemoveAccountModal accountId={selectedAccountId} onClose={hideRemoveAccountModal} />,
+    [selectedAccountId],
+  );
 
   const { colors, fontSizes } = useTheme();
+
+  useEffect(() => {
+    router.events.on('routeChangeStart', onClose);
+    return () => {
+      router.events.off('routeChangeStart', onClose);
+    };
+  }, []);
+
+  useEffect(() => {
+    if (!selectedAccountId?.trim()) return;
+    showRemoveAccountModal();
+  }, [selectedAccountId]);
 
   return (
     <VStack width={width} backgroundColor="white" height="full" borderRightColor="coolGray.100" borderRightWidth="2">
@@ -35,6 +60,7 @@ export const Menu = ({ width = '56' }: MenuProps) => {
             {formatMessage({ defaultMessage: 'Budget' })}
           </Heading>
           <Button
+            onPress={() => router.push('/budget')}
             variant="ghost"
             size="sm"
             colorScheme="primary"
@@ -55,6 +81,7 @@ export const Menu = ({ width = '56' }: MenuProps) => {
           {accounts.length > 0 && (
             <>
               <Button
+                onPress={() => router.push('/accounts')}
                 variant="ghost"
                 size="sm"
                 colorScheme="primary"
@@ -81,6 +108,7 @@ export const Menu = ({ width = '56' }: MenuProps) => {
                     colorScheme="secondary"
                     size="sm"
                     icon={<MinusCircleIcon color={colors.red['600']} width={fontSizes['xl']} />}
+                    onPress={() => setSelectedAccountId(accountId)}
                   />
                 </HStack>
               ))}

@@ -57,7 +57,7 @@ const AddCategory = (props: InterfaceBoxProps<IModalProps> & { onClose: AddCateg
             rules={{ required: false }}
             render={({ field: { onChange, name, value } }) => (
               <Checkbox name={name} onChange={onChange} value={value.toString()} _text={{ fontSize: 'xs' }}>
-                {formatMessage({ defaultMessage: 'Treat this category as a group' })}
+                {formatMessage({ defaultMessage: 'Create as a category group' })}
               </Checkbox>
             )}
           />

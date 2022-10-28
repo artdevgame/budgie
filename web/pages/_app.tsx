@@ -1,7 +1,9 @@
 import '../styles/global.css';
 
+import Dinero from 'dinero.js';
 import { InteractiveMenuProvider } from 'features/common/context/InteractiveMenu';
 import { urql } from 'lib/urql';
+import { DateTime } from 'luxon';
 import { NativeBaseProvider } from 'native-base';
 import { AppProps } from 'next/app';
 import Head from 'next/head';
@@ -12,6 +14,9 @@ import { theme } from 'theme';
 import { Provider as UrqlProvider } from 'urql';
 
 const language = 'en-GB';
+
+Dinero.globalLocale = language;
+DateTime.local().setLocale(language);
 
 function MyApp({ Component, pageProps }: AppProps) {
   return (

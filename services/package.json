@@ -8,7 +8,7 @@
     "@sentry/integrations": "^7.15.0",
     "@sentry/serverless": "^7.15.0",
     "@serverless-stack/lambda": "^0.0.0-20220728004859",
-    "@serverless-stack/node": "^1.15.13",
+    "@serverless-stack/node": "1.15.16",
     "aws-sdk": "^2.1232.0",
     "fs-extra": "^10.1.0",
     "graphql-scalars": "^1.19.0",
@@ -18,8 +18,8 @@
     "ulid": "^2.3.0"
   },
   "devDependencies": {
-    "@serverless-stack/cli": "1.15.13",
-    "@serverless-stack/resources": "1.15.13",
+    "@serverless-stack/cli": "1.15.16",
+    "@serverless-stack/resources": "1.15.16",
     "@types/aws-lambda": "^8.10.107",
     "@types/fs-extra": "^9.0.13"
   }

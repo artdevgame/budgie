@@ -79,7 +79,7 @@ const SetBudget = (props: SetBudgetProps) => {
         )}
       </Modal.Body>
       <Modal.Footer>
-        <Button>{formatMessage({ defaultMessage: 'Update' })}</Button>
+        <Button onPress={handleSubmit(onSubmit)}>{formatMessage({ defaultMessage: 'Update' })}</Button>
       </Modal.Footer>
     </Modal.Content>
   );

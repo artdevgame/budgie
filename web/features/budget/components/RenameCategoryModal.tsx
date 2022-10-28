@@ -4,6 +4,7 @@ import {
     Button, FormControl, IModalProps, Input, Modal, Slide, Text, useBreakpointValue, VStack
 } from 'native-base';
 import { InterfaceBoxProps } from 'native-base/lib/typescript/components/primitives/Box';
+import React from 'react';
 import { Controller, SubmitHandler, useForm } from 'react-hook-form';
 import { useIntl } from 'react-intl';
 
@@ -62,13 +63,13 @@ const RenameCategory = (props: RenameCategoryProps) => {
       <Modal.Body>
         <VStack space="2">
           {categories.map((category) => (
-            <>
+            <React.Fragment key={`category-${category}`}>
               <Controller
                 control={control}
                 name={category}
                 rules={{ required: true }}
-                render={({ field, formState: { defaultValues } }) => (
-                  <Input defaultValue={defaultValues[category]} placeholder={defaultValues[category]} {...field} />
+                render={({ field: { value, ...props }, formState: { defaultValues } }) => (
+                  <Input defaultValue={defaultValues[category]} placeholder={defaultValues[category]} {...props} />
                 )}
               />
               {errors[category] && (
@@ -76,7 +77,7 @@ const RenameCategory = (props: RenameCategoryProps) => {
                   {formatMessage({ defaultMessage: 'Category name is required' })}
                 </Text>
               )}
-            </>
+            </React.Fragment>
           ))}
         </VStack>
       </Modal.Body>
