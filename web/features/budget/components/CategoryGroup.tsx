@@ -1,9 +1,9 @@
-import { categoriesStub } from 'features/common/stubs/categories';
 import {
     Badge, Box, Checkbox, ChevronDownIcon, ChevronRightIcon, HStack, IconButton, Text,
     useMediaQuery, useTheme, VStack
 } from 'native-base';
 import { useState } from 'react';
+import { categoriesStub } from 'stubs/categories';
 
 import { Category } from './Category';
 

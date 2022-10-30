@@ -1,10 +1,10 @@
-import { categoriesStub } from 'features/common/stubs/categories';
 import {
     Button, HStack, IModalProps, Input, Modal, Slide, Text, useBreakpointValue
 } from 'native-base';
 import { InterfaceBoxProps } from 'native-base/lib/typescript/components/primitives/Box';
 import { Controller, SubmitHandler, useForm } from 'react-hook-form';
 import { useIntl } from 'react-intl';
+import { categoriesStub } from 'stubs/categories';
 
 import type { ModalContextType } from 'react-modal-hook';
 

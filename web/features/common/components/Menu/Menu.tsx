@@ -1,3 +1,4 @@
+import { AddAccountModal } from 'features/accounts/components/AddAccountModal';
 import { RemoveAccountModal } from 'features/accounts/components/RemoveAccountModal';
 import { useInteractiveMenu } from 'features/common/context/InteractiveMenu';
 import { Box, Button, Heading, HStack, IconButton, theme, useTheme, VStack } from 'native-base';
@@ -11,7 +12,7 @@ import {
     ArrowSmallRightIcon, BuildingLibraryIcon, MinusCircleIcon, ShoppingBagIcon
 } from '@heroicons/react/24/outline';
 
-import { accountsStub } from '../../stubs/accounts';
+import { accountsStub } from '../../../../stubs/accounts';
 import { AppName } from '../Logo/AppName';
 import { AuthenticatedUser } from './AuthenticatedUser';
 
@@ -25,6 +26,11 @@ export const Menu = ({ width = '56' }: MenuProps) => {
   const router = useRouter();
   const { onClose } = useInteractiveMenu();
   const [selectedAccountId, setSelectedAccountId] = useState<string>();
+
+  const [showAddAccountModal, hideAddAccountModal] = useModal(
+    () => <AddAccountModal onClose={hideAddAccountModal} />,
+    [],
+  );
 
   const [showRemoveAccountModal, hideRemoveAccountModal] = useModal(
     () => <RemoveAccountModal accountId={selectedAccountId} onClose={hideRemoveAccountModal} />,
@@ -114,7 +120,7 @@ export const Menu = ({ width = '56' }: MenuProps) => {
               ))}
             </>
           )}
-          <Button size="xs" mt="4">
+          <Button onPress={showAddAccountModal} size="xs" mt="4">
             {formatMessage({ defaultMessage: 'Add account' })}
           </Button>
         </VStack>

@@ -1,5 +1,3 @@
-import { categoriesStub } from 'features/common/stubs/categories';
-import { categoryGroupsStub } from 'features/common/stubs/category-groups';
 import {
     Button, FormControl, IModalProps, Input, Modal, Slide, Text, useBreakpointValue, VStack
 } from 'native-base';
@@ -7,6 +5,8 @@ import { InterfaceBoxProps } from 'native-base/lib/typescript/components/primiti
 import React from 'react';
 import { Controller, SubmitHandler, useForm } from 'react-hook-form';
 import { useIntl } from 'react-intl';
+import { categoriesStub } from 'stubs/categories';
+import { categoryGroupsStub } from 'stubs/category-groups';
 
 import type { ModalContextType } from 'react-modal-hook';
 

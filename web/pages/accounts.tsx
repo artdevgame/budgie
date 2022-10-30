@@ -2,10 +2,10 @@ import { AccountsHeader } from 'features/accounts/components/AccountsHeader';
 import { SelectedActions } from 'features/accounts/components/SelectedActions';
 import { Transaction } from 'features/accounts/components/Transaction';
 import { MainLayout } from 'features/common/components/MainLayout';
-import { ledgerStub } from 'features/common/stubs/ledger';
 import { Box, Button, Checkbox, HStack, Text, useMediaQuery, useTheme, VStack } from 'native-base';
 import { useEffect, useState } from 'react';
 import { useIntl } from 'react-intl';
+import { ledgerStub } from 'stubs/ledger';
 
 import { ArrowPathIcon } from '@heroicons/react/24/outline';
 

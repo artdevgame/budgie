@@ -10,6 +10,8 @@ export function ClientSideStack({ stack }: StackContext) {
     environment: {
       NEXT_PUBLIC_API_URL: api.url,
       NEXT_PUBLIC_GRAPHQL_URL: api.url + '/graphql',
+      NORDIGEN_SECRET_ID: process.env.NORDIGEN_SECRET_ID,
+      NORDIGEN_SECRET_KEY: process.env.NORDIGEN_SECRET_KEY,
     },
   });
 

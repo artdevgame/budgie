@@ -15,10 +15,15 @@ import { ModalProvider } from 'react-modal-hook';
 import { theme } from 'theme';
 import { Provider as UrqlProvider } from 'urql';
 
+import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
+import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
+
 const language = 'en-GB';
 
 Dinero.globalLocale = language;
 DateTime.local().setLocale(language);
+
+const queryClient = new QueryClient();
 
 const PageWrapper = ({ children }) => {
   const router = useRouter();
@@ -37,24 +42,28 @@ const PageWrapper = ({ children }) => {
 };
 
 function MyApp({ Component, pageProps }: AppProps) {
+  console.log({ pageProps });
   return (
     <>
       <Head>
         <meta name="viewport" content="width=device-width, initial-scale=1" key="viewport" />
       </Head>
-      <IntlProvider locale={language} key={language} onError={() => null}>
-        <NativeBaseProvider theme={theme}>
-          <UrqlProvider value={urql}>
-            <InteractiveMenuProvider>
-              <ModalProvider>
-                <PageWrapper>
-                  <Component {...pageProps} />
-                </PageWrapper>
-              </ModalProvider>
-            </InteractiveMenuProvider>
-          </UrqlProvider>
-        </NativeBaseProvider>
-      </IntlProvider>
+      <QueryClientProvider client={queryClient}>
+        <IntlProvider locale={language} key={language} onError={() => null}>
+          <NativeBaseProvider theme={theme}>
+            <UrqlProvider value={urql}>
+              <InteractiveMenuProvider>
+                <ModalProvider>
+                  <PageWrapper>
+                    <Component {...pageProps} />
+                  </PageWrapper>
+                </ModalProvider>
+              </InteractiveMenuProvider>
+            </UrqlProvider>
+          </NativeBaseProvider>
+        </IntlProvider>
+        <ReactQueryDevtools initialIsOpen={false} position="bottom-right" />
+      </QueryClientProvider>
     </>
   );
 }

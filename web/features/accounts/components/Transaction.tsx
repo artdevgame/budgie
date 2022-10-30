@@ -1,10 +1,10 @@
 import Dinero, { Currency } from 'dinero.js';
-import { categoriesStub } from 'features/common/stubs/categories';
 import { DateTime } from 'luxon';
 import {
     Badge, Box, Button, Checkbox, HStack, Link, Pressable, Text, useMediaQuery, useTheme, VStack
 } from 'native-base';
 import { useModal } from 'react-modal-hook';
+import { categoriesStub } from 'stubs/categories';
 
 import { AssignCategoryModal } from './AssignCategoryModal';
 

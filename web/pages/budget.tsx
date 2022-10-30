@@ -3,14 +3,14 @@ import { BudgetHeader } from 'features/budget/components/BudgetHeader';
 import { CategoryGroup } from 'features/budget/components/CategoryGroup';
 import { SelectedActions } from 'features/budget/components/SelectedActions';
 import { MainLayout } from 'features/common/components/MainLayout';
-import { categoriesStub } from 'features/common/stubs/categories';
-import { categoryGroupsStub } from 'features/common/stubs/category-groups';
 import {
     AddIcon, Box, Button, Checkbox, HStack, Text, useMediaQuery, useTheme, VStack
 } from 'native-base';
 import { useEffect, useState } from 'react';
 import { useIntl } from 'react-intl';
 import { useModal } from 'react-modal-hook';
+import { categoriesStub } from 'stubs/categories';
+import { categoryGroupsStub } from 'stubs/category-groups';
 
 export default function Budget() {
   const { formatMessage } = useIntl();

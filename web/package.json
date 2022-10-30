@@ -9,6 +9,7 @@
   "dependencies": {
     "@heroicons/react": "^2.0.12",
     "@sls-next/lambda-at-edge": "^3.7.0",
+    "@tanstack/react-query": "^4.13.4",
     "dinero.js": "^1.9.1",
     "expo": "^46.0.16",
     "graphql": "^16.6.0",
@@ -33,6 +34,7 @@
     "@serverless-stack/cli": "1.15.16",
     "@serverless-stack/resources": "1.15.16",
     "@serverless-stack/static-site-env": "1.15.16",
+    "@tanstack/react-query-devtools": "^4.13.4",
     "@types/dinero.js": "1.9.0",
     "@types/luxon": "^3.0.1",
     "@types/react-native": "^0.70.4",

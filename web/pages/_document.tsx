@@ -8,6 +8,7 @@ export default function Document() {
         <link rel="stylesheet" href="https://rsms.me/inter/inter.css" />
       </Head>
       <body>
+        <div id="institution-content-wrapper"></div>
         <Main />
         <NextScript />
       </body>
