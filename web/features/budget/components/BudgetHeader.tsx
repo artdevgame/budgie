@@ -40,6 +40,7 @@ export const BudgetHeader = () => {
       </VStack>
     );
   }
+
   return (
     <HStack minH="24" p="4" alignItems="center" bgColor="muted.50">
       <Box width="1/2">
